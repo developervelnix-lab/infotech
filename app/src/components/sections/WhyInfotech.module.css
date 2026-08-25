@@ -1,6 +1,7 @@
 .section { padding-block: var(--space-32); background: linear-gradient(180deg, transparent, rgba(91,140,255,0.03), transparent); }
+@media (max-width: 640px) { .section { padding-block: var(--space-16); } }
 .inner { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-20); align-items: center; }
-@media (max-width: 1024px) { .inner { grid-template-columns: 1fr; } }
+@media (max-width: 1024px) { .inner { grid-template-columns: 1fr; gap: var(--space-10); } }
 
 .left { display: flex; flex-direction: column; gap: var(--space-10); }
 .list { display: flex; flex-direction: column; gap: var(--space-5); }
@@ -87,6 +88,14 @@
   align-items: center;
   gap: var(--space-3);
   box-shadow: var(--shadow-lg);
+}
+@media (max-width: 640px) {
+  .floatingBadge {
+    position: static;
+    margin-top: var(--space-4);
+    width: 100%;
+    box-sizing: border-box;
+  }
 }
 .badgeEmoji { font-size: 1.8rem; }
 .badgeMain { font-size: var(--text-sm); font-weight: 700; color: var(--color-white); }

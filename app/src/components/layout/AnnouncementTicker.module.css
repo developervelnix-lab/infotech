@@ -66,3 +66,12 @@
   color: rgba(91, 140, 255, 0.4);
   padding-left: var(--space-4);
 }
+
+@media (max-width: 768px) {
+  .label span { font-size: 8px; letter-spacing: 0.08em; }
+  .label { padding: 0 var(--space-3); }
+  .item { padding: 0 var(--space-4); font-size: var(--text-xs); }
+}
+@media (max-width: 480px) {
+  .label { display: none; }
+}

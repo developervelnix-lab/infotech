@@ -196,192 +196,259 @@ export default function Solutions() {
             </div>
 
             <div className={styles.mainWrapper}>
-              {/* Segmented Floating Tabs */}
-              <div className={styles.tabsContainer}>
-                <div className={styles.navTabs}>
-                  {solutions.map((sol, index) => {
-                    const isActive = index === activeIndex;
-                    return (
-                      <button
-                        key={sol.id}
-                        onClick={() => handleSelectTab(index)}
-                        className={`${styles.tabButton} ${isActive ? styles.tabButtonActive : ''}`}
-                        style={isActive ? { color: '#ffffff' } : {}}
+              {/* Desktop Showcase (Hidden on Mobile) */}
+              <div className={styles.desktopShowcase}>
+                {/* Segmented Floating Tabs */}
+                <div className={styles.tabsContainer}>
+                  <div className={styles.navTabs}>
+                    {solutions.map((sol, index) => {
+                      const isActive = index === activeIndex;
+                      return (
+                        <button
+                          key={sol.id}
+                          onClick={() => handleSelectTab(index)}
+                          className={`${styles.tabButton} ${isActive ? styles.tabButtonActive : ''}`}
+                          style={isActive ? { color: '#ffffff' } : {}}
+                        >
+                          {isActive && (
+                            <motion.div
+                              layoutId="activeSolutionTab"
+                              className={styles.tabIndicator}
+                              style={{ 
+                                background: sol.accentGradient,
+                                boxShadow: `0 0 25px ${sol.glowColor}`
+                              }}
+                              transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                            />
+                          )}
+                          <span className={styles.tabIconWrapper}>
+                            <sol.Icon size={16} color={isActive ? '#ffffff' : sol.accentColor} />
+                          </span>
+                          <span className={styles.tabText}>{sol.title}</span>
+                          <span className={styles.tabIndex}>{sol.number}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Showcase Card Frame */}
+                <div className={styles.cardFrame}>
+                  <AnimatePresence mode="wait" custom={direction}>
+                    <motion.div
+                      key={activeSolution.id}
+                      custom={direction}
+                      variants={slideVariants}
+                      initial="enter"
+                      animate="center"
+                      exit="exit"
+                      className={styles.cardInner}
+                    >
+                      {/* Left Column: Content */}
+                      <div className={styles.contentCol}>
+                        <motion.div 
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.1, duration: 0.4 }}
+                          className={styles.pillCategory}
+                          style={{ 
+                            color: activeSolution.accentColor,
+                            background: `${activeSolution.glowColor}`,
+                            border: `1px solid ${activeSolution.accentColor}40`
+                          }}
+                        >
+                          <span>{activeSolution.category}</span>
+                        </motion.div>
+
+                        <motion.h3 
+                          initial={{ opacity: 0, y: 15 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.15, duration: 0.45 }}
+                          className={styles.slideTitle}
+                        >
+                          {activeSolution.title}
+                        </motion.h3>
+
+                        <motion.p 
+                          initial={{ opacity: 0, y: 15 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.2, duration: 0.45 }}
+                          className={styles.slideDesc}
+                        >
+                          {activeSolution.desc}
+                        </motion.p>
+
+                        {/* Feature Tags */}
+                        <motion.div 
+                          initial={{ opacity: 0, y: 15 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.25, duration: 0.45 }}
+                          className={styles.featureTags}
+                        >
+                          {activeSolution.features.map((feat, idx) => (
+                            <div key={idx} className={styles.featurePill}>
+                              <span 
+                                className={styles.featureDot} 
+                                style={{ background: activeSolution.accentColor }} 
+                              />
+                              <span>{feat}</span>
+                            </div>
+                          ))}
+                        </motion.div>
+
+                        {/* Action & Nav Controls */}
+                        <motion.div 
+                          initial={{ opacity: 0, y: 15 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.3, duration: 0.45 }}
+                          className={styles.actionRow}
+                        >
+                          <button 
+                            className={styles.primaryBtn}
+                            style={{ background: activeSolution.accentGradient }}
+                          >
+                            <span>Explore Solution</span>
+                            <ArrowRight size={15} />
+                          </button>
+
+                          <div className={styles.quickNavArrows}>
+                            <button 
+                              className={styles.arrowBtn} 
+                              onClick={handlePrev}
+                              disabled={activeIndex === 0}
+                              aria-label="Previous solution"
+                            >
+                              <ChevronLeft size={18} />
+                            </button>
+                            <button 
+                              className={styles.arrowBtn} 
+                              onClick={handleNext}
+                              disabled={activeIndex === solutions.length - 1}
+                              aria-label="Next solution"
+                            >
+                              <ChevronRight size={18} />
+                            </button>
+                          </div>
+                        </motion.div>
+                      </div>
+
+                      {/* Right Column: Media Frame */}
+                      <motion.div 
+                        className={styles.mediaCol}
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.2, duration: 0.5 }}
                       >
-                        {isActive && (
-                          <motion.div
-                            layoutId="activeSolutionTab"
-                            className={styles.tabIndicator}
-                            style={{ 
-                              background: sol.accentGradient,
-                              boxShadow: `0 0 25px ${sol.glowColor}`
-                            }}
-                            transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                        <div className={styles.imageFrame}>
+                          <Image 
+                            src={activeSolution.image}
+                            alt={activeSolution.title}
+                            fill
+                            className={styles.imageLayer}
+                            sizes="(max-width: 900px) 100vw, 50vw"
+                            priority
                           />
-                        )}
-                        <span className={styles.tabIconWrapper}>
-                          <sol.Icon size={16} color={isActive ? '#ffffff' : sol.accentColor} />
-                        </span>
-                        <span className={styles.tabText}>{sol.title}</span>
-                        <span className={styles.tabIndex}>{sol.number}</span>
-                      </button>
-                    );
-                  })}
+                          <div className={styles.imageOverlayGradient} />
+                        </div>
+
+                        {/* Floating Badge (Top Right) */}
+                        <motion.div 
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.35, duration: 0.4 }}
+                          className={styles.floatingPillBadge}
+                        >
+                          <CheckCircle2 size={13} color={activeSolution.accentColor} />
+                          <span>{activeSolution.badge}</span>
+                        </motion.div>
+
+                        {/* Floating Stat Badge (Bottom Left) */}
+                        <motion.div 
+                          initial={{ opacity: 0, y: 15 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.4, duration: 0.45 }}
+                          className={styles.floatingStatBadge}
+                        >
+                          <div>
+                            <div 
+                              className={styles.statValue}
+                              style={{ color: activeSolution.accentColor }}
+                            >
+                              {activeSolution.stat.value}
+                            </div>
+                            <div className={styles.statLabel}>
+                              {activeSolution.stat.label}
+                            </div>
+                          </div>
+                        </motion.div>
+                      </motion.div>
+                    </motion.div>
+                  </AnimatePresence>
                 </div>
               </div>
 
-              {/* Showcase Card Frame */}
-              <div className={styles.cardFrame}>
-                <AnimatePresence mode="wait" custom={direction}>
-                  <motion.div
-                    key={activeSolution.id}
-                    custom={direction}
-                    variants={slideVariants}
-                    initial="enter"
-                    animate="center"
-                    exit="exit"
-                    className={styles.cardInner}
-                  >
-                    {/* Left Column: Content */}
-                    <div className={styles.contentCol}>
-                      <motion.div 
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.1, duration: 0.4 }}
+              {/* Mobile Solutions Stack (Visible on Mobile) */}
+              <div className={styles.mobileCardList}>
+                {solutions.map((sol) => (
+                  <div key={sol.id} className={styles.mobileCard}>
+                    <div className={styles.mobileCardImageWrap}>
+                      <Image 
+                        src={sol.image}
+                        alt={sol.title}
+                        fill
+                        className={styles.imageLayer}
+                        sizes="100vw"
+                      />
+                      <div className={styles.imageOverlayGradient} />
+                      <div className={styles.mobilePillBadge}>
+                        <CheckCircle2 size={12} color={sol.accentColor} />
+                        <span>{sol.badge}</span>
+                      </div>
+                    </div>
+
+                    <div className={styles.mobileCardContent}>
+                      <div 
                         className={styles.pillCategory}
                         style={{ 
-                          color: activeSolution.accentColor,
-                          background: `${activeSolution.glowColor}`,
-                          border: `1px solid ${activeSolution.accentColor}40`
+                          color: sol.accentColor,
+                          background: `${sol.glowColor}`,
+                          border: `1px solid ${sol.accentColor}40`
                         }}
                       >
-                        <span>{activeSolution.category}</span>
-                      </motion.div>
+                        <span>{sol.category}</span>
+                      </div>
 
-                      <motion.h3 
-                        initial={{ opacity: 0, y: 15 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.15, duration: 0.45 }}
-                        className={styles.slideTitle}
-                      >
-                        {activeSolution.title}
-                      </motion.h3>
+                      <h3 className={styles.slideTitle}>{sol.title}</h3>
+                      <p className={styles.slideDesc}>{sol.desc}</p>
 
-                      <motion.p 
-                        initial={{ opacity: 0, y: 15 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2, duration: 0.45 }}
-                        className={styles.slideDesc}
-                      >
-                        {activeSolution.desc}
-                      </motion.p>
-
-                      {/* Feature Tags */}
-                      <motion.div 
-                        initial={{ opacity: 0, y: 15 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.25, duration: 0.45 }}
-                        className={styles.featureTags}
-                      >
-                        {activeSolution.features.map((feat, idx) => (
+                      <div className={styles.featureTags}>
+                        {sol.features.map((feat, idx) => (
                           <div key={idx} className={styles.featurePill}>
-                            <span 
-                              className={styles.featureDot} 
-                              style={{ background: activeSolution.accentColor }} 
-                            />
+                            <span className={styles.featureDot} style={{ background: sol.accentColor }} />
                             <span>{feat}</span>
                           </div>
                         ))}
-                      </motion.div>
-
-                      {/* Action & Nav Controls */}
-                      <motion.div 
-                        initial={{ opacity: 0, y: 15 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.3, duration: 0.45 }}
-                        className={styles.actionRow}
-                      >
-                        <button 
-                          className={styles.primaryBtn}
-                          style={{ background: activeSolution.accentGradient }}
-                        >
-                          <span>Explore Solution</span>
-                          <ArrowRight size={15} />
-                        </button>
-
-                        <div className={styles.quickNavArrows}>
-                          <button 
-                            className={styles.arrowBtn} 
-                            onClick={handlePrev}
-                            disabled={activeIndex === 0}
-                            aria-label="Previous solution"
-                          >
-                            <ChevronLeft size={18} />
-                          </button>
-                          <button 
-                            className={styles.arrowBtn} 
-                            onClick={handleNext}
-                            disabled={activeIndex === solutions.length - 1}
-                            aria-label="Next solution"
-                          >
-                            <ChevronRight size={18} />
-                          </button>
-                        </div>
-                      </motion.div>
-                    </div>
-
-                    {/* Right Column: Media Frame */}
-                    <motion.div 
-                      className={styles.mediaCol}
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.2, duration: 0.5 }}
-                    >
-                      <div className={styles.imageFrame}>
-                        <Image 
-                          src={activeSolution.image}
-                          alt={activeSolution.title}
-                          fill
-                          className={styles.imageLayer}
-                          sizes="(max-width: 900px) 100vw, 50vw"
-                          priority
-                        />
-                        <div className={styles.imageOverlayGradient} />
                       </div>
 
-                      {/* Floating Badge (Top Right) */}
-                      <motion.div 
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.35, duration: 0.4 }}
-                        className={styles.floatingPillBadge}
-                      >
-                        <CheckCircle2 size={13} color={activeSolution.accentColor} />
-                        <span>{activeSolution.badge}</span>
-                      </motion.div>
-
-                      {/* Floating Stat Badge (Bottom Left) */}
-                      <motion.div 
-                        initial={{ opacity: 0, y: 15 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.4, duration: 0.45 }}
-                        className={styles.floatingStatBadge}
-                      >
-                        <div>
-                          <div 
-                            className={styles.statValue}
-                            style={{ color: activeSolution.accentColor }}
-                          >
-                            {activeSolution.stat.value}
-                          </div>
-                          <div className={styles.statLabel}>
-                            {activeSolution.stat.label}
-                          </div>
+                      <div className={styles.mobileCardFooter}>
+                        <div className={styles.mobileStatBox}>
+                          <span className={styles.statValue} style={{ color: sol.accentColor }}>
+                            {sol.stat.value}
+                          </span>
+                          <span className={styles.statLabel}>{sol.stat.label}</span>
                         </div>
-                      </motion.div>
-                    </motion.div>
-                  </motion.div>
-                </AnimatePresence>
+
+                        <button 
+                          className={styles.primaryBtn}
+                          style={{ background: sol.accentGradient }}
+                        >
+                          <span>Explore</span>
+                          <ArrowRight size={14} />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>

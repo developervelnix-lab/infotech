@@ -176,8 +176,8 @@ export const stats = [
 export const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'Solutions', href: '/#solutions' },
-  { label: 'Case Studies', href: '/#case-studies' },
-  { label: 'Careers', href: '/#careers' },
+  { label: 'Case Studies', href: '/case-studies' },
+  { label: 'Careers', href: '/careers' },
   { label: 'Blog', href: '/blog' },
 ];
 

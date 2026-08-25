@@ -98,9 +98,16 @@ export default function Navbar() {
                 </motion.div>
               ))}
               <div className={styles.mobileCta}>
-                <Button href="/contact" size="md" style={{ width: '100%' }}>
+                <Button href="/contact" size="md" style={{ width: '100%', marginBottom: 'var(--space-3)' }} onClick={() => setMenuOpen(false)}>
                   Get Started
                 </Button>
+                <Link
+                  href="/login"
+                  className={styles.mobileLoginLink}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Sign In to Admin Portal
+                </Link>
               </div>
             </nav>
           </motion.div>

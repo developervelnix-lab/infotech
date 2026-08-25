@@ -1,0 +1,376 @@
+.container {
+  min-height: calc(100vh - var(--navbar-h) - var(--ticker-h));
+  position: relative;
+  padding: var(--space-16) 0;
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: var(--space-12);
+}
+
+.title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 900;
+  color: var(--color-white);
+  letter-spacing: -0.03em;
+  margin-bottom: var(--space-3);
+}
+
+.subtitle {
+  font-size: var(--text-base);
+  color: var(--color-muted);
+  max-width: 580px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.funnelContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.progress {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+  position: relative;
+  margin-bottom: var(--space-4);
+}
+@media (max-width: 480px) {
+  .progress { gap: var(--space-1); }
+  .stepNum { width: 28px; height: 28px; font-size: 12px; }
+  .stepLabel { font-size: 9px; }
+  .container { padding: var(--space-8) 0; }
+  .title { font-size: 1.85rem; }
+  .subtitle { font-size: 0.85rem; }
+}
+
+.progressStep {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  position: relative;
+}
+
+.stepNum {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--color-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: var(--text-sm);
+  transition: all 0.3s ease;
+}
+
+.stepLabel {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-muted-dark);
+  transition: color 0.3s ease;
+}
+
+.progressActive .stepNum {
+  border-color: var(--color-accent);
+  color: var(--color-white);
+  box-shadow: 0 0 15px rgba(91, 140, 255, 0.25);
+  background: rgba(91, 140, 255, 0.1);
+}
+
+.progressActive .stepLabel {
+  color: var(--color-white);
+}
+
+.progressCompleted .stepNum {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-white);
+}
+
+.funnelCard {
+  background: linear-gradient(145deg, #0e1224 0%, #080a14 100%) !important;
+  border: 1px solid rgba(91, 140, 255, 0.15) !important;
+  border-radius: var(--radius-2xl);
+  padding: var(--space-10) var(--space-8);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+  min-height: 380px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+@media (max-width: 640px) {
+  .funnelCard { padding: var(--space-6) var(--space-4); border-radius: var(--radius-xl); min-height: auto; }
+}
+
+.stepContent {
+  width: 100%;
+}
+
+.stepForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.stepTitle {
+  font-size: var(--text-xl);
+  font-weight: 800;
+  color: var(--color-white);
+  letter-spacing: -0.01em;
+  border-left: 3px solid var(--color-accent);
+  padding-left: var(--space-3);
+}
+
+/* Service Grid Styles */
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+@media (max-width: 580px) {
+  .servicesGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.serviceCard {
+  background: rgba(14, 18, 36, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.serviceCard:hover {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.serviceActive {
+  background: rgba(91, 140, 255, 0.08) !important;
+  border-color: rgba(91, 140, 255, 0.35) !important;
+  box-shadow: 0 8px 30px rgba(91, 140, 255, 0.15);
+}
+
+.serviceIcon {
+  color: var(--color-muted-dark);
+  transition: color 0.25s;
+}
+.serviceActive .serviceIcon {
+  color: var(--color-accent);
+}
+
+.serviceLabel {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-white);
+}
+
+/* Inputs Grid */
+.inputsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-5);
+}
+@media (max-width: 580px) {
+  .inputsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.label {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputIcon {
+  position: absolute;
+  left: var(--space-4);
+  color: var(--color-muted-dark);
+  pointer-events: none;
+}
+
+.input {
+  width: 100%;
+  padding: 0.85rem var(--space-4) 0.85rem 2.8rem;
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-lg);
+  color: var(--color-white);
+  font-family: inherit;
+  font-size: var(--text-sm);
+  transition: all 0.2s;
+}
+.input:focus {
+  outline: none;
+  border-color: rgba(91, 140, 255, 0.4);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.textarea {
+  width: 100%;
+  padding: 1rem var(--space-4);
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-lg);
+  color: var(--color-white);
+  font-family: inherit;
+  font-size: var(--text-sm);
+  resize: none;
+  line-height: 1.6;
+  transition: all 0.2s;
+}
+.textarea:focus {
+  outline: none;
+  border-color: rgba(91, 140, 255, 0.4);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* Slider Custom Styles */
+.sliderContainer {
+  padding: var(--space-4) 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.budgetValue {
+  font-size: clamp(2.2rem, 8vw, 3.5rem);
+  font-weight: 900;
+  color: var(--color-white);
+  letter-spacing: -0.04em;
+  text-shadow: 0 0 30px rgba(91, 140, 255, 0.3);
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.08);
+  outline: none;
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(91, 140, 255, 0.5);
+  transition: transform 0.1s;
+}
+.slider::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+}
+
+.sliderLabels {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--text-xs);
+  color: var(--color-muted-dark);
+  font-weight: 600;
+  padding: 0 var(--space-2);
+}
+
+/* Wizard actions footer */
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--space-2);
+}
+@media (max-width: 480px) {
+  .actions {
+    flex-direction: column-reverse;
+    gap: var(--space-3);
+  }
+  .actions button, .actions a {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Success State Screen */
+.successScreen {
+  text-align: center;
+  padding: var(--space-6) 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.successIcon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1.5px solid rgba(16, 185, 129, 0.4);
+  color: var(--color-teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 30px rgba(16, 185, 129, 0.2);
+}
+
+.successTitle {
+  font-size: var(--text-3xl);
+  font-weight: 900;
+  color: var(--color-white);
+  letter-spacing: -0.02em;
+}
+
+.successDesc {
+  font-size: var(--text-base);
+  color: var(--color-muted);
+  max-width: 480px;
+  line-height: 1.6;
+}
+
+.successFollowUp {
+  font-size: var(--text-sm);
+  color: var(--color-muted-dark);
+  max-width: 420px;
+  line-height: 1.5;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: var(--space-4);
+  margin-top: var(--space-2);
+}

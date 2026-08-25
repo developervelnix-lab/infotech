@@ -1,4 +1,10 @@
 .page { padding-block: var(--space-20); }
+@media (max-width: 640px) {
+  .page { padding-block: var(--space-10); }
+  .header { margin-bottom: var(--space-8); }
+  .title { font-size: 1.85rem; }
+  .subtitle { font-size: var(--text-base); }
+}
 .header { text-align: center; margin-bottom: var(--space-16); display: flex; flex-direction: column; align-items: center; gap: var(--space-4); }
 .label { display: inline-block; padding: 0.3rem 0.9rem; background: rgba(91,140,255,0.12); border: 1px solid rgba(91,140,255,0.3); border-radius: var(--radius-full); color: var(--color-accent); font-size: var(--text-sm); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
 .title { font-size: clamp(2rem,4vw,var(--text-5xl)); font-weight: 800; color: var(--color-white); letter-spacing: -0.02em; }
@@ -7,8 +13,8 @@
 .grid { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--space-6); }
 @media (max-width: 1024px) { .grid { grid-template-columns: repeat(2,1fr); } }
 @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
-.card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: var(--radius-lg); overflow: hidden; text-decoration: none; display: flex; flex-direction: column; transition: transform var(--duration-base) var(--ease-out), box-shadow var(--duration-base); }
-.card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg),var(--shadow-accent); }
+.card { background: linear-gradient(145deg, #0e1224 0%, #080a14 100%) !important; border: 1px solid rgba(91, 140, 255, 0.15) !important; border-radius: var(--radius-lg); overflow: hidden; text-decoration: none; display: flex; flex-direction: column; transition: transform var(--duration-base) var(--ease-out), box-shadow var(--duration-base); }
+.card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg),var(--shadow-accent); border-color: rgba(91, 140, 255, 0.3) !important; }
 .imageWrap { position: relative; height: 200px; overflow: hidden; }
 .image { object-fit: cover; transition: transform 0.5s ease; }
 .card:hover .image { transform: scale(1.06); }
