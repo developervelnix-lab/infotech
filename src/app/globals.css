@@ -41,19 +41,19 @@
   --text-7xl:            4rem;
 
   /* Spacing */
-  --space-1:  0.2rem;
-  --space-2:  0.4rem;
-  --space-3:  0.6rem;
-  --space-4:  0.8rem;
-  --space-5:  1rem;
-  --space-6:  1.2rem;
-  --space-8:  1.6rem;
-  --space-10: 2rem;
-  --space-12: 2.4rem;
-  --space-16: 3.2rem;
-  --space-20: 4rem;
-  --space-24: 4.8rem;
-  --space-32: 6.4rem;
+  --space-1:  0.15rem;
+  --space-2:  0.3rem;
+  --space-3:  0.45rem;
+  --space-4:  0.65rem;
+  --space-5:  0.85rem;
+  --space-6:  1rem;
+  --space-8:  1.3rem;
+  --space-10: 1.6rem;
+  --space-12: 1.9rem;
+  --space-16: 2.4rem;
+  --space-20: 3rem;
+  --space-24: 3.5rem;
+  --space-32: 4.2rem;
 
   /* Border Radius */
   --radius-sm:   8px;
