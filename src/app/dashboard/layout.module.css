@@ -1,24 +1,24 @@
 .wrapper {
   display: flex;
   min-height: 100vh;
-  background-color: #0E1322;
+  background-color: var(--color-navy, #0B0F19);
   color: #ffffff;
   font-family: var(--font-sans);
 }
 
 /* ============================================================
-   LEFT NAVIGATION SIDEBAR (Dark Jet Pitch Tone #060810)
+   LEFT SIDEBAR (Matched Foundation Dark #070A11)
    ============================================================ */
 .sidebar {
   width: 260px;
-  background: #060810;
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  background: #070A11;
+  border-right: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
   display: flex;
   flex-direction: column;
   position: fixed;
   top: 0; bottom: 0; left: 0;
   z-index: 100;
-  box-shadow: 4px 0 30px rgba(0, 0, 0, 0.5);
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.4);
   transition: transform 0.3s ease;
 }
 
@@ -28,17 +28,17 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-  background: #04050A;
+  border-bottom: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
+  background: rgba(255, 255, 255, 0.015);
 }
 
 .logoMark {
   width: 34px; height: 34px;
-  background: linear-gradient(135deg, var(--color-accent), var(--color-teal));
-  border-radius: 10px;
+  background: linear-gradient(135deg, var(--color-accent, #5B8CFF), var(--color-teal, #00D1B2));
+  border-radius: 9px;
   display: flex; align-items: center; justify-content: center;
-  font-weight: 900; font-size: 13px; color: #fff;
-  box-shadow: 0 4px 14px rgba(91, 140, 255, 0.4);
+  font-weight: 900; font-size: 13px; color: #ffffff;
+  box-shadow: 0 4px 14px rgba(91, 140, 255, 0.35);
 }
 
 .brandText { 
@@ -50,9 +50,9 @@
 
 .badgeOs {
   font-size: 9px; font-weight: 800; letter-spacing: 0.08em;
-  background: rgba(91, 140, 255, 0.15); 
-  border: 1px solid rgba(91, 140, 255, 0.3);
-  color: var(--color-accent); 
+  background: rgba(91, 140, 255, 0.12); 
+  border: 1px solid rgba(91, 140, 255, 0.25);
+  color: var(--color-accent, #5B8CFF); 
   padding: 0.15rem 0.45rem; 
   border-radius: 99px;
 }
@@ -86,47 +86,47 @@
 }
 
 .navLink:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.04);
   color: #ffffff;
-  transform: translateX(3px);
+  transform: translateX(2px);
 }
 
 .navLinkActive {
-  background: linear-gradient(90deg, rgba(91, 140, 255, 0.2) 0%, rgba(0, 209, 178, 0.08) 100%);
-  border: 1px solid rgba(91, 140, 255, 0.35);
+  background: linear-gradient(135deg, rgba(91, 140, 255, 0.15) 0%, rgba(0, 209, 178, 0.06) 100%);
+  border: 1px solid rgba(91, 140, 255, 0.3);
   color: #ffffff;
-  box-shadow: inset 3px 0 0 var(--color-accent);
+  box-shadow: 0 4px 16px rgba(91, 140, 255, 0.12);
 }
 
 .navIcon { 
   flex-shrink: 0; 
-  color: #5B8CFF;
+  color: var(--color-accent, #5B8CFF);
 }
 
 .userProfile {
   padding: 1.1rem 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  border-top: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  background: #04050A;
+  background: rgba(255, 255, 255, 0.015);
 }
 
 .avatar {
   width: 36px; height: 36px;
   border-radius: 10px;
-  background: linear-gradient(135deg, #3b82f6, #00D1B2);
+  background: linear-gradient(135deg, var(--color-accent, #5B8CFF), var(--color-teal, #00D1B2));
   display: flex; align-items: center; justify-content: center;
   font-weight: 800; font-size: 13px; color: #fff;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.35);
+  box-shadow: 0 4px 12px rgba(91, 140, 255, 0.3);
 }
 
 .userInfo { display: flex; flex-direction: column; overflow: hidden; }
 .userName { font-size: 0.825rem; font-weight: 700; color: #fff; white-space: nowrap; text-overflow: ellipsis; }
-.userRole { font-size: 0.7rem; color: #00D1B2; font-weight: 700; text-transform: uppercase; }
+.userRole { font-size: 0.7rem; color: var(--color-teal, #00D1B2); font-weight: 700; text-transform: uppercase; }
 
 /* ============================================================
-   RIGHT WORKSPACE CANVAS (Rich Slate Tone #0E1322)
+   RIGHT WORKSPACE (Matched Brand Navy #0B0F19)
    ============================================================ */
 .main {
   flex: 1;
@@ -134,19 +134,20 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
-  background-color: #0E1322;
+  background-color: var(--color-navy, #0B0F19);
 }
 
 .header {
   height: 72px;
   padding: 0 2rem;
-  background: #0B0F1D;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(11, 15, 25, 0.9);
+  border-bottom: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: sticky; top: 0; z-index: 90;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .headerTitle { 
@@ -161,7 +162,7 @@
 .content {
   padding: 2rem;
   flex: 1;
-  background-color: #0E1322;
+  background-color: var(--color-navy, #0B0F19);
 }
 
 @media (max-width: 900px) {
