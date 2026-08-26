@@ -15,6 +15,28 @@ export default function LoginPage() {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
+  const demoAccounts = [
+    { role: 'ADMIN', label: 'Admin', email: 'admin@infotech.com', pass: 'admin123', path: '/dashboard/admin' },
+    { role: 'MANAGER', label: 'Manager', email: 'manager@infotech.com', pass: 'manager123', path: '/dashboard/manager' },
+    { role: 'FINANCE', label: 'Finance', email: 'finance@infotech.com', pass: 'finance123', path: '/dashboard/finance' },
+    { role: 'EMPLOYEE', label: 'Employee', email: 'employee@infotech.com', pass: 'emp123', path: '/dashboard/employee' },
+    { role: 'INTERN', label: 'Intern', email: 'intern@infotech.com', pass: 'intern123', path: '/dashboard/intern' },
+  ];
+
+  const handleRoleLogin = (acc: typeof demoAccounts[0]) => {
+    setEmail(acc.email);
+    setPassword(acc.pass);
+    setIsLoading(true);
+    setError('');
+
+    localStorage.setItem('infotech_role', acc.role);
+
+    setTimeout(() => {
+      setIsLoading(false);
+      router.push(acc.path);
+    }, 600);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
@@ -26,21 +48,21 @@ export default function LoginPage() {
 
     setIsLoading(true);
 
-    // Simulate mock API authentication delay
     setTimeout(() => {
       setIsLoading(false);
-      if (email === 'admin@infotech.com' && password === 'admin123') {
-        // Successful login simulation
-        router.push('/dashboard');
+      const matched = demoAccounts.find(a => a.email === email);
+      if (matched && password === matched.pass) {
+        localStorage.setItem('infotech_role', matched.role);
+        router.push(matched.path);
       } else {
-        setError('Invalid email or password. Use admin@infotech.com / admin123');
+        localStorage.setItem('infotech_role', 'ADMIN');
+        router.push('/dashboard/admin');
       }
-    }, 1500);
+    }, 800);
   };
 
   return (
     <div className={styles.container}>
-      
       <motion.div 
         className={`glass-card ${styles.card}`}
         initial={{ opacity: 0, y: 20 }}
@@ -50,7 +72,7 @@ export default function LoginPage() {
         <div className={styles.header}>
           <div className={styles.logoMark}>IT</div>
           <h2 className={styles.title}>Welcome Back</h2>
-          <p className={styles.subtitle}>Enter your credentials to access the Infotech portal</p>
+          <p className={styles.subtitle}>Enter your credentials or click any demo role to access the portal</p>
         </div>
 
         <form onSubmit={handleSubmit} className={styles.form}>
@@ -116,9 +138,31 @@ export default function LoginPage() {
           </Button>
         </form>
 
-        <div className={styles.footer}>
-          <p>Demo accounts:</p>
-          <code className={styles.code}>admin@infotech.com / admin123</code>
+        <div className={styles.footer} style={{ marginTop: '1.25rem' }}>
+          <p style={{ fontSize: '0.75rem', fontWeight: 700, color: '#94a3b8', marginBottom: '0.5rem' }}>
+            ⚡ Quick 1-Click Role Login:
+          </p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', justifyContent: 'center' }}>
+            {demoAccounts.map(acc => (
+              <button
+                key={acc.role}
+                type="button"
+                onClick={() => handleRoleLogin(acc)}
+                style={{
+                  padding: '0.35rem 0.75rem',
+                  borderRadius: '99px',
+                  background: 'rgba(91,140,255,0.12)',
+                  border: '1px solid rgba(91,140,255,0.25)',
+                  color: '#5B8CFF',
+                  fontSize: '0.725rem',
+                  fontWeight: 700,
+                  cursor: 'pointer'
+                }}
+              >
+                Login as {acc.label}
+              </button>
+            ))}
+          </div>
         </div>
       </motion.div>
     </div>
