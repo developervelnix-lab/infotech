@@ -17,7 +17,8 @@ import {
   Building2,
   Bell,
   UserCheck,
-  Megaphone
+  Megaphone,
+  Palette
 } from 'lucide-react';
 import styles from './layout.module.css';
 
@@ -61,6 +62,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     { label: 'Attendance & Leave', path: '/dashboard/attendance', icon: Clock, roles: ['ADMIN', 'MANAGER', 'FINANCE', 'EMPLOYEE', 'INTERN'] },
     { label: 'Payroll & Payslips', path: '/dashboard/finance', icon: DollarSign, roles: ['ADMIN', 'FINANCE', 'EMPLOYEE'] },
     { label: 'Social Automation', path: '/dashboard/social', icon: Share2, roles: ['ADMIN'] },
+    { label: 'Website Studio & CMS', path: '/dashboard/website', icon: Palette, roles: ['ADMIN'] },
     { label: 'Announcements', path: '/dashboard/updates', icon: Megaphone, roles: ['ADMIN', 'MANAGER'] },
     { label: 'Company Settings', path: '/dashboard/settings', icon: Settings, roles: ['ADMIN'] },
   ];
@@ -125,6 +127,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             {pathname === '/dashboard/crm' && 'Lead CRM Pipeline'}
             {pathname === '/dashboard/attendance' && 'Attendance & Leave Management'}
             {pathname === '/dashboard/social' && 'Social Media Automation'}
+            {pathname === '/dashboard/website' && 'Website Studio & Maintenance Control'}
             {pathname === '/dashboard/updates' && 'Announcements & Updates'}
             {pathname === '/dashboard/settings' && 'Company Settings'}
           </div>
