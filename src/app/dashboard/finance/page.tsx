@@ -45,6 +45,7 @@ export default function FinanceDashboardPage() {
               <th>Role</th>
               <th>Base Salary</th>
               <th>Allowances</th>
+              <th>Deductions</th>
               <th>Net Pay</th>
               <th>Status</th>
               <th>Payslip</th>
@@ -57,6 +58,7 @@ export default function FinanceDashboardPage() {
                 <td>{p.role}</td>
                 <td>{p.base}</td>
                 <td>{p.allowances}</td>
+                <td>{p.deductions}</td>
                 <td style={{ fontWeight: 800, color: '#00D1B2' }}>{p.net}</td>
                 <td>
                   <span className={styles.statusPill} style={{ background: p.status === 'PAID' ? 'rgba(0,209,178,0.15)' : 'rgba(234,179,8,0.15)', color: p.status === 'PAID' ? '#00D1B2' : '#eab308' }}>

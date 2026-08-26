@@ -5,7 +5,17 @@ import { Clock, Briefcase, Calendar, Download, Award, CheckCircle2 } from 'lucid
 import styles from '../dashboard.module.css';
 
 export default function EmployeeDashboardPage() {
-  const [isCheckedIn, setIsCheckedIn] = useState(true);
+  const [isCheckedIn, setIsCheckedIn] = useState(false);
+  const [checkInTime, setCheckInTime] = useState<string | null>(null);
+
+  const handleCheckIn = () => {
+    if (!isCheckedIn) {
+      setIsCheckedIn(true);
+      setCheckInTime(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+    } else {
+      setIsCheckedIn(false);
+    }
+  };
 
   return (
     <div className={styles.pageWrap}>
@@ -17,7 +27,7 @@ export default function EmployeeDashboardPage() {
 
         <div className={styles.quickActions}>
           <button 
-            onClick={() => setIsCheckedIn(!isCheckedIn)}
+            onClick={handleCheckIn}
             className={styles.actionBtnPrimary}
             style={{ background: isCheckedIn ? '#f43f5e' : 'linear-gradient(135deg, #00D1B2, #3b82f6)' }}
           >
@@ -28,9 +38,9 @@ export default function EmployeeDashboardPage() {
 
       <div className={styles.statsGrid}>
         <div className={styles.statCard}>
-          <div className={styles.statHeader}><span className={styles.statTitle}>Attendance Status</span><CheckCircle2 size={20} color="#00D1B2" /></div>
-          <div className={styles.statVal} style={{ color: '#00D1B2', fontSize: '1.2rem' }}>PRESENT (9:55 AM)</div>
-          <div className={styles.statChange}>Total Hours: 5.8 hrs</div>
+          <div className={styles.statHeader}><span className={styles.statTitle}>Attendance Status</span><CheckCircle2 size={20} color={isCheckedIn ? '#00D1B2' : '#64748b'} /></div>
+          <div className={styles.statVal} style={{ color: isCheckedIn ? '#00D1B2' : '#94a3b8', fontSize: '1.2rem' }}>{isCheckedIn ? `PRESENT (${checkInTime})` : 'NOT CHECKED IN'}</div>
+          <div className={styles.statChange}>{isCheckedIn ? 'Session active' : 'Click Check In to start'}</div>
         </div>
 
         <div className={styles.statCard}>

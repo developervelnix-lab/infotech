@@ -59,7 +59,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     { label: 'Certificates & Letters', path: '/dashboard/certificates', icon: FileCheck2, roles: ['ADMIN', 'MANAGER', 'EMPLOYEE', 'INTERN'] },
     { label: 'Lead CRM', path: '/dashboard/crm', icon: Briefcase, roles: ['ADMIN', 'MANAGER'] },
     { label: 'Attendance & Leave', path: '/dashboard/attendance', icon: Clock, roles: ['ADMIN', 'MANAGER', 'FINANCE', 'EMPLOYEE', 'INTERN'] },
-    { label: 'Payroll & Payslips', path: '/dashboard/payroll', icon: DollarSign, roles: ['ADMIN', 'FINANCE', 'EMPLOYEE'] },
+    { label: 'Payroll & Payslips', path: '/dashboard/finance', icon: DollarSign, roles: ['ADMIN', 'FINANCE', 'EMPLOYEE'] },
     { label: 'Social Automation', path: '/dashboard/social', icon: Share2, roles: ['ADMIN'] },
     { label: 'Announcements', path: '/dashboard/updates', icon: Megaphone, roles: ['ADMIN', 'MANAGER'] },
     { label: 'Company Settings', path: '/dashboard/settings', icon: Settings, roles: ['ADMIN'] },
@@ -101,9 +101,13 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             <span className={styles.userName}>Active Account</span>
             <span className={styles.userRole}>{currentRole}</span>
           </div>
-          <Link href="/login" style={{ marginLeft: 'auto', color: '#64748b' }} title="Logout">
+          <button 
+            onClick={() => { localStorage.removeItem('infotech_role'); router.push('/login'); }}
+            style={{ marginLeft: 'auto', color: '#64748b', background: 'none', border: 'none', cursor: 'pointer' }} 
+            title="Logout"
+          >
             <LogOut size={16} />
-          </Link>
+          </button>
         </div>
       </aside>
 
@@ -111,18 +115,18 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <div className={styles.main}>
         <header className={styles.header}>
           <div className={styles.headerTitle}>
-            {pathname.includes('admin') && 'Executive Admin Control'}
-            {pathname.includes('intern') && 'Intern Dedicated Portal'}
-            {pathname.includes('manager') && 'Manager Team Command'}
-            {pathname.includes('finance') && 'Finance & Payroll Hub'}
-            {pathname.includes('employee') && 'Employee Self-Service'}
-            {pathname.includes('employees') && 'HR Employee & Intern Registry'}
-            {pathname.includes('certificates') && 'Certificate & Letter Generator'}
-            {pathname.includes('crm') && 'Lead CRM Pipeline'}
-            {pathname.includes('attendance') && 'Attendance & Leave Management'}
-            {pathname.includes('payroll') && 'Payroll & Payslips'}
-            {pathname.includes('social') && 'Social Media Automation'}
-            {pathname.includes('settings') && 'Company Settings'}
+            {pathname === '/dashboard/admin' && 'Executive Admin Control'}
+            {pathname === '/dashboard/intern' && 'Intern Dedicated Portal'}
+            {pathname === '/dashboard/manager' && 'Manager Team Command'}
+            {pathname === '/dashboard/finance' && 'Finance & Payroll Hub'}
+            {pathname === '/dashboard/employee' && 'Employee Self-Service'}
+            {pathname === '/dashboard/employees' && 'HR Employee & Intern Registry'}
+            {pathname === '/dashboard/certificates' && 'Certificate & Letter Generator'}
+            {pathname === '/dashboard/crm' && 'Lead CRM Pipeline'}
+            {pathname === '/dashboard/attendance' && 'Attendance & Leave Management'}
+            {pathname === '/dashboard/social' && 'Social Media Automation'}
+            {pathname === '/dashboard/updates' && 'Announcements & Updates'}
+            {pathname === '/dashboard/settings' && 'Company Settings'}
           </div>
 
           <div className={styles.headerRight}>

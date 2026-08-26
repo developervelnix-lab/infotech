@@ -17,7 +17,7 @@ import styles from '../dashboard.module.css';
 
 export default function SocialAutomationPage() {
   const [caption, setCaption] = useState('');
-  const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>(['LinkedIn', 'Instagram', 'X']);
+  const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>(['LinkedIn', 'Instagram', 'X / Twitter']);
   const [isPublished, setIsPublished] = useState(false);
 
   const platforms = [
@@ -40,6 +40,8 @@ export default function SocialAutomationPage() {
   const handlePublish = (e: React.FormEvent) => {
     e.preventDefault();
     setIsPublished(true);
+    setCaption('');
+    setTimeout(() => setIsPublished(false), 3000);
   };
 
   const history = [
@@ -66,6 +68,11 @@ export default function SocialAutomationPage() {
           </div>
 
           <form onSubmit={handlePublish} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+            {isPublished && (
+              <div style={{ background: 'rgba(0,209,178,0.1)', border: '1px solid rgba(0,209,178,0.3)', borderRadius: '10px', padding: '0.75rem 1rem', color: '#00D1B2', fontSize: '0.825rem', fontWeight: 700 }}>
+                ✅ Post published successfully to {selectedPlatforms.length} platforms!
+              </div>
+            )}
             {/* Select Platforms */}
             <div>
               <label style={{ fontSize: '0.775rem', fontWeight: 700, color: '#cbd5e1', display: 'block', marginBottom: '0.5rem' }}>

@@ -18,6 +18,7 @@ import styles from '../dashboard.module.css';
 export default function InternDashboardPage() {
   const [isCheckedIn, setIsCheckedIn] = useState(false);
   const [checkInTime, setCheckInTime] = useState<string | null>(null);
+  const [checkOutTime, setCheckOutTime] = useState<string | null>(null);
   const [reportSubmitted, setReportSubmitted] = useState(false);
 
   // Form State
@@ -28,13 +29,23 @@ export default function InternDashboardPage() {
 
   const handleCheckIn = () => {
     const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    setIsCheckedIn(!isCheckedIn);
-    if (!isCheckedIn) setCheckInTime(time);
+    if (!isCheckedIn) {
+      setIsCheckedIn(true);
+      setCheckInTime(time);
+      setCheckOutTime(null);
+    } else {
+      setIsCheckedIn(false);
+      setCheckOutTime(time);
+    }
   };
 
   const handleSubmitReport = (e: React.FormEvent) => {
     e.preventDefault();
     setReportSubmitted(true);
+    setTasks('');
+    setHours('');
+    setBlockers('');
+    setLearnings('');
   };
 
   return (

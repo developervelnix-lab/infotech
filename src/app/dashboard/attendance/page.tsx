@@ -15,8 +15,20 @@ import styles from '../dashboard.module.css';
 export default function AttendancePage() {
   const [isCheckedIn, setIsCheckedIn] = useState(false);
   const [showLeaveForm, setShowLeaveForm] = useState(false);
+  const [checkInTime, setCheckInTime] = useState<string | null>(null);
+  const [leaveSubmitted, setLeaveSubmitted] = useState(false);
+
+  const handleCheckIn = () => {
+    if (!isCheckedIn) {
+      setIsCheckedIn(true);
+      setCheckInTime(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+    } else {
+      setIsCheckedIn(false);
+    }
+  };
 
   const logs = [
+    { id: '0', name: 'You (Current User)', role: 'Logged-In User', date: new Date().toISOString().split('T')[0], inTime: checkInTime || '--:--', outTime: !isCheckedIn && checkInTime ? new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '--:--', totalHours: isCheckedIn ? 'Running...' : checkInTime ? 'Ended' : '0.0 hrs', status: isCheckedIn ? 'ON_TIME' : checkInTime ? 'ON_TIME' : 'ABSENT' },
     { id: '1', name: 'Rahul Sharma', role: 'Web Intern', date: '2026-08-26', inTime: '10:02 AM', outTime: '--:--', totalHours: 'Running...', status: 'ON_TIME' },
     { id: '2', name: 'Priya Patel', role: 'Frontend Lead', date: '2026-08-26', inTime: '09:55 AM', outTime: '--:--', totalHours: 'Running...', status: 'ON_TIME' },
     { id: '3', name: 'Vikram Verma', role: 'UI/UX Intern', date: '2026-08-26', inTime: '10:24 AM', outTime: '--:--', totalHours: 'Running...', status: 'LATE' },
@@ -35,7 +47,7 @@ export default function AttendancePage() {
 
         <div className={styles.quickActions}>
           <button 
-            onClick={() => setIsCheckedIn(!isCheckedIn)}
+            onClick={handleCheckIn}
             className={styles.actionBtnPrimary}
             style={{ background: isCheckedIn ? '#f43f5e' : 'linear-gradient(135deg, #00D1B2, #3b82f6)' }}
           >
@@ -53,7 +65,7 @@ export default function AttendancePage() {
           <div className={styles.boxHeader}>
             <h3 className={styles.boxTitle}>Submit Leave Request</h3>
           </div>
-          <form onSubmit={(e) => { e.preventDefault(); setShowLeaveForm(false); }} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem' }}>
+          <form onSubmit={(e) => { e.preventDefault(); setShowLeaveForm(false); setLeaveSubmitted(true); setTimeout(() => setLeaveSubmitted(false), 3000); }} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem' }}>
             <div>
               <label style={{ fontSize: '0.775rem', color: '#94a3b8', display: 'block', marginBottom: '0.3rem' }}>Leave Type</label>
               <select style={{ width: '100%', background: '#0f172a', border: '1px solid rgba(255,255,255,0.1)', padding: '0.6rem', borderRadius: '8px', color: '#fff', fontSize: '0.8rem' }}>

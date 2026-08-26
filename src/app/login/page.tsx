@@ -55,8 +55,7 @@ export default function LoginPage() {
         localStorage.setItem('infotech_role', matched.role);
         router.push(matched.path);
       } else {
-        localStorage.setItem('infotech_role', 'ADMIN');
-        router.push('/dashboard/admin');
+        setError('Invalid email or password. Please use one of the demo accounts below.');
       }
     }, 800);
   };

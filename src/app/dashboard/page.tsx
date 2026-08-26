@@ -19,8 +19,10 @@ export default function DashboardRootPage() {
   }, [router]);
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '60vh', color: '#94a3b8' }}>
-      Loading role dashboard...
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '60vh', color: '#94a3b8', gap: '1rem' }}>
+      <div style={{ width: '32px', height: '32px', border: '3px solid rgba(91,140,255,0.2)', borderTop: '3px solid #5B8CFF', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} />
+      <span>Redirecting to your dashboard...</span>
+      <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
     </div>
   );
 }

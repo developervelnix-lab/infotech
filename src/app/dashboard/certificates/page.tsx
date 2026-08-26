@@ -116,6 +116,12 @@ export default function CertificatesPage() {
               </div>
             </div>
 
+            {isGenerated && (
+              <div style={{ background: 'rgba(0,209,178,0.1)', border: '1px solid rgba(0,209,178,0.3)', borderRadius: '10px', padding: '0.75rem 1rem', color: '#00D1B2', fontSize: '0.825rem', fontWeight: 700 }}>
+                ✅ Document generated successfully! Preview is shown on the right.
+              </div>
+            )}
+
             <button type="submit" className={styles.actionBtnPrimary} style={{ marginTop: '0.5rem' }}>
               <Printer size={16} /> Generate Branded PDF Document
             </button>
