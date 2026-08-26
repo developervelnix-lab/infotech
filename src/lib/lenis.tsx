@@ -13,11 +13,9 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
   const rafRef = useRef<number>(0);
 
   useEffect(() => {
-    const prefersReducedMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)'
-    ).matches;
-
-    if (prefersReducedMotion) return;
+    const isMobile = window.innerWidth <= 768;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion || isMobile) return;
 
     lenisInstance = new Lenis({
       duration: 1.8,

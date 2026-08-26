@@ -84,7 +84,6 @@
   --radius-2xl:    28px;
 }
 
-/* Mobile overrides */
 @media (max-width: 768px) {
   :root {
     --navbar-h: 64px;
@@ -94,6 +93,14 @@
     --space-20: 2.5rem;
     --space-16: 2rem;
     --radius-2xl: 20px;
+  }
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  /* Disable expensive GPU backdrop blur shaders on mobile for 60FPS scroll performance */
+  .glass-card, [class*="cardFrame"], [class*="illustration"], [class*="modal"] {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
   }
 }
 @media (max-width: 480px) {
