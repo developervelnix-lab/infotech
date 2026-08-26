@@ -2,9 +2,22 @@
 .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); margin-top: var(--space-16); perspective: 1200px; }
 @media (max-width: 1024px) { .grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 640px) {
-  .grid { grid-template-columns: 1fr; }
+  .grid { grid-template-columns: 1fr; gap: 1.25rem; }
   .section { padding-block: var(--space-16); }
-  .imageWrap { height: 180px; }
+  .imageWrap { height: 190px; }
+  .card {
+    border-radius: 20px;
+    background: linear-gradient(165deg, rgba(30, 41, 59, 0.75) 0%, rgba(15, 23, 42, 0.9) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+  }
+  .overlay { opacity: 1; background: linear-gradient(180deg, transparent 40%, rgba(11, 15, 25, 0.85) 100%); }
+  .viewBtn {
+    padding: 0.5rem 1.1rem;
+    font-size: 0.75rem;
+    border-radius: var(--radius-full);
+    box-shadow: 0 4px 15px rgba(91, 140, 255, 0.4);
+  }
 }
 
 .card {
