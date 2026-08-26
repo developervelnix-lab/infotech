@@ -1,22 +1,24 @@
 .wrapper {
   display: flex;
   min-height: 100vh;
-  background-color: #080B14;
+  background-color: #0E1322;
   color: #ffffff;
   font-family: var(--font-sans);
 }
 
-/* Sidebar */
+/* ============================================================
+   LEFT NAVIGATION SIDEBAR (Dark Jet Pitch Tone #060810)
+   ============================================================ */
 .sidebar {
   width: 260px;
-  background: #0B0F19;
-  border-right: 1px solid rgba(255, 255, 255, 0.07);
+  background: #060810;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   flex-direction: column;
   position: fixed;
   top: 0; bottom: 0; left: 0;
   z-index: 100;
-  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.4);
+  box-shadow: 4px 0 30px rgba(0, 0, 0, 0.5);
   transition: transform 0.3s ease;
 }
 
@@ -26,8 +28,8 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  background: rgba(255, 255, 255, 0.01);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  background: #04050A;
 }
 
 .logoMark {
@@ -36,20 +38,23 @@
   border-radius: 10px;
   display: flex; align-items: center; justify-content: center;
   font-weight: 900; font-size: 13px; color: #fff;
-  box-shadow: 0 4px 14px rgba(91, 140, 255, 0.35);
+  box-shadow: 0 4px 14px rgba(91, 140, 255, 0.4);
 }
 
 .brandText { 
   font-size: 1.15rem; 
   font-weight: 800; 
-  color: #fff; 
+  color: #ffffff; 
   letter-spacing: -0.01em;
 }
 
 .badgeOs {
   font-size: 9px; font-weight: 800; letter-spacing: 0.08em;
-  background: rgba(91, 140, 255, 0.12); border: 1px solid rgba(91, 140, 255, 0.25);
-  color: var(--color-accent); padding: 0.15rem 0.45rem; border-radius: 99px;
+  background: rgba(91, 140, 255, 0.15); 
+  border: 1px solid rgba(91, 140, 255, 0.3);
+  color: var(--color-accent); 
+  padding: 0.15rem 0.45rem; 
+  border-radius: 99px;
 }
 
 .nav {
@@ -81,16 +86,16 @@
 }
 
 .navLink:hover {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.05);
   color: #ffffff;
-  transform: translateX(2px);
+  transform: translateX(3px);
 }
 
 .navLinkActive {
-  background: linear-gradient(90deg, rgba(91, 140, 255, 0.15) 0%, rgba(0, 209, 178, 0.05) 100%);
-  border: 1px solid rgba(91, 140, 255, 0.25);
+  background: linear-gradient(90deg, rgba(91, 140, 255, 0.2) 0%, rgba(0, 209, 178, 0.08) 100%);
+  border: 1px solid rgba(91, 140, 255, 0.35);
   color: #ffffff;
-  box-shadow: inset 2px 0 0 var(--color-accent);
+  box-shadow: inset 3px 0 0 var(--color-accent);
 }
 
 .navIcon { 
@@ -100,11 +105,11 @@
 
 .userProfile {
   padding: 1.1rem 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  background: rgba(255, 255, 255, 0.015);
+  background: #04050A;
 }
 
 .avatar {
@@ -113,28 +118,30 @@
   background: linear-gradient(135deg, #3b82f6, #00D1B2);
   display: flex; align-items: center; justify-content: center;
   font-weight: 800; font-size: 13px; color: #fff;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.35);
 }
 
 .userInfo { display: flex; flex-direction: column; overflow: hidden; }
 .userName { font-size: 0.825rem; font-weight: 700; color: #fff; white-space: nowrap; text-overflow: ellipsis; }
 .userRole { font-size: 0.7rem; color: #00D1B2; font-weight: 700; text-transform: uppercase; }
 
-/* Main Area */
+/* ============================================================
+   RIGHT WORKSPACE CANVAS (Rich Slate Tone #0E1322)
+   ============================================================ */
 .main {
   flex: 1;
   margin-left: 260px;
   display: flex;
   flex-direction: column;
   min-width: 0;
-  background-color: #080B14;
+  background-color: #0E1322;
 }
 
 .header {
   height: 72px;
   padding: 0 2rem;
-  background: #0B0F19;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  background: #0B0F1D;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -145,7 +152,7 @@
 .headerTitle { 
   font-size: 1.2rem; 
   font-weight: 800; 
-  color: #fff; 
+  color: #ffffff; 
   letter-spacing: -0.01em;
 }
 
@@ -154,6 +161,7 @@
 .content {
   padding: 2rem;
   flex: 1;
+  background-color: #0E1322;
 }
 
 @media (max-width: 900px) {
