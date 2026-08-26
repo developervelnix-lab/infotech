@@ -134,17 +134,17 @@ export default function CertificatesPage() {
             <h3 className={styles.boxTitle}>Document Live Preview Pane</h3>
           </div>
 
-          <div style={{ background: '#ffffff', color: '#000000', borderRadius: '12px', padding: '1.5rem', minHeight: '340px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', boxShadow: '0 10px 30px rgba(0,0,0,0.5)' }}>
+          <div style={{ background: '#131A2B', color: '#ffffff', borderRadius: '12px', border: '1px solid rgba(91,140,255,0.3)', padding: '1.5rem', minHeight: '340px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', boxShadow: '0 10px 30px rgba(0,0,0,0.5)' }}>
             <div>
               {/* Document Header */}
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '2px solid #5B8CFF', paddingBottom: '0.75rem', marginBottom: '1rem' }}>
-                <div style={{ fontWeight: 900, fontSize: '1.2rem', color: '#0B0F19' }}>INFOTECH</div>
-                <div style={{ fontSize: '0.7rem', color: '#64748b', textAlign: 'right' }}>Official Certificate & Letterhead</div>
+                <div style={{ fontWeight: 900, fontSize: '1.2rem', color: '#5B8CFF' }}>INFOTECH</div>
+                <div style={{ fontSize: '0.7rem', color: '#94a3b8', textAlign: 'right' }}>Official Certificate & Letterhead</div>
               </div>
 
               {/* Title */}
               <div style={{ textAlign: 'center', margin: '1rem 0' }}>
-                <h4 style={{ fontSize: '1.15rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em', color: '#0B0F19' }}>
+                <h4 style={{ fontSize: '1.15rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em', color: '#ffffff' }}>
                   {selectedTemplate === 'INTERNSHIP_CERT' && 'INTERNSHIP CERTIFICATE OF COMPLETION'}
                   {selectedTemplate === 'OFFER_LETTER' && 'EMPLOYMENT OFFER LETTER'}
                   {selectedTemplate === 'APPOINTMENT_LETTER' && 'LETTER OF APPOINTMENT'}
@@ -155,20 +155,20 @@ export default function CertificatesPage() {
               </div>
 
               {/* Body text */}
-              <p style={{ fontSize: '0.8rem', lineHeight: '1.6', color: '#334155', marginTop: '1rem' }}>
-                This is to certify that <strong>{selectedUser.split(' (')[0]}</strong> has successfully completed their stint at Infotech. During this period, their performance was evaluated as <strong>Exemplary</strong>.
+              <p style={{ fontSize: '0.825rem', lineHeight: '1.6', color: '#e2e8f0', marginTop: '1rem' }}>
+                This is to certify that <strong style={{ color: '#00D1B2' }}>{selectedUser.split(' (')[0]}</strong> has successfully completed their stint at Infotech. During this period, their performance was evaluated as <strong style={{ color: '#fff' }}>Exemplary</strong>.
               </p>
             </div>
 
             {/* Document Footer */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', borderTop: '1px dashed #cbd5e1', paddingTop: '0.75rem', marginTop: '1rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', borderTop: '1px dashed rgba(255,255,255,0.15)', paddingTop: '0.75rem', marginTop: '1rem' }}>
               <div>
-                <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#0B0F19' }}>{signatory}</div>
-                <div style={{ fontSize: '0.65rem', color: '#64748b' }}>Infotech Technologies Ltd.</div>
+                <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#ffffff' }}>{signatory}</div>
+                <div style={{ fontSize: '0.65rem', color: '#94a3b8' }}>Infotech Technologies Ltd.</div>
               </div>
               <div style={{ textAlign: 'right' }}>
                 <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#5B8CFF' }}>Date: {issueDate}</div>
-                <div style={{ fontSize: '0.65rem', color: '#64748b' }}>Verify ID: {selectedUser.split('(')[1]?.replace(')', '') || 'VERIFIED'}</div>
+                <div style={{ fontSize: '0.65rem', color: '#94a3b8' }}>Verify ID: {selectedUser.split('(')[1]?.replace(')', '') || 'VERIFIED'}</div>
               </div>
             </div>
           </div>
