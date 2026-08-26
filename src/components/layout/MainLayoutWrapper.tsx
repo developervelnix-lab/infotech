@@ -9,9 +9,8 @@ import AnnouncementTicker from '@/components/layout/AnnouncementTicker';
 export default function MainLayoutWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isDashboard = pathname?.startsWith('/dashboard');
-  const isLogin = pathname?.startsWith('/login');
 
-  if (isDashboard || isLogin) {
+  if (isDashboard) {
     return <main>{children}</main>;
   }
 
