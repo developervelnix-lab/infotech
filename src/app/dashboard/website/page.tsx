@@ -22,7 +22,13 @@ import {
   ExternalLink,
   ChevronRight,
   ArrowRight,
-  Monitor
+  Monitor,
+  Play,
+  TrendingUp,
+  Check,
+  ShieldCheck,
+  Zap,
+  Star
 } from 'lucide-react';
 import styles from '../dashboard.module.css';
 
@@ -34,21 +40,21 @@ export default function WebsiteStudioPage() {
   const [sectionSuccess, setSectionSuccess] = useState<string | null>(null);
 
   // --- 1. HERO STATE ---
-  const [heroBadge, setHeroBadge] = useState('✨ Next-Generation Digital Agency');
+  const [heroBadge, setHeroBadge] = useState('✨ AI-Powered Digital Agency — 2026');
   const [heroTitle, setHeroTitle] = useState('Build Smarter. Scale Faster.');
-  const [heroSubtext, setHeroSubtext] = useState('We engineer high-performance web platforms, custom enterprise software, and AI-driven growth systems tailored for modern scale.');
-  const [primaryCtaText, setPrimaryCtaText] = useState('Explore Solutions');
-  const [secondaryCtaText, setSecondaryCtaText] = useState('Book a Strategy Call');
+  const [heroSubtext, setHeroSubtext] = useState('We help businesses transform digitally with AI-powered solutions, modern development, and growth-focused strategies.');
+  const [primaryCtaText, setPrimaryCtaText] = useState('Start Your Project');
+  const [secondaryCtaText, setSecondaryCtaText] = useState('Get Free Consultation');
   const [heroImgUrl, setHeroImgUrl] = useState('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop');
 
   // --- 2. SOLUTIONS STATE ---
   const [solutionsTitle, setSolutionsTitle] = useState('Engineering Digital Dominance');
   const [solutionsSubtitle, setSolutionsSubtitle] = useState('Six integrated pillars designed to accelerate growth, optimize operations, and build enduring enterprise value.');
   const [solutionsList, setSolutionsList] = useState([
-    { id: '1', title: 'Custom Web & Mobile Apps', tag: 'High-Performance', desc: 'Scalable Next.js & mobile engineering built with enterprise security, sub-second load times, and fluid UX.', img: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=600&auto=format&fit=crop' },
-    { id: '2', title: 'AI & Workflow Automation', tag: 'AI & Automation', desc: 'Custom LLM agents, intelligent CRM workflows, and autonomous bots that eliminate manual tasks.', img: 'https://images.unsplash.com/photo-1677442136019-21780efad99a?q=80&w=600&auto=format&fit=crop' },
-    { id: '3', title: 'Enterprise Software & ERP', tag: 'Scalability', desc: 'Robust backend architectures, custom ERP systems, and microservices engineered for high transaction volumes.', img: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=600&auto=format&fit=crop' },
-    { id: '4', title: 'Growth Marketing & SEO', tag: 'Performance ROI', desc: 'Data-backed search engine domination, conversion rate optimization, and multi-channel acquisition funnels.', img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop' },
+    { id: '1', number: '01', title: 'Custom Web & Mobile Apps', tag: 'High-Performance', subtitle: 'Scalable infrastructure for modern scale', desc: 'Scalable Next.js & mobile engineering built with enterprise security, sub-second load times, and fluid UX.', stat: '99.99%', statLabel: 'Uptime SLA', img: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=600&auto=format&fit=crop' },
+    { id: '2', number: '02', title: 'AI & Workflow Automation', tag: 'AI & Automation', subtitle: 'Autonomous efficiency for business', desc: 'Custom LLM agents, intelligent CRM workflows, and autonomous bots that eliminate manual tasks.', stat: '4.8x', statLabel: 'Faster Ops', img: 'https://images.unsplash.com/photo-1677442136019-21780efad99a?q=80&w=600&auto=format&fit=crop' },
+    { id: '3', number: '03', title: 'Enterprise Software & ERP', tag: 'Scalability', subtitle: 'Tailored to unique business needs', desc: 'Robust backend architectures, custom ERP systems, and microservices engineered for high transaction volumes.', stat: '10x', statLabel: 'Query Speed', img: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=600&auto=format&fit=crop' },
+    { id: '4', number: '04', title: 'Growth Marketing & SEO', tag: 'Performance ROI', subtitle: 'Insights that drive strategic decisions', desc: 'Data-backed search engine domination, conversion rate optimization, and multi-channel acquisition funnels.', stat: '3.4x', statLabel: 'Avg ROI', img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop' },
   ]);
 
   // --- 3. WHY US STATE ---
@@ -74,9 +80,9 @@ export default function WebsiteStudioPage() {
   const [toolsTitle, setToolsTitle] = useState('Try Our Free Business Tools');
   const [toolsSubtitle, setToolsSubtitle] = useState('Interactive calculators and audit engines to evaluate your digital maturity.');
   const [toolsList, setToolsList] = useState([
-    { id: '1', name: 'ROI & Tech Investment Calculator', tag: 'Financial', desc: 'Forecast cost savings and revenue uplift from automated workflows and custom software migration.' },
-    { id: '2', name: 'Website Speed & SEO Audit Score', tag: 'Engineering', desc: 'Instant diagnostic of Core Web Vitals, page weight, security headers, and conversion bottlenecks.' },
-    { id: '3', name: 'AI Automation Feasibility Scanner', tag: 'AI Diagnostic', desc: 'Identify high-value manual processes in your business that can be automated with LLM agents.' },
+    { id: '1', name: 'ROI & Tech Investment Calculator', tag: 'Financial Modeling', desc: 'Forecast cost savings and revenue uplift from automated workflows and custom software migration.' },
+    { id: '2', name: 'Website Speed & SEO Audit Score', tag: 'Engineering Diagnostic', desc: 'Instant diagnostic of Core Web Vitals, page weight, security headers, and conversion bottlenecks.' },
+    { id: '3', name: 'AI Automation Feasibility Scanner', tag: 'AI Workflow Audit', desc: 'Identify high-value manual processes in your business that can be automated with LLM agents.' },
   ]);
 
   // --- 6. BLOG STATE ---
@@ -246,7 +252,7 @@ export default function WebsiteStudioPage() {
       <div className={styles.welcomeBanner}>
         <div>
           <h1 className={styles.greeting}>Website Content Studio & Visual Manager 🎨</h1>
-          <p className={styles.subtext}>Edit any section, upload local image assets, and preview real-time results instantly before publishing.</p>
+          <p className={styles.subtext}>Edit any section, upload local image assets, and preview real-time results exactly as they appear on the live website.</p>
         </div>
 
         <div className={styles.quickActions}>
@@ -302,12 +308,12 @@ export default function WebsiteStudioPage() {
       </div>
 
       {/* ========================================================================= */}
-      {/* 2-COLUMN WORKSPACE: LEFT EDITOR | RIGHT REAL-TIME LIVE DEMO */}
+      {/* 2-COLUMN WORKSPACE: LEFT EDITOR | RIGHT EXACT PIXEL-PERFECT LIVE DEMO */}
       {/* ========================================================================= */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '1.5rem', alignItems: 'start' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 1.15fr', gap: '1.5rem', alignItems: 'start' }}>
 
         {/* ----------------------------------------------------------------------- */}
-        {/* LEFT COLUMN: EDITING FORMS & UPLOADERS */}
+        {/* LEFT COLUMN: EDITING CONTROLS */}
         {/* ----------------------------------------------------------------------- */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
 
@@ -324,37 +330,36 @@ export default function WebsiteStudioPage() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 <div>
                   <label style={{ fontSize: '0.775rem', fontWeight: 700, color: '#cbd5e1', display: 'block', marginBottom: '0.35rem' }}>Top Badge Text</label>
-                  <input type="text" value={heroBadge} onChange={(e) => setHeroBadge(e.target.value)} style={{ width: '100%', background: '#0B0F19', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.65rem', color: '#fff', fontSize: '0.825rem' }} />
+                  <input type="text" value={heroBadge} onChange={(e) => setHeroBadge(e.target.value)} style={{ width: '100%', background: '#070A11', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.65rem', color: '#fff', fontSize: '0.825rem' }} />
                 </div>
 
                 <div>
                   <label style={{ fontSize: '0.775rem', fontWeight: 700, color: '#cbd5e1', display: 'block', marginBottom: '0.35rem' }}>Main Headline (H1)</label>
-                  <input type="text" value={heroTitle} onChange={(e) => setHeroTitle(e.target.value)} style={{ width: '100%', background: '#0B0F19', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.65rem', color: '#fff', fontSize: '0.825rem', fontWeight: 700 }} />
+                  <input type="text" value={heroTitle} onChange={(e) => setHeroTitle(e.target.value)} style={{ width: '100%', background: '#070A11', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.65rem', color: '#fff', fontSize: '0.825rem', fontWeight: 700 }} />
                 </div>
 
                 <div>
                   <label style={{ fontSize: '0.775rem', fontWeight: 700, color: '#cbd5e1', display: 'block', marginBottom: '0.35rem' }}>Subtext Description</label>
-                  <textarea rows={3} value={heroSubtext} onChange={(e) => setHeroSubtext(e.target.value)} style={{ width: '100%', background: '#0B0F19', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.65rem', color: '#fff', fontSize: '0.825rem' }} />
+                  <textarea rows={3} value={heroSubtext} onChange={(e) => setHeroSubtext(e.target.value)} style={{ width: '100%', background: '#070A11', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.65rem', color: '#fff', fontSize: '0.825rem' }} />
                 </div>
 
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
                   <div>
                     <label style={{ fontSize: '0.775rem', fontWeight: 700, color: '#cbd5e1', display: 'block', marginBottom: '0.35rem' }}>Primary CTA Button</label>
-                    <input type="text" value={primaryCtaText} onChange={(e) => setPrimaryCtaText(e.target.value)} style={{ width: '100%', background: '#0B0F19', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.65rem', color: '#fff', fontSize: '0.825rem' }} />
+                    <input type="text" value={primaryCtaText} onChange={(e) => setPrimaryCtaText(e.target.value)} style={{ width: '100%', background: '#070A11', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.65rem', color: '#fff', fontSize: '0.825rem' }} />
                   </div>
                   <div>
                     <label style={{ fontSize: '0.775rem', fontWeight: 700, color: '#cbd5e1', display: 'block', marginBottom: '0.35rem' }}>Secondary CTA Button</label>
-                    <input type="text" value={secondaryCtaText} onChange={(e) => setSecondaryCtaText(e.target.value)} style={{ width: '100%', background: '#0B0F19', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.65rem', color: '#fff', fontSize: '0.825rem' }} />
+                    <input type="text" value={secondaryCtaText} onChange={(e) => setSecondaryCtaText(e.target.value)} style={{ width: '100%', background: '#070A11', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.65rem', color: '#fff', fontSize: '0.825rem' }} />
                   </div>
                 </div>
 
-                {/* Local Image Upload Area */}
                 <div>
                   <label style={{ fontSize: '0.775rem', fontWeight: 700, color: '#cbd5e1', display: 'block', marginBottom: '0.35rem' }}>Hero Showcase Image</label>
                   <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-                    <input type="text" value={heroImgUrl} onChange={(e) => setHeroImgUrl(e.target.value)} placeholder="Or paste image URL" style={{ flex: 1, background: '#0B0F19', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.65rem', color: '#fff', fontSize: '0.8rem' }} />
+                    <input type="text" value={heroImgUrl} onChange={(e) => setHeroImgUrl(e.target.value)} placeholder="Or paste image URL" style={{ flex: 1, background: '#070A11', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.65rem', color: '#fff', fontSize: '0.8rem' }} />
                     <label style={{ padding: '0.65rem 1rem', borderRadius: '8px', background: 'rgba(91,140,255,0.15)', border: '1px solid rgba(91,140,255,0.3)', color: '#5B8CFF', fontSize: '0.8rem', fontWeight: 700, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
-                      <Upload size={14} /> Upload Device File
+                      <Upload size={14} /> Upload Local
                       <input type="file" accept="image/*" onChange={(e) => handleLocalImageUpload(e, setHeroImgUrl)} style={{ display: 'none' }} />
                     </label>
                   </div>
@@ -369,7 +374,7 @@ export default function WebsiteStudioPage() {
               <div className={styles.boxHeader}>
                 <h3 className={styles.boxTitle}>Edit Solutions & Services ({solutionsList.length} Cards)</h3>
                 <div style={{ display: 'flex', gap: '0.5rem' }}>
-                  <button onClick={() => setSolutionsList([...solutionsList, { id: Date.now().toString(), title: 'New Custom Solution', tag: 'Enterprise', desc: 'Comprehensive digital engineering solutions tailored for rapid scale.', img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop' }])} className={styles.actionBtn}>
+                  <button onClick={() => setSolutionsList([...solutionsList, { id: Date.now().toString(), number: `0${solutionsList.length + 1}`, title: 'New Custom Solution', tag: 'Enterprise', subtitle: 'Tailored enterprise software', desc: 'Comprehensive digital engineering solutions tailored for rapid scale.', stat: '99.9%', statLabel: 'Uptime SLA', img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop' }])} className={styles.actionBtn}>
                     <Plus size={14} /> Add Card
                   </button>
                   <button onClick={() => handlePublishSection('Our Solutions')} className={styles.actionBtnPrimary}>
@@ -380,9 +385,9 @@ export default function WebsiteStudioPage() {
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 {solutionsList.map((sol, idx) => (
-                  <div key={sol.id} style={{ background: '#0B0F19', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+                  <div key={sol.id} style={{ background: '#070A11', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#5B8CFF' }}>Service Card #{idx + 1}</span>
+                      <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#5B8CFF' }}>Service Card #{idx + 1} ({sol.number})</span>
                       <button onClick={() => setSolutionsList(solutionsList.filter(s => s.id !== sol.id))} style={{ background: 'none', border: 'none', color: '#f43f5e', cursor: 'pointer' }}>
                         <Trash2 size={15} />
                       </button>
@@ -393,7 +398,13 @@ export default function WebsiteStudioPage() {
                       <input type="text" value={sol.tag} onChange={(e) => { const n = [...solutionsList]; n[idx].tag = e.target.value; setSolutionsList(n); }} placeholder="Tag" style={{ background: 'rgba(0,209,178,0.1)', border: '1px solid rgba(0,209,178,0.25)', borderRadius: '8px', padding: '0.55rem', color: '#00D1B2', fontSize: '0.75rem', fontWeight: 700 }} />
                     </div>
 
+                    <input type="text" value={sol.subtitle} onChange={(e) => { const n = [...solutionsList]; n[idx].subtitle = e.target.value; setSolutionsList(n); }} placeholder="Subtitle" style={{ width: '100%', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.55rem', color: '#94a3b8', fontSize: '0.75rem' }} />
                     <textarea rows={2} value={sol.desc} onChange={(e) => { const n = [...solutionsList]; n[idx].desc = e.target.value; setSolutionsList(n); }} placeholder="Service Description" style={{ width: '100%', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.55rem', color: '#cbd5e1', fontSize: '0.75rem' }} />
+
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
+                      <input type="text" value={sol.stat} onChange={(e) => { const n = [...solutionsList]; n[idx].stat = e.target.value; setSolutionsList(n); }} placeholder="Stat e.g. 99.9%" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.55rem', color: '#fff', fontSize: '0.75rem' }} />
+                      <input type="text" value={sol.statLabel} onChange={(e) => { const n = [...solutionsList]; n[idx].statLabel = e.target.value; setSolutionsList(n); }} placeholder="Stat Label" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.55rem', color: '#94a3b8', fontSize: '0.75rem' }} />
+                    </div>
 
                     <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
                       <input type="text" value={sol.img} onChange={(e) => { const n = [...solutionsList]; n[idx].img = e.target.value; setSolutionsList(n); }} placeholder="Card Image URL" style={{ flex: 1, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.55rem', color: '#94a3b8', fontSize: '0.75rem' }} />
@@ -420,7 +431,7 @@ export default function WebsiteStudioPage() {
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 {whyPillars.map((p, idx) => (
-                  <div key={p.id} style={{ background: '#0B0F19', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+                  <div key={p.id} style={{ background: '#070A11', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#5B8CFF' }}>Pillar #{idx + 1}</span>
                       <input type="text" value={p.stat} onChange={(e) => { const n = [...whyPillars]; n[idx].stat = e.target.value; setWhyPillars(n); }} placeholder="Stat Badge" style={{ background: 'rgba(0,209,178,0.12)', border: '1px solid rgba(0,209,178,0.3)', borderRadius: '6px', padding: '0.25rem 0.6rem', color: '#00D1B2', fontSize: '0.725rem', fontWeight: 700, width: '120px', textAlign: 'center' }} />
@@ -451,7 +462,7 @@ export default function WebsiteStudioPage() {
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 {casesList.map((cs, idx) => (
-                  <div key={cs.id} style={{ background: '#0B0F19', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+                  <div key={cs.id} style={{ background: '#070A11', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#5B8CFF' }}>Case #{idx + 1}</span>
                       <button onClick={() => setCasesList(casesList.filter(c => c.id !== cs.id))} style={{ background: 'none', border: 'none', color: '#f43f5e', cursor: 'pointer' }}>
@@ -484,7 +495,7 @@ export default function WebsiteStudioPage() {
           {activeSection === 'tools' && (
             <div className={styles.cardBox}>
               <div className={styles.boxHeader}>
-                <h3 className={styles.boxTitle}>Edit Interactive Free Tools ({toolsList.length} Tools)</h3>
+                <h3 className={styles.boxTitle}>Edit Interactive Free Tools</h3>
                 <button onClick={() => handlePublishSection('Interactive Tools')} className={styles.actionBtnPrimary}>
                   <Save size={15} /> Publish Tools
                 </button>
@@ -492,7 +503,7 @@ export default function WebsiteStudioPage() {
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 {toolsList.map((tool, idx) => (
-                  <div key={tool.id} style={{ background: '#0B0F19', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+                  <div key={tool.id} style={{ background: '#070A11', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
                     <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#5B8CFF' }}>Tool #{idx + 1}</span>
                     <input type="text" value={tool.name} onChange={(e) => { const n = [...toolsList]; n[idx].name = e.target.value; setToolsList(n); }} style={{ width: '100%', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.55rem', color: '#fff', fontSize: '0.8rem', fontWeight: 700 }} />
                     <textarea rows={2} value={tool.desc} onChange={(e) => { const n = [...toolsList]; n[idx].desc = e.target.value; setToolsList(n); }} style={{ width: '100%', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.55rem', color: '#cbd5e1', fontSize: '0.75rem' }} />
@@ -506,7 +517,7 @@ export default function WebsiteStudioPage() {
           {activeSection === 'blog' && (
             <div className={styles.cardBox}>
               <div className={styles.boxHeader}>
-                <h3 className={styles.boxTitle}>Edit Blog & Insights ({blogList.length} Posts)</h3>
+                <h3 className={styles.boxTitle}>Edit Blog & Insights</h3>
                 <div style={{ display: 'flex', gap: '0.5rem' }}>
                   <button onClick={() => setBlogList([...blogList, { id: Date.now().toString(), title: 'New Digital Insights Post', tag: 'Engineering', readTime: '5 min read', img: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=600&auto=format&fit=crop' }])} className={styles.actionBtn}>
                     <Plus size={14} /> Add Article
@@ -519,7 +530,7 @@ export default function WebsiteStudioPage() {
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 {blogList.map((b, idx) => (
-                  <div key={b.id} style={{ background: '#0B0F19', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+                  <div key={b.id} style={{ background: '#070A11', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#5B8CFF' }}>Post #{idx + 1}</span>
                       <button onClick={() => setBlogList(blogList.filter(x => x.id !== b.id))} style={{ background: 'none', border: 'none', color: '#f43f5e', cursor: 'pointer' }}>
@@ -551,7 +562,7 @@ export default function WebsiteStudioPage() {
           {activeSection === 'careers' && (
             <div className={styles.cardBox}>
               <div className={styles.boxHeader}>
-                <h3 className={styles.boxTitle}>Edit Career Job Openings ({careersList.length} Roles)</h3>
+                <h3 className={styles.boxTitle}>Edit Career Job Openings</h3>
                 <div style={{ display: 'flex', gap: '0.5rem' }}>
                   <button onClick={() => setCareersList([...careersList, { id: Date.now().toString(), role: 'New Role Title', dept: 'Engineering', type: 'Full-Time · Remote', exp: '2+ Yrs' }])} className={styles.actionBtn}>
                     <Plus size={14} /> Add Role
@@ -564,9 +575,9 @@ export default function WebsiteStudioPage() {
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 {careersList.map((job, idx) => (
-                  <div key={job.id} style={{ background: '#0B0F19', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+                  <div key={job.id} style={{ background: '#070A11', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#5B8CFF' }}>Job #{idx + 1}</span>
+                      <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#5B8CFF' }}>Position #{idx + 1}</span>
                       <button onClick={() => setCareersList(careersList.filter(j => j.id !== job.id))} style={{ background: 'none', border: 'none', color: '#f43f5e', cursor: 'pointer' }}>
                         <Trash2 size={15} />
                       </button>
@@ -607,7 +618,7 @@ export default function WebsiteStudioPage() {
                       style={{
                         padding: '0.6rem',
                         borderRadius: '12px',
-                        background: activePreset === p.name ? 'rgba(91,140,255,0.15)' : '#0B0F19',
+                        background: activePreset === p.name ? 'rgba(91,140,255,0.15)' : '#070A11',
                         border: activePreset === p.name ? `2px solid ${p.accent}` : '1px solid rgba(255,255,255,0.08)',
                         cursor: 'pointer',
                         textAlign: 'left'
@@ -627,7 +638,7 @@ export default function WebsiteStudioPage() {
                     <label style={{ fontSize: '0.775rem', fontWeight: 700, color: '#cbd5e1', display: 'block', marginBottom: '0.35rem' }}>Primary Accent Hex</label>
                     <div style={{ display: 'flex', gap: '0.5rem' }}>
                       <input type="color" value={primaryAccent} onChange={(e) => setPrimaryAccent(e.target.value)} style={{ width: '36px', height: '36px', borderRadius: '8px', border: 'none', cursor: 'pointer', background: 'none' }} />
-                      <input type="text" value={primaryAccent} onChange={(e) => setPrimaryAccent(e.target.value)} style={{ flex: 1, background: '#0B0F19', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.5rem', color: '#fff', fontSize: '0.8rem' }} />
+                      <input type="text" value={primaryAccent} onChange={(e) => setPrimaryAccent(e.target.value)} style={{ flex: 1, background: '#070A11', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.5rem', color: '#fff', fontSize: '0.8rem' }} />
                     </div>
                   </div>
 
@@ -635,7 +646,7 @@ export default function WebsiteStudioPage() {
                     <label style={{ fontSize: '0.775rem', fontWeight: 700, color: '#cbd5e1', display: 'block', marginBottom: '0.35rem' }}>Secondary Teal Hex</label>
                     <div style={{ display: 'flex', gap: '0.5rem' }}>
                       <input type="color" value={secondaryTeal} onChange={(e) => setSecondaryTeal(e.target.value)} style={{ width: '36px', height: '36px', borderRadius: '8px', border: 'none', cursor: 'pointer', background: 'none' }} />
-                      <input type="text" value={secondaryTeal} onChange={(e) => setSecondaryTeal(e.target.value)} style={{ flex: 1, background: '#0B0F19', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.5rem', color: '#fff', fontSize: '0.8rem' }} />
+                      <input type="text" value={secondaryTeal} onChange={(e) => setSecondaryTeal(e.target.value)} style={{ flex: 1, background: '#070A11', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.5rem', color: '#fff', fontSize: '0.8rem' }} />
                     </div>
                   </div>
                 </div>
@@ -654,7 +665,7 @@ export default function WebsiteStudioPage() {
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem', background: '#0B0F19', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.08)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem', background: '#070A11', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.08)' }}>
                   <div>
                     <div style={{ fontWeight: 800, color: '#fff', fontSize: '0.9rem' }}>Maintenance Mode Barrier</div>
                     <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>When active, non-admin visitors see the maintenance screen.</div>
@@ -679,17 +690,17 @@ export default function WebsiteStudioPage() {
 
                 <div>
                   <label style={{ fontSize: '0.775rem', fontWeight: 700, color: '#cbd5e1', display: 'block', marginBottom: '0.35rem' }}>Public Headline</label>
-                  <input type="text" value={maintenanceHeadline} onChange={(e) => setMaintenanceHeadline(e.target.value)} style={{ width: '100%', background: '#0B0F19', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.6rem', color: '#fff', fontSize: '0.8rem' }} />
+                  <input type="text" value={maintenanceHeadline} onChange={(e) => setMaintenanceHeadline(e.target.value)} style={{ width: '100%', background: '#070A11', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.6rem', color: '#fff', fontSize: '0.8rem' }} />
                 </div>
 
                 <div>
                   <label style={{ fontSize: '0.775rem', fontWeight: 700, color: '#cbd5e1', display: 'block', marginBottom: '0.35rem' }}>Explanation Message</label>
-                  <textarea rows={2} value={maintenanceMessage} onChange={(e) => setMaintenanceMessage(e.target.value)} style={{ width: '100%', background: '#0B0F19', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.6rem', color: '#fff', fontSize: '0.8rem' }} />
+                  <textarea rows={2} value={maintenanceMessage} onChange={(e) => setMaintenanceMessage(e.target.value)} style={{ width: '100%', background: '#070A11', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.6rem', color: '#fff', fontSize: '0.8rem' }} />
                 </div>
 
                 <div>
                   <label style={{ fontSize: '0.775rem', fontWeight: 700, color: '#cbd5e1', display: 'block', marginBottom: '0.35rem' }}>Estimated Return Time</label>
-                  <input type="datetime-local" value={estimatedReturn} onChange={(e) => setEstimatedReturn(e.target.value)} style={{ width: '100%', background: '#0B0F19', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.6rem', color: '#fff', fontSize: '0.8rem' }} />
+                  <input type="datetime-local" value={estimatedReturn} onChange={(e) => setEstimatedReturn(e.target.value)} style={{ width: '100%', background: '#070A11', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.6rem', color: '#fff', fontSize: '0.8rem' }} />
                 </div>
               </div>
             </div>
@@ -698,100 +709,109 @@ export default function WebsiteStudioPage() {
         </div>
 
         {/* ----------------------------------------------------------------------- */}
-        {/* RIGHT COLUMN: REAL-TIME INTERACTIVE LIVE DEMO */}
+        {/* RIGHT COLUMN: EXACT PIXEL-PERFECT LIVE WEBSITE COMPONENT PREVIEW */}
         {/* ----------------------------------------------------------------------- */}
         <div style={{ position: 'sticky', top: '90px' }}>
-          <div className={styles.cardBox} style={{ border: '1px solid rgba(91,140,255,0.3)', background: '#0E1424' }}>
+          <div className={styles.cardBox} style={{ border: '1px solid rgba(91,140,255,0.3)', background: '#111827' }}>
             <div className={styles.boxHeader}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
                 <Monitor size={16} color="#5B8CFF" />
-                <h3 className={styles.boxTitle} style={{ fontSize: '0.95rem' }}>Real-Time Live Demo</h3>
+                <h3 className={styles.boxTitle} style={{ fontSize: '0.95rem' }}>Exact Live Component Demo</h3>
               </div>
-              <span style={{ fontSize: '0.7rem', fontWeight: 700, color: '#00D1B2', background: 'rgba(0,209,178,0.15)', padding: '0.15rem 0.5rem', borderRadius: '99px' }}>
-                ● LIVE SYNC
+              <span style={{ fontSize: '0.7rem', fontWeight: 700, color: '#00D1B2', background: 'rgba(0,209,178,0.15)', padding: '0.15rem 0.5rem', borderRadius: '99px', display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}>
+                <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#00D1B2' }}></span> LIVE PREVIEW
               </span>
             </div>
 
-            {/* LIVE PREVIEW CANVAS */}
-            <div style={{ background: '#070A11', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '14px', padding: '1.25rem', minHeight: '340px', display: 'flex', flexDirection: 'column', gap: '1rem', overflow: 'hidden' }}>
+            {/* EXACT COMPONENT RENDER CANVAS */}
+            <div style={{ background: '#0B0F19', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '1.5rem', minHeight: '440px', display: 'flex', flexDirection: 'column', gap: '1.25rem', overflow: 'hidden' }}>
 
-              {/* DEMO 1: HERO */}
+              {/* DEMO 1: EXACT HERO COMPONENT */}
               {activeSection === 'hero' && (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
-                  <span style={{ fontSize: '0.7rem', fontWeight: 700, color: '#5B8CFF', background: 'rgba(91,140,255,0.15)', padding: '0.2rem 0.6rem', borderRadius: '99px', width: 'fit-content' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                  {/* Badge */}
+                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.35rem 0.85rem', borderRadius: '99px', background: 'rgba(91,140,255,0.1)', border: '1px solid rgba(91,140,255,0.3)', color: '#5B8CFF', fontSize: '0.75rem', fontWeight: 700, width: 'fit-content' }}>
+                    <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#00D1B2', boxShadow: '0 0 8px #00D1B2' }} />
                     {heroBadge}
-                  </span>
-                  <h2 style={{ fontSize: '1.35rem', fontWeight: 900, color: '#ffffff', lineHeight: 1.2, margin: 0 }}>
-                    {heroTitle}
-                  </h2>
-                  <p style={{ fontSize: '0.775rem', color: '#94a3b8', lineHeight: 1.5, margin: 0 }}>
+                  </div>
+
+                  {/* Headline */}
+                  <h1 style={{ fontSize: '1.85rem', fontWeight: 900, lineHeight: 1.15, color: '#ffffff', letterSpacing: '-0.02em', margin: 0 }}>
+                    Build <span style={{ background: 'linear-gradient(135deg, #5B8CFF, #00D1B2)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Smarter.</span>
+                    <br />
+                    Scale <span style={{ background: 'linear-gradient(135deg, #00D1B2, #38BDF8)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Faster.</span>
+                    <br />
+                    <span style={{ fontSize: '1.25rem', color: '#94a3b8', fontWeight: 600 }}>Grow with Infotech.</span>
+                  </h1>
+
+                  {/* Subtext */}
+                  <p style={{ fontSize: '0.85rem', color: '#94a3b8', lineHeight: 1.6, margin: 0 }}>
                     {heroSubtext}
                   </p>
-                  <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.25rem' }}>
-                    <div style={{ background: 'linear-gradient(135deg, #5B8CFF, #00D1B2)', color: '#fff', padding: '0.45rem 0.9rem', borderRadius: '8px', fontSize: '0.725rem', fontWeight: 700 }}>
-                      {primaryCtaText}
+
+                  {/* CTAs */}
+                  <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                    <div style={{ background: 'linear-gradient(135deg, #5B8CFF 0%, #00D1B2 100%)', color: '#fff', padding: '0.6rem 1.25rem', borderRadius: '99px', fontSize: '0.8rem', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '0.4rem', boxShadow: '0 4px 18px rgba(91,140,255,0.35)' }}>
+                      {primaryCtaText} <ArrowRight size={14} />
                     </div>
-                    <div style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.15)', color: '#fff', padding: '0.45rem 0.9rem', borderRadius: '8px', fontSize: '0.725rem', fontWeight: 600 }}>
-                      {secondaryCtaText}
+                    <div style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.15)', color: '#fff', padding: '0.6rem 1.25rem', borderRadius: '99px', fontSize: '0.8rem', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
+                      <Play size={13} /> {secondaryCtaText}
                     </div>
                   </div>
+
+                  {/* Stats Bar */}
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.75rem', borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '1rem', marginTop: '0.25rem' }}>
+                    <div>
+                      <div style={{ fontSize: '1.25rem', fontWeight: 900, color: '#fff' }}>150+</div>
+                      <div style={{ fontSize: '0.7rem', color: '#64748b' }}>Projects Done</div>
+                    </div>
+                    <div>
+                      <div style={{ fontSize: '1.25rem', fontWeight: 900, color: '#00D1B2' }}>99.9%</div>
+                      <div style={{ fontSize: '0.7rem', color: '#64748b' }}>Uptime SLA</div>
+                    </div>
+                    <div>
+                      <div style={{ fontSize: '1.25rem', fontWeight: 900, color: '#5B8CFF' }}>4.9/5</div>
+                      <div style={{ fontSize: '0.7rem', color: '#64748b' }}>Client Rating</div>
+                    </div>
+                  </div>
+
+                  {/* Hero Showcase Image */}
                   {heroImgUrl && (
-                    <div style={{ marginTop: '0.5rem', borderRadius: '10px', overflow: 'hidden', height: '140px', border: '1px solid rgba(255,255,255,0.1)' }}>
+                    <div style={{ borderRadius: '12px', overflow: 'hidden', height: '160px', border: '1px solid rgba(255,255,255,0.12)', boxShadow: '0 8px 30px rgba(0,0,0,0.5)' }}>
                       <img src={heroImgUrl} alt="Hero Live Preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     </div>
                   )}
                 </div>
               )}
 
-              {/* DEMO 2: SOLUTIONS */}
+              {/* DEMO 2: EXACT SOLUTIONS COMPONENT */}
               {activeSection === 'solutions' && (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                  <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#00D1B2' }}>OUR SOLUTIONS PREVIEW</div>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', maxHeight: '360px', overflowY: 'auto' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                  <div style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '0.75rem' }}>
+                    <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#00D1B2', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Our Solutions</div>
+                    <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#fff', margin: '0.2rem 0' }}>{solutionsTitle}</h3>
+                    <p style={{ fontSize: '0.75rem', color: '#94a3b8', margin: 0 }}>{solutionsSubtitle}</p>
+                  </div>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', maxHeight: '420px', overflowY: 'auto' }}>
                     {solutionsList.map(s => (
-                      <div key={s.id} style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '10px', padding: '0.75rem', display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
-                        <img src={s.img} alt={s.title} style={{ width: '50px', height: '50px', borderRadius: '8px', objectFit: 'cover' }} />
-                        <div style={{ flex: 1, minWidth: 0 }}>
-                          <div style={{ fontSize: '0.8rem', fontWeight: 800, color: '#fff' }}>{s.title}</div>
-                          <div style={{ fontSize: '0.675rem', color: '#00D1B2', fontWeight: 700 }}>{s.tag}</div>
-                          <div style={{ fontSize: '0.7rem', color: '#94a3b8', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{s.desc}</div>
+                      <div key={s.id} style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '14px', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                          <span style={{ fontSize: '0.75rem', fontWeight: 900, color: '#5B8CFF', background: 'rgba(91,140,255,0.12)', padding: '0.2rem 0.6rem', borderRadius: '6px' }}>{s.number || '01'}</span>
+                          <span style={{ fontSize: '0.7rem', color: '#00D1B2', fontWeight: 700, background: 'rgba(0,209,178,0.12)', padding: '0.2rem 0.6rem', borderRadius: '99px' }}>{s.tag}</span>
                         </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
+                        <div style={{ fontSize: '0.95rem', fontWeight: 800, color: '#fff' }}>{s.title}</div>
+                        <div style={{ fontSize: '0.75rem', color: '#00D1B2', fontWeight: 600 }}>{s.subtitle}</div>
+                        <div style={{ fontSize: '0.75rem', color: '#94a3b8', lineHeight: 1.5 }}>{s.desc}</div>
 
-              {/* DEMO 3: WHY US */}
-              {activeSection === 'whyUs' && (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                  <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#5B8CFF' }}>VALUE PILLARS PREVIEW</div>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
-                    {whyPillars.map(p => (
-                      <div key={p.id} style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '10px', padding: '0.75rem', display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
-                        <div style={{ fontSize: '0.7rem', color: '#00D1B2', fontWeight: 800 }}>{p.stat}</div>
-                        <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#fff' }}>{p.title}</div>
-                        <div style={{ fontSize: '0.675rem', color: '#94a3b8', lineHeight: 1.4 }}>{p.desc}</div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* DEMO 4: CASE STUDIES */}
-              {activeSection === 'caseStudies' && (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                  <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#00D1B2' }}>OUR WORK PREVIEW</div>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem', maxHeight: '360px', overflowY: 'auto' }}>
-                    {casesList.map(c => (
-                      <div key={c.id} style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '10px', overflow: 'hidden' }}>
-                        <img src={c.img} alt={c.client} style={{ width: '100%', height: '80px', objectFit: 'cover' }} />
-                        <div style={{ padding: '0.65rem' }}>
-                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <span style={{ fontSize: '0.775rem', fontWeight: 800, color: '#fff' }}>{c.client}</span>
-                            <span style={{ fontSize: '0.675rem', color: '#00D1B2', fontWeight: 800 }}>{c.metric}</span>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '0.5rem', marginTop: '0.25rem' }}>
+                          <div>
+                            <span style={{ fontSize: '0.85rem', fontWeight: 900, color: '#fff' }}>{s.stat}</span>
+                            <span style={{ fontSize: '0.675rem', color: '#64748b', marginLeft: '0.35rem' }}>{s.statLabel}</span>
                           </div>
-                          <div style={{ fontSize: '0.675rem', color: '#94a3b8', marginTop: '0.2rem' }}>{c.desc}</div>
+                          <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#5B8CFF', display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
+                            Learn More <ArrowRight size={12} />
+                          </span>
                         </div>
                       </div>
                     ))}
@@ -799,79 +819,163 @@ export default function WebsiteStudioPage() {
                 </div>
               )}
 
-              {/* DEMO 5: TOOLS */}
+              {/* DEMO 3: EXACT WHY US COMPONENT */}
+              {activeSection === 'whyUs' && (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                  <div style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '0.75rem' }}>
+                    <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#5B8CFF', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Why Choose Us</div>
+                    <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#fff', margin: '0.2rem 0' }}>{whyTitle}</h3>
+                    <p style={{ fontSize: '0.75rem', color: '#94a3b8', margin: 0 }}>{whySubtitle}</p>
+                  </div>
+
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+                    {whyPillars.map((p, i) => (
+                      <div key={p.id} style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.45rem' }}>
+                        <div style={{ display: 'inline-flex', padding: '0.2rem 0.5rem', borderRadius: '6px', background: 'rgba(0,209,178,0.12)', color: '#00D1B2', fontSize: '0.7rem', fontWeight: 800, width: 'fit-content' }}>
+                          {p.stat}
+                        </div>
+                        <div style={{ fontSize: '0.825rem', fontWeight: 800, color: '#fff' }}>{p.title}</div>
+                        <div style={{ fontSize: '0.7rem', color: '#94a3b8', lineHeight: 1.5 }}>{p.desc}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* DEMO 4: EXACT CASE STUDIES COMPONENT */}
+              {activeSection === 'caseStudies' && (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                  <div style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '0.75rem' }}>
+                    <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#00D1B2', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Case Studies</div>
+                    <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#fff', margin: '0.2rem 0' }}>{caseTitle}</h3>
+                    <p style={{ fontSize: '0.75rem', color: '#94a3b8', margin: 0 }}>{caseSubtitle}</p>
+                  </div>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', maxHeight: '420px', overflowY: 'auto' }}>
+                    {casesList.map(c => (
+                      <div key={c.id} style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '14px', overflow: 'hidden' }}>
+                        <img src={c.img} alt={c.client} style={{ width: '100%', height: '110px', objectFit: 'cover' }} />
+                        <div style={{ padding: '0.85rem', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <span style={{ fontSize: '0.7rem', color: '#5B8CFF', fontWeight: 700 }}>{c.tag}</span>
+                            <span style={{ fontSize: '0.7rem', fontWeight: 800, color: '#00D1B2', background: 'rgba(0,209,178,0.12)', padding: '0.15rem 0.5rem', borderRadius: '99px' }}>{c.metric}</span>
+                          </div>
+                          <div style={{ fontSize: '0.9rem', fontWeight: 800, color: '#fff' }}>{c.client}</div>
+                          <div style={{ fontSize: '0.725rem', color: '#94a3b8', lineHeight: 1.5 }}>{c.desc}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* DEMO 5: EXACT TOOLS COMPONENT */}
               {activeSection === 'tools' && (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
-                  <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#5B8CFF' }}>INTERACTIVE TOOLS PREVIEW</div>
-                  {toolsList.map(t => (
-                    <div key={t.id} style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '10px', padding: '0.75rem' }}>
-                      <div style={{ fontSize: '0.775rem', fontWeight: 800, color: '#fff' }}>{t.name}</div>
-                      <div style={{ fontSize: '0.7rem', color: '#94a3b8', marginTop: '0.25rem' }}>{t.desc}</div>
-                    </div>
-                  ))}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                  <div style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '0.75rem' }}>
+                    <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#5B8CFF', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Interactive Suite</div>
+                    <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#fff', margin: '0.2rem 0' }}>{toolsTitle}</h3>
+                    <p style={{ fontSize: '0.75rem', color: '#94a3b8', margin: 0 }}>{toolsSubtitle}</p>
+                  </div>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                    {toolsList.map(t => (
+                      <div key={t.id} style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                        <span style={{ fontSize: '0.7rem', color: '#00D1B2', fontWeight: 700 }}>{t.tag || 'Tool Engine'}</span>
+                        <div style={{ fontSize: '0.85rem', fontWeight: 800, color: '#fff' }}>{t.name}</div>
+                        <div style={{ fontSize: '0.725rem', color: '#94a3b8', lineHeight: 1.5 }}>{t.desc}</div>
+                        <div style={{ marginTop: '0.4rem' }}>
+                          <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#5B8CFF', display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}>
+                            Launch Tool <ArrowRight size={13} />
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               )}
 
-              {/* DEMO 6: BLOG */}
+              {/* DEMO 6: EXACT BLOG COMPONENT */}
               {activeSection === 'blog' && (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
-                  <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#00D1B2' }}>BLOG ARTICLES PREVIEW</div>
-                  {blogList.map(b => (
-                    <div key={b.id} style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '10px', padding: '0.65rem', display: 'flex', gap: '0.65rem', alignItems: 'center' }}>
-                      <img src={b.img} alt={b.title} style={{ width: '45px', height: '45px', borderRadius: '6px', objectFit: 'cover' }} />
-                      <div style={{ flex: 1, minWidth: 0 }}>
-                        <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#fff', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{b.title}</div>
-                        <div style={{ fontSize: '0.65rem', color: '#00D1B2' }}>{b.tag} · {b.readTime}</div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                  <div style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '0.75rem' }}>
+                    <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#00D1B2', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Blog & Insights</div>
+                    <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#fff', margin: '0.2rem 0' }}>{blogTitle}</h3>
+                    <p style={{ fontSize: '0.75rem', color: '#94a3b8', margin: 0 }}>{blogSubtitle}</p>
+                  </div>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', maxHeight: '420px', overflowY: 'auto' }}>
+                    {blogList.map(b => (
+                      <div key={b.id} style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '0.75rem', display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                        <img src={b.img} alt={b.title} style={{ width: '60px', height: '60px', borderRadius: '8px', objectFit: 'cover' }} />
+                        <div style={{ flex: 1, minWidth: 0 }}>
+                          <div style={{ fontSize: '0.675rem', color: '#00D1B2', fontWeight: 700 }}>{b.tag} · {b.readTime}</div>
+                          <div style={{ fontSize: '0.8rem', fontWeight: 800, color: '#fff', margin: '0.15rem 0', lineHeight: 1.3 }}>{b.title}</div>
+                          <span style={{ fontSize: '0.7rem', color: '#5B8CFF', fontWeight: 600 }}>Read Full Story &rarr;</span>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               )}
 
-              {/* DEMO 7: CAREERS */}
+              {/* DEMO 7: EXACT CAREERS COMPONENT */}
               {activeSection === 'careers' && (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
-                  <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#5B8CFF' }}>CAREERS PREVIEW</div>
-                  {careersList.map(j => (
-                    <div key={j.id} style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '10px', padding: '0.75rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <div>
-                        <div style={{ fontSize: '0.775rem', fontWeight: 800, color: '#fff' }}>{j.role}</div>
-                        <div style={{ fontSize: '0.675rem', color: '#94a3b8' }}>{j.dept} · {j.exp}</div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                  <div style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '0.75rem' }}>
+                    <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#5B8CFF', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Careers at Infotech</div>
+                    <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#fff', margin: '0.2rem 0' }}>Join Our Engineering & AI Team</h3>
+                    <p style={{ fontSize: '0.75rem', color: '#94a3b8', margin: 0 }}>Build the future of software with world-class talent.</p>
+                  </div>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                    {careersList.map(j => (
+                      <div key={j.id} style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '0.85rem 1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <div>
+                          <div style={{ fontSize: '0.825rem', fontWeight: 800, color: '#fff' }}>{j.role}</div>
+                          <div style={{ fontSize: '0.7rem', color: '#94a3b8', marginTop: '0.2rem' }}>{j.dept} · {j.exp}</div>
+                        </div>
+                        <div style={{ background: 'linear-gradient(135deg, #5B8CFF, #00D1B2)', color: '#fff', padding: '0.35rem 0.8rem', borderRadius: '99px', fontSize: '0.7rem', fontWeight: 700 }}>
+                          Apply Now
+                        </div>
                       </div>
-                      <div style={{ fontSize: '0.65rem', background: 'rgba(91,140,255,0.15)', color: '#5B8CFF', padding: '0.2rem 0.5rem', borderRadius: '6px', fontWeight: 700 }}>
-                        {j.type.split('·')[0]}
-                      </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               )}
 
-              {/* DEMO 8: THEME */}
+              {/* DEMO 8: EXACT THEME COMPONENT */}
               {activeSection === 'theme' && (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
-                  <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: `linear-gradient(135deg, ${primaryAccent}, ${secondaryTeal})`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 900 }}>
-                    IT
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', alignItems: 'center', justifyContent: 'center', padding: '1.5rem', textAlign: 'center' }}>
+                  <div style={{ width: '56px', height: '56px', borderRadius: '14px', background: `linear-gradient(135deg, ${primaryAccent}, ${secondaryTeal})`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 900, fontSize: '1.3rem', boxShadow: `0 8px 24px ${primaryAccent}40` }}>
+                    IF
                   </div>
-                  <div style={{ fontSize: '0.9rem', fontWeight: 800, color: '#fff' }}>Theme: {activePreset}</div>
-                  <div style={{ display: 'flex', gap: '0.5rem' }}>
-                    <div style={{ background: primaryAccent, color: '#fff', padding: '0.45rem 0.9rem', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 700 }}>
-                      Accent Color
+                  <div>
+                    <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#fff', margin: 0 }}>Active Theme: {activePreset}</h3>
+                    <p style={{ fontSize: '0.775rem', color: '#94a3b8', margin: '0.35rem 0 0 0' }}>Dynamic CSS token engine rendering across public buttons, glows, and badges.</p>
+                  </div>
+                  <div style={{ display: 'flex', gap: '0.75rem' }}>
+                    <div style={{ background: `linear-gradient(135deg, ${primaryAccent}, ${secondaryTeal})`, color: '#fff', padding: '0.55rem 1.1rem', borderRadius: '99px', fontSize: '0.775rem', fontWeight: 700, boxShadow: `0 4px 14px ${primaryAccent}40` }}>
+                      Primary Brand Gradient
                     </div>
-                    <div style={{ background: secondaryTeal, color: '#000', padding: '0.45rem 0.9rem', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 700 }}>
-                      Teal Glow
+                    <div style={{ background: 'rgba(255,255,255,0.06)', border: `1px solid ${primaryAccent}40`, color: '#fff', padding: '0.55rem 1.1rem', borderRadius: '99px', fontSize: '0.775rem', fontWeight: 600 }}>
+                      Secondary Outline
                     </div>
                   </div>
                 </div>
               )}
 
-              {/* DEMO 9: MAINTENANCE */}
+              {/* DEMO 9: EXACT MAINTENANCE COMPONENT */}
               {activeSection === 'maintenance' && (
-                <div style={{ textAlign: 'center', padding: '1rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.65rem' }}>
-                  <Wrench size={28} color={isMaintenanceActive ? '#f43f5e' : '#00D1B2'} />
-                  <div style={{ fontSize: '0.85rem', fontWeight: 800, color: '#fff' }}>{maintenanceHeadline}</div>
-                  <div style={{ fontSize: '0.725rem', color: '#94a3b8' }}>{maintenanceMessage}</div>
-                  <div style={{ fontSize: '0.7rem', color: '#00D1B2', fontWeight: 700 }}>
-                    Status: {isMaintenanceActive ? '🔴 BARRIER ACTIVE' : '🟢 SITE ONLINE'}
+                <div style={{ textAlign: 'center', padding: '2rem 1rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', background: '#05070D', borderRadius: '16px', border: '1px solid rgba(244,63,94,0.3)' }}>
+                  <div style={{ width: '52px', height: '52px', borderRadius: '50%', background: 'rgba(244,63,94,0.15)', border: '1px solid rgba(244,63,94,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#f43f5e' }}>
+                    <Wrench size={26} />
+                  </div>
+                  <span style={{ fontSize: '0.7rem', fontWeight: 800, color: '#f43f5e', textTransform: 'uppercase', letterSpacing: '0.08em' }}>System Status</span>
+                  <h4 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#fff', margin: 0, lineHeight: 1.3 }}>{maintenanceHeadline}</h4>
+                  <p style={{ fontSize: '0.8rem', color: '#94a3b8', lineHeight: 1.6, maxWidth: '280px', margin: 0 }}>{maintenanceMessage}</p>
+                  <div style={{ padding: '0.45rem 1rem', background: 'rgba(255,255,255,0.04)', borderRadius: '99px', border: '1px solid rgba(255,255,255,0.1)', fontSize: '0.75rem', color: '#00D1B2', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
+                    <Clock size={14} /> Back by: {new Date(estimatedReturn).toLocaleString()}
                   </div>
                 </div>
               )}
