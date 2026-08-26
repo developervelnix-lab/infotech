@@ -14,10 +14,16 @@
   .brand { grid-column: 1 / -1; }
 }
 @media (max-width: 640px) {
-  .inner { grid-template-columns: 1fr 1fr; gap: var(--space-8); }
-}
-@media (max-width: 440px) {
-  .inner { grid-template-columns: 1fr; gap: var(--space-6); }
+  .footer { padding-top: 1.5rem; }
+  .inner { grid-template-columns: 1fr 1fr; gap: 1rem 1.25rem; padding-bottom: 1.25rem; }
+  .brand { grid-column: 1 / -1; gap: 0.4rem; }
+  .tagline { font-size: 0.775rem; line-height: 1.4; max-width: 100%; }
+  .socials { gap: 0.4rem; }
+  .socialIcon { width: 32px; height: 32px; }
+  .col { gap: 0.35rem; }
+  .colTitle { font-size: 0.75rem; letter-spacing: 0.05em; }
+  .colLinks { gap: 0.25rem; }
+  .colLink { font-size: 0.75rem; }
 }
 
 /* Brand */
