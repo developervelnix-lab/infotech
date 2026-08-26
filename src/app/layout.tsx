@@ -1,10 +1,8 @@
 import type { Metadata } from 'next';
 import { Outfit } from 'next/font/google';
 import './globals.css';
-import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
-import AnnouncementTicker from '@/components/layout/AnnouncementTicker';
 import { LenisProvider } from '@/lib/lenis';
+import MainLayoutWrapper from '@/components/layout/MainLayoutWrapper';
 
 const outfit = Outfit({
   subsets: ['latin'],
@@ -51,12 +49,7 @@ export default function RootLayout({
     <html lang="en" className={`${outfit.variable}`}>
       <body>
         <LenisProvider>
-          <Navbar />
-          <AnnouncementTicker />
-          <main style={{ paddingTop: 'calc(var(--navbar-h) + var(--ticker-h))' }}>
-            {children}
-          </main>
-          <Footer />
+          <MainLayoutWrapper>{children}</MainLayoutWrapper>
         </LenisProvider>
       </body>
     </html>
