@@ -126,19 +126,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           </div>
 
           <div className={styles.headerRight}>
-            <div className={styles.roleSelector}>
-              <span>Viewing Role:</span>
-              <select 
-                value={currentRole} 
-                onChange={(e) => handleRoleChange(e.target.value as UserRole)}
-                className={styles.roleSelect}
-              >
-                <option value="ADMIN">ADMIN</option>
-                <option value="MANAGER">MANAGER</option>
-                <option value="FINANCE">FINANCE</option>
-                <option value="EMPLOYEE">EMPLOYEE</option>
-                <option value="INTERN">INTERN</option>
-              </select>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', background: 'rgba(91,140,255,0.12)', border: '1px solid rgba(91,140,255,0.25)', padding: '0.3rem 0.75rem', borderRadius: '99px', fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-accent)' }}>
+              <span>Role: {currentRole}</span>
             </div>
             <button style={{ color: '#94a3b8', position: 'relative' }}>
               <Bell size={18} />
