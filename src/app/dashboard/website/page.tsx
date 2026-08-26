@@ -28,7 +28,12 @@ import {
   Check,
   ShieldCheck,
   Zap,
-  Star
+  Star,
+  ChevronLeft,
+  Cloud,
+  Code2,
+  BarChart3,
+  Cpu
 } from 'lucide-react';
 import styles from '../dashboard.module.css';
 
@@ -39,37 +44,83 @@ export default function WebsiteStudioPage() {
 
   const [sectionSuccess, setSectionSuccess] = useState<string | null>(null);
 
+  // Active solution tab in preview
+  const [selectedSolutionIndex, setSelectedSolutionIndex] = useState(0);
+
   // --- 1. HERO STATE ---
-  const [heroBadge, setHeroBadge] = useState('✨ AI-Powered Digital Agency — 2026');
+  const [heroBadge, setHeroBadge] = useState('AI-Powered Digital Agency — 2026');
   const [heroTitle, setHeroTitle] = useState('Build Smarter. Scale Faster.');
   const [heroSubtext, setHeroSubtext] = useState('We help businesses transform digitally with AI-powered solutions, modern development, and growth-focused strategies.');
   const [primaryCtaText, setPrimaryCtaText] = useState('Start Your Project');
   const [secondaryCtaText, setSecondaryCtaText] = useState('Get Free Consultation');
-  const [heroImgUrl, setHeroImgUrl] = useState('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop');
 
   // --- 2. SOLUTIONS STATE ---
-  const [solutionsTitle, setSolutionsTitle] = useState('Engineering Digital Dominance');
-  const [solutionsSubtitle, setSolutionsSubtitle] = useState('Six integrated pillars designed to accelerate growth, optimize operations, and build enduring enterprise value.');
+  const [solutionsTitle, setSolutionsTitle] = useState('Our Solutions');
+  const [solutionsSubtitle, setSolutionsSubtitle] = useState('Empowering your digital transformation journey with cutting-edge technology and unparalleled expertise.');
   const [solutionsList, setSolutionsList] = useState([
-    { id: '1', number: '01', title: 'Custom Web & Mobile Apps', tag: 'High-Performance', subtitle: 'Scalable infrastructure for modern scale', desc: 'Scalable Next.js & mobile engineering built with enterprise security, sub-second load times, and fluid UX.', stat: '99.99%', statLabel: 'Uptime SLA', img: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=600&auto=format&fit=crop' },
-    { id: '2', number: '02', title: 'AI & Workflow Automation', tag: 'AI & Automation', subtitle: 'Autonomous efficiency for business', desc: 'Custom LLM agents, intelligent CRM workflows, and autonomous bots that eliminate manual tasks.', stat: '4.8x', statLabel: 'Faster Ops', img: 'https://images.unsplash.com/photo-1677442136019-21780efad99a?q=80&w=600&auto=format&fit=crop' },
-    { id: '3', number: '03', title: 'Enterprise Software & ERP', tag: 'Scalability', subtitle: 'Tailored to unique business needs', desc: 'Robust backend architectures, custom ERP systems, and microservices engineered for high transaction volumes.', stat: '10x', statLabel: 'Query Speed', img: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=600&auto=format&fit=crop' },
-    { id: '4', number: '04', title: 'Growth Marketing & SEO', tag: 'Performance ROI', subtitle: 'Insights that drive strategic decisions', desc: 'Data-backed search engine domination, conversion rate optimization, and multi-channel acquisition funnels.', stat: '3.4x', statLabel: 'Avg ROI', img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop' },
+    { 
+      id: 'cloud', 
+      number: '01', 
+      title: 'Cloud Integration', 
+      tag: 'Cloud Infrastructure', 
+      desc: 'Seamlessly migrate and scale your enterprise infrastructure with high-availability multi-cloud architecture, automated CI/CD pipelines, and zero-downtime deployments.', 
+      features: ['Multi-Cloud Architecture', 'Automated CI/CD', 'Zero-Downtime Migration', 'SOC2 Compliant'],
+      stat: '99.99%', 
+      statLabel: 'UPTIME SLA', 
+      badge: 'Enterprise Grade',
+      img: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=800&auto=format&fit=crop' 
+    },
+    { 
+      id: 'custom', 
+      number: '02', 
+      title: 'Custom Software', 
+      tag: 'Engineering & Development', 
+      desc: 'We architect and build robust, high-performance custom applications designed specifically to streamline workflows, eliminate bottlenecks, and scale your operations effortlessly.', 
+      features: ['Microservices & APIs', 'Full-Stack Modern Web', 'High-Throughput Backends', 'Modular Architecture'],
+      stat: '4.8x', 
+      statLabel: 'FASTER TIME-TO-MARKET', 
+      badge: 'Tailored Solution',
+      img: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop' 
+    },
+    { 
+      id: 'data', 
+      number: '03', 
+      title: 'Data Analytics', 
+      tag: 'Intelligence & Insights', 
+      desc: 'Transform raw data into real-time business intelligence. Our analytics pipelines offer predictive modeling, automated reporting, and interactive executive dashboards.', 
+      features: ['Real-Time Streaming', 'Predictive Modeling', 'Interactive BI Dashboards', 'Data Warehousing'],
+      stat: '10x', 
+      statLabel: 'FASTER QUERY SPEEDS', 
+      badge: 'Predictive BI',
+      img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop' 
+    },
+    { 
+      id: 'ai', 
+      number: '04', 
+      title: 'AI Solutions', 
+      tag: 'Artificial Intelligence', 
+      desc: 'Harness the power of machine learning and large language models. We build intelligent recommendation engines, automated NLP workflows, and computer vision systems.', 
+      features: ['Custom LLM Integration', 'Predictive ML Models', 'Intelligent Chat Agents', 'Automated Workflows'],
+      stat: '65%', 
+      statLabel: 'OPERATIONAL COST REDUCTION', 
+      badge: 'Next-Gen AI',
+      img: 'https://images.unsplash.com/photo-1677442136019-21780efad99a?q=80&w=800&auto=format&fit=crop' 
+    },
   ]);
 
   // --- 3. WHY US STATE ---
-  const [whyTitle, setWhyTitle] = useState('Why Visionary Brands Choose Infotech');
-  const [whySubtitle, setWhySubtitle] = useState('We bridge the divide between cutting-edge technology and real commercial revenue.');
+  const [whyTitle, setWhyTitle] = useState('Why Businesses Trust Infotech');
+  const [whySubtitle, setWhySubtitle] = useState('We combine speed, intelligence, and proven results to deliver outcomes your business can feel.');
   const [whyPillars, setWhyPillars] = useState([
-    { id: '1', title: 'Full-Stack Technical Mastery', desc: 'From Next.js and Cloud Native backends to LLM pipelines, we build with modern, future-proof tech stacks.', stat: '99.9% Uptime' },
-    { id: '2', title: 'Data-Obsessed Growth Architecture', desc: 'Every line of code and user funnel is instrumented to maximize revenue conversion and retention.', stat: '3.4x Avg ROI' },
-    { id: '3', title: 'Rapid Agile Execution', desc: 'Transparent sprint cycles, weekly milestone demos, and continuous delivery with zero downtime.', stat: '2x Speed' },
-    { id: '4', title: 'Enterprise Security & Compliance', desc: 'Bank-grade data encryption, automated penetration tests, and SOC2-ready cloud deployments.', stat: '100% Secure' },
+    { id: '1', title: 'Full-Stack Technical Mastery', desc: 'From Next.js and Cloud Native backends to LLM pipelines, we build with modern, future-proof tech stacks.', icon: '⚡' },
+    { id: '2', title: 'Data-Obsessed Growth Architecture', desc: 'Every line of code and user funnel is instrumented to maximize revenue conversion and retention.', icon: '📈' },
+    { id: '3', title: 'Rapid Agile Execution', desc: 'Transparent sprint cycles, weekly milestone demos, and continuous delivery with zero downtime.', icon: '🚀' },
+    { id: '4', title: 'Enterprise Security & Compliance', desc: 'Bank-grade data encryption, automated penetration tests, and SOC2-ready cloud deployments.', icon: '🛡️' },
   ]);
 
   // --- 4. CASE STUDIES STATE ---
   const [caseTitle, setCaseTitle] = useState('Results That Speak for Themselves');
-  const [caseSubtitle, setCaseSubtitle] = useState('Real business transformation delivered for ambitious scale-ups and established industry leaders.');
+  const [caseSubtitle, setCaseSubtitle] = useState('Real projects. Real numbers. Real growth for real businesses.');
   const [casesList, setCasesList] = useState([
     { id: '1', client: 'NovaPay Global', tag: 'FinTech Platform', metric: '+340% User Growth', desc: 'Architected next-generation payment gateway processing $40M+ ARR with 99.99% availability.', img: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?q=80&w=600&auto=format&fit=crop' },
     { id: '2', client: 'AeroLogix Supply', tag: 'AI & Logistics', metric: '65% Time Saved', desc: 'Deployed autonomous route scheduling engine cutting dispatch latency from 4 hours to 8 seconds.', img: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=600&auto=format&fit=crop' },
@@ -131,7 +182,6 @@ export default function WebsiteStudioPage() {
           setHeroBadge(p.hero.badge || heroBadge);
           setHeroTitle(p.hero.title || heroTitle);
           setHeroSubtext(p.hero.subtext || heroSubtext);
-          setHeroImgUrl(p.hero.img || heroImgUrl);
           if (p.hero.cta1) setPrimaryCtaText(p.hero.cta1);
           if (p.hero.cta2) setSecondaryCtaText(p.hero.cta2);
         }
@@ -206,7 +256,7 @@ export default function WebsiteStudioPage() {
 
       const updated = {
         ...current,
-        hero: { badge: heroBadge, title: heroTitle, subtext: heroSubtext, cta1: primaryCtaText, cta2: secondaryCtaText, img: heroImgUrl },
+        hero: { badge: heroBadge, title: heroTitle, subtext: heroSubtext, cta1: primaryCtaText, cta2: secondaryCtaText },
         solutions: { title: solutionsTitle, subtitle: solutionsSubtitle, list: solutionsList },
         whyUs: { title: whyTitle, subtitle: whySubtitle, pillars: whyPillars },
         cases: { title: caseTitle, subtitle: caseSubtitle, list: casesList },
@@ -245,6 +295,8 @@ export default function WebsiteStudioPage() {
     document.documentElement.style.setProperty('--color-accent', preset.accent);
     document.documentElement.style.setProperty('--color-teal', preset.teal);
   };
+
+  const currentSolution = solutionsList[selectedSolutionIndex] || solutionsList[0];
 
   return (
     <div className={styles.pageWrap}>
@@ -310,7 +362,7 @@ export default function WebsiteStudioPage() {
       {/* ========================================================================= */}
       {/* 2-COLUMN WORKSPACE: LEFT EDITOR | RIGHT EXACT PIXEL-PERFECT LIVE DEMO */}
       {/* ========================================================================= */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 1.15fr', gap: '1.5rem', alignItems: 'start' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1.05fr 1.25fr', gap: '1.5rem', alignItems: 'start' }}>
 
         {/* ----------------------------------------------------------------------- */}
         {/* LEFT COLUMN: EDITING CONTROLS */}
@@ -353,17 +405,6 @@ export default function WebsiteStudioPage() {
                     <input type="text" value={secondaryCtaText} onChange={(e) => setSecondaryCtaText(e.target.value)} style={{ width: '100%', background: '#070A11', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.65rem', color: '#fff', fontSize: '0.825rem' }} />
                   </div>
                 </div>
-
-                <div>
-                  <label style={{ fontSize: '0.775rem', fontWeight: 700, color: '#cbd5e1', display: 'block', marginBottom: '0.35rem' }}>Hero Showcase Image</label>
-                  <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-                    <input type="text" value={heroImgUrl} onChange={(e) => setHeroImgUrl(e.target.value)} placeholder="Or paste image URL" style={{ flex: 1, background: '#070A11', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.65rem', color: '#fff', fontSize: '0.8rem' }} />
-                    <label style={{ padding: '0.65rem 1rem', borderRadius: '8px', background: 'rgba(91,140,255,0.15)', border: '1px solid rgba(91,140,255,0.3)', color: '#5B8CFF', fontSize: '0.8rem', fontWeight: 700, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
-                      <Upload size={14} /> Upload Local
-                      <input type="file" accept="image/*" onChange={(e) => handleLocalImageUpload(e, setHeroImgUrl)} style={{ display: 'none' }} />
-                    </label>
-                  </div>
-                </div>
               </div>
             </div>
           )}
@@ -374,7 +415,7 @@ export default function WebsiteStudioPage() {
               <div className={styles.boxHeader}>
                 <h3 className={styles.boxTitle}>Edit Solutions & Services ({solutionsList.length} Cards)</h3>
                 <div style={{ display: 'flex', gap: '0.5rem' }}>
-                  <button onClick={() => setSolutionsList([...solutionsList, { id: Date.now().toString(), number: `0${solutionsList.length + 1}`, title: 'New Custom Solution', tag: 'Enterprise', subtitle: 'Tailored enterprise software', desc: 'Comprehensive digital engineering solutions tailored for rapid scale.', stat: '99.9%', statLabel: 'Uptime SLA', img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop' }])} className={styles.actionBtn}>
+                  <button onClick={() => setSolutionsList([...solutionsList, { id: Date.now().toString(), number: `0${solutionsList.length + 1}`, title: 'New Custom Solution', tag: 'Enterprise', desc: 'Comprehensive digital engineering solutions tailored for rapid scale.', features: ['Custom Architecture', 'Cloud Integration', '24/7 Monitoring', 'Enterprise Security'], stat: '99.9%', statLabel: 'UPTIME SLA', badge: 'Enterprise Grade', img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop' }])} className={styles.actionBtn}>
                     <Plus size={14} /> Add Card
                   </button>
                   <button onClick={() => handlePublishSection('Our Solutions')} className={styles.actionBtnPrimary}>
@@ -387,27 +428,26 @@ export default function WebsiteStudioPage() {
                 {solutionsList.map((sol, idx) => (
                   <div key={sol.id} style={{ background: '#070A11', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#5B8CFF' }}>Service Card #{idx + 1} ({sol.number})</span>
+                      <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#5B8CFF' }}>Solution #{idx + 1} ({sol.number})</span>
                       <button onClick={() => setSolutionsList(solutionsList.filter(s => s.id !== sol.id))} style={{ background: 'none', border: 'none', color: '#f43f5e', cursor: 'pointer' }}>
                         <Trash2 size={15} />
                       </button>
                     </div>
 
                     <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: '0.5rem' }}>
-                      <input type="text" value={sol.title} onChange={(e) => { const n = [...solutionsList]; n[idx].title = e.target.value; setSolutionsList(n); }} placeholder="Service Title" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.55rem', color: '#fff', fontSize: '0.8rem', fontWeight: 700 }} />
-                      <input type="text" value={sol.tag} onChange={(e) => { const n = [...solutionsList]; n[idx].tag = e.target.value; setSolutionsList(n); }} placeholder="Tag" style={{ background: 'rgba(0,209,178,0.1)', border: '1px solid rgba(0,209,178,0.25)', borderRadius: '8px', padding: '0.55rem', color: '#00D1B2', fontSize: '0.75rem', fontWeight: 700 }} />
+                      <input type="text" value={sol.title} onChange={(e) => { const n = [...solutionsList]; n[idx].title = e.target.value; setSolutionsList(n); }} placeholder="Solution Title" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.55rem', color: '#fff', fontSize: '0.8rem', fontWeight: 700 }} />
+                      <input type="text" value={sol.tag} onChange={(e) => { const n = [...solutionsList]; n[idx].tag = e.target.value; setSolutionsList(n); }} placeholder="Category Tag" style={{ background: 'rgba(0,209,178,0.1)', border: '1px solid rgba(0,209,178,0.25)', borderRadius: '8px', padding: '0.55rem', color: '#00D1B2', fontSize: '0.75rem', fontWeight: 700 }} />
                     </div>
 
-                    <input type="text" value={sol.subtitle} onChange={(e) => { const n = [...solutionsList]; n[idx].subtitle = e.target.value; setSolutionsList(n); }} placeholder="Subtitle" style={{ width: '100%', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.55rem', color: '#94a3b8', fontSize: '0.75rem' }} />
-                    <textarea rows={2} value={sol.desc} onChange={(e) => { const n = [...solutionsList]; n[idx].desc = e.target.value; setSolutionsList(n); }} placeholder="Service Description" style={{ width: '100%', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.55rem', color: '#cbd5e1', fontSize: '0.75rem' }} />
+                    <textarea rows={2} value={sol.desc} onChange={(e) => { const n = [...solutionsList]; n[idx].desc = e.target.value; setSolutionsList(n); }} placeholder="Solution Description" style={{ width: '100%', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.55rem', color: '#cbd5e1', fontSize: '0.75rem' }} />
 
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
-                      <input type="text" value={sol.stat} onChange={(e) => { const n = [...solutionsList]; n[idx].stat = e.target.value; setSolutionsList(n); }} placeholder="Stat e.g. 99.9%" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.55rem', color: '#fff', fontSize: '0.75rem' }} />
+                      <input type="text" value={sol.stat} onChange={(e) => { const n = [...solutionsList]; n[idx].stat = e.target.value; setSolutionsList(n); }} placeholder="Stat (e.g. 99.99%)" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.55rem', color: '#fff', fontSize: '0.75rem', fontWeight: 700 }} />
                       <input type="text" value={sol.statLabel} onChange={(e) => { const n = [...solutionsList]; n[idx].statLabel = e.target.value; setSolutionsList(n); }} placeholder="Stat Label" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.55rem', color: '#94a3b8', fontSize: '0.75rem' }} />
                     </div>
 
                     <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-                      <input type="text" value={sol.img} onChange={(e) => { const n = [...solutionsList]; n[idx].img = e.target.value; setSolutionsList(n); }} placeholder="Card Image URL" style={{ flex: 1, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.55rem', color: '#94a3b8', fontSize: '0.75rem' }} />
+                      <input type="text" value={sol.img} onChange={(e) => { const n = [...solutionsList]; n[idx].img = e.target.value; setSolutionsList(n); }} placeholder="Showcase Image URL" style={{ flex: 1, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.55rem', color: '#94a3b8', fontSize: '0.75rem' }} />
                       <label style={{ padding: '0.55rem 0.85rem', borderRadius: '8px', background: 'rgba(91,140,255,0.15)', border: '1px solid rgba(91,140,255,0.3)', color: '#5B8CFF', fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}>
                         <Upload size={13} /> Local Image
                         <input type="file" accept="image/*" onChange={(e) => handleLocalImageUpload(e, (val) => { const n = [...solutionsList]; n[idx].img = val; setSolutionsList(n); })} style={{ display: 'none' }} />
@@ -432,11 +472,7 @@ export default function WebsiteStudioPage() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 {whyPillars.map((p, idx) => (
                   <div key={p.id} style={{ background: '#070A11', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#5B8CFF' }}>Pillar #{idx + 1}</span>
-                      <input type="text" value={p.stat} onChange={(e) => { const n = [...whyPillars]; n[idx].stat = e.target.value; setWhyPillars(n); }} placeholder="Stat Badge" style={{ background: 'rgba(0,209,178,0.12)', border: '1px solid rgba(0,209,178,0.3)', borderRadius: '6px', padding: '0.25rem 0.6rem', color: '#00D1B2', fontSize: '0.725rem', fontWeight: 700, width: '120px', textAlign: 'center' }} />
-                    </div>
-
+                    <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#5B8CFF' }}>Pillar #{idx + 1}</span>
                     <input type="text" value={p.title} onChange={(e) => { const n = [...whyPillars]; n[idx].title = e.target.value; setWhyPillars(n); }} placeholder="Pillar Title" style={{ width: '100%', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.55rem', color: '#fff', fontSize: '0.8rem', fontWeight: 700 }} />
                     <textarea rows={2} value={p.desc} onChange={(e) => { const n = [...whyPillars]; n[idx].desc = e.target.value; setWhyPillars(n); }} placeholder="Pillar Description" style={{ width: '100%', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.55rem', color: '#cbd5e1', fontSize: '0.75rem' }} />
                   </div>
@@ -632,24 +668,6 @@ export default function WebsiteStudioPage() {
                     </button>
                   ))}
                 </div>
-
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginTop: '1.25rem' }}>
-                  <div>
-                    <label style={{ fontSize: '0.775rem', fontWeight: 700, color: '#cbd5e1', display: 'block', marginBottom: '0.35rem' }}>Primary Accent Hex</label>
-                    <div style={{ display: 'flex', gap: '0.5rem' }}>
-                      <input type="color" value={primaryAccent} onChange={(e) => setPrimaryAccent(e.target.value)} style={{ width: '36px', height: '36px', borderRadius: '8px', border: 'none', cursor: 'pointer', background: 'none' }} />
-                      <input type="text" value={primaryAccent} onChange={(e) => setPrimaryAccent(e.target.value)} style={{ flex: 1, background: '#070A11', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.5rem', color: '#fff', fontSize: '0.8rem' }} />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label style={{ fontSize: '0.775rem', fontWeight: 700, color: '#cbd5e1', display: 'block', marginBottom: '0.35rem' }}>Secondary Teal Hex</label>
-                    <div style={{ display: 'flex', gap: '0.5rem' }}>
-                      <input type="color" value={secondaryTeal} onChange={(e) => setSecondaryTeal(e.target.value)} style={{ width: '36px', height: '36px', borderRadius: '8px', border: 'none', cursor: 'pointer', background: 'none' }} />
-                      <input type="text" value={secondaryTeal} onChange={(e) => setSecondaryTeal(e.target.value)} style={{ flex: 1, background: '#070A11', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.5rem', color: '#fff', fontSize: '0.8rem' }} />
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           )}
@@ -709,132 +727,246 @@ export default function WebsiteStudioPage() {
         </div>
 
         {/* ----------------------------------------------------------------------- */}
-        {/* RIGHT COLUMN: EXACT PIXEL-PERFECT LIVE WEBSITE COMPONENT PREVIEW */}
+        {/* RIGHT COLUMN: EXACT REPLICA OF THE REAL PUBLIC WEBSITE SECTION */}
         {/* ----------------------------------------------------------------------- */}
         <div style={{ position: 'sticky', top: '90px' }}>
           <div className={styles.cardBox} style={{ border: '1px solid rgba(91,140,255,0.3)', background: '#111827' }}>
             <div className={styles.boxHeader}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
                 <Monitor size={16} color="#5B8CFF" />
-                <h3 className={styles.boxTitle} style={{ fontSize: '0.95rem' }}>Exact Live Component Demo</h3>
+                <h3 className={styles.boxTitle} style={{ fontSize: '0.95rem' }}>Exact Website Replica Demo</h3>
               </div>
               <span style={{ fontSize: '0.7rem', fontWeight: 700, color: '#00D1B2', background: 'rgba(0,209,178,0.15)', padding: '0.15rem 0.5rem', borderRadius: '99px', display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}>
-                <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#00D1B2' }}></span> LIVE PREVIEW
+                <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#00D1B2' }}></span> 1:1 REPLICA
               </span>
             </div>
 
             {/* EXACT COMPONENT RENDER CANVAS */}
             <div style={{ background: '#0B0F19', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '1.5rem', minHeight: '440px', display: 'flex', flexDirection: 'column', gap: '1.25rem', overflow: 'hidden' }}>
 
-              {/* DEMO 1: EXACT HERO COMPONENT */}
+              {/* DEMO 1: EXACT HERO REPLICA (Matches Homepage with macOS Dashboard Mockup) */}
               {activeSection === 'hero' && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                  {/* Badge */}
-                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.35rem 0.85rem', borderRadius: '99px', background: 'rgba(91,140,255,0.1)', border: '1px solid rgba(91,140,255,0.3)', color: '#5B8CFF', fontSize: '0.75rem', fontWeight: 700, width: 'fit-content' }}>
-                    <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#00D1B2', boxShadow: '0 0 8px #00D1B2' }} />
-                    {heroBadge}
-                  </div>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '1rem', alignItems: 'center' }}>
+                    {/* Left Column */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+                      <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.35rem 0.85rem', borderRadius: '99px', background: 'rgba(91,140,255,0.08)', border: '1px solid rgba(91,140,255,0.25)', color: '#5B8CFF', fontSize: '0.725rem', fontWeight: 700, width: 'fit-content' }}>
+                        <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#00D1B2', boxShadow: '0 0 8px #00D1B2' }} />
+                        {heroBadge}
+                      </div>
 
-                  {/* Headline */}
-                  <h1 style={{ fontSize: '1.85rem', fontWeight: 900, lineHeight: 1.15, color: '#ffffff', letterSpacing: '-0.02em', margin: 0 }}>
-                    Build <span style={{ background: 'linear-gradient(135deg, #5B8CFF, #00D1B2)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Smarter.</span>
-                    <br />
-                    Scale <span style={{ background: 'linear-gradient(135deg, #00D1B2, #38BDF8)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Faster.</span>
-                    <br />
-                    <span style={{ fontSize: '1.25rem', color: '#94a3b8', fontWeight: 600 }}>Grow with Infotech.</span>
-                  </h1>
+                      <h1 style={{ fontSize: '1.65rem', fontWeight: 900, lineHeight: 1.15, color: '#ffffff', letterSpacing: '-0.02em', margin: 0 }}>
+                        Build <span style={{ background: 'linear-gradient(135deg, #5B8CFF, #818CF8)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Smarter.</span>
+                        <br />
+                        Scale <span style={{ background: 'linear-gradient(135deg, #00D1B2, #38BDF8)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Faster.</span>
+                        <br />
+                        <span style={{ fontSize: '1.25rem', color: '#ffffff', fontWeight: 800 }}>Grow with Infotech.</span>
+                      </h1>
 
-                  {/* Subtext */}
-                  <p style={{ fontSize: '0.85rem', color: '#94a3b8', lineHeight: 1.6, margin: 0 }}>
-                    {heroSubtext}
-                  </p>
+                      <p style={{ fontSize: '0.75rem', color: '#94a3b8', lineHeight: 1.5, margin: 0 }}>
+                        {heroSubtext}
+                      </p>
 
-                  {/* CTAs */}
-                  <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                    <div style={{ background: 'linear-gradient(135deg, #5B8CFF 0%, #00D1B2 100%)', color: '#fff', padding: '0.6rem 1.25rem', borderRadius: '99px', fontSize: '0.8rem', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '0.4rem', boxShadow: '0 4px 18px rgba(91,140,255,0.35)' }}>
-                      {primaryCtaText} <ArrowRight size={14} />
-                    </div>
-                    <div style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.15)', color: '#fff', padding: '0.6rem 1.25rem', borderRadius: '99px', fontSize: '0.8rem', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
-                      <Play size={13} /> {secondaryCtaText}
-                    </div>
-                  </div>
-
-                  {/* Stats Bar */}
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.75rem', borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '1rem', marginTop: '0.25rem' }}>
-                    <div>
-                      <div style={{ fontSize: '1.25rem', fontWeight: 900, color: '#fff' }}>150+</div>
-                      <div style={{ fontSize: '0.7rem', color: '#64748b' }}>Projects Done</div>
-                    </div>
-                    <div>
-                      <div style={{ fontSize: '1.25rem', fontWeight: 900, color: '#00D1B2' }}>99.9%</div>
-                      <div style={{ fontSize: '0.7rem', color: '#64748b' }}>Uptime SLA</div>
-                    </div>
-                    <div>
-                      <div style={{ fontSize: '1.25rem', fontWeight: 900, color: '#5B8CFF' }}>4.9/5</div>
-                      <div style={{ fontSize: '0.7rem', color: '#64748b' }}>Client Rating</div>
-                    </div>
-                  </div>
-
-                  {/* Hero Showcase Image */}
-                  {heroImgUrl && (
-                    <div style={{ borderRadius: '12px', overflow: 'hidden', height: '160px', border: '1px solid rgba(255,255,255,0.12)', boxShadow: '0 8px 30px rgba(0,0,0,0.5)' }}>
-                      <img src={heroImgUrl} alt="Hero Live Preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {/* DEMO 2: EXACT SOLUTIONS COMPONENT */}
-              {activeSection === 'solutions' && (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                  <div style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '0.75rem' }}>
-                    <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#00D1B2', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Our Solutions</div>
-                    <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#fff', margin: '0.2rem 0' }}>{solutionsTitle}</h3>
-                    <p style={{ fontSize: '0.75rem', color: '#94a3b8', margin: 0 }}>{solutionsSubtitle}</p>
-                  </div>
-
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', maxHeight: '420px', overflowY: 'auto' }}>
-                    {solutionsList.map(s => (
-                      <div key={s.id} style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '14px', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                          <span style={{ fontSize: '0.75rem', fontWeight: 900, color: '#5B8CFF', background: 'rgba(91,140,255,0.12)', padding: '0.2rem 0.6rem', borderRadius: '6px' }}>{s.number || '01'}</span>
-                          <span style={{ fontSize: '0.7rem', color: '#00D1B2', fontWeight: 700, background: 'rgba(0,209,178,0.12)', padding: '0.2rem 0.6rem', borderRadius: '99px' }}>{s.tag}</span>
+                      <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                        <div style={{ background: '#3B82F6', color: '#fff', padding: '0.5rem 1rem', borderRadius: '99px', fontSize: '0.75rem', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
+                          {primaryCtaText} <ArrowRight size={13} />
                         </div>
-                        <div style={{ fontSize: '0.95rem', fontWeight: 800, color: '#fff' }}>{s.title}</div>
-                        <div style={{ fontSize: '0.75rem', color: '#00D1B2', fontWeight: 600 }}>{s.subtitle}</div>
-                        <div style={{ fontSize: '0.75rem', color: '#94a3b8', lineHeight: 1.5 }}>{s.desc}</div>
-
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '0.5rem', marginTop: '0.25rem' }}>
-                          <div>
-                            <span style={{ fontSize: '0.85rem', fontWeight: 900, color: '#fff' }}>{s.stat}</span>
-                            <span style={{ fontSize: '0.675rem', color: '#64748b', marginLeft: '0.35rem' }}>{s.statLabel}</span>
-                          </div>
-                          <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#5B8CFF', display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
-                            Learn More <ArrowRight size={12} />
-                          </span>
+                        <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.15)', color: '#fff', padding: '0.5rem 1rem', borderRadius: '99px', fontSize: '0.75rem', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
+                          <Play size={12} /> {secondaryCtaText}
                         </div>
                       </div>
-                    ))}
+                    </div>
+
+                    {/* Right Column: EXACT macOS Dashboard Illustration Mockup */}
+                    <div style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '14px', padding: '0.85rem', display: 'flex', flexDirection: 'column', gap: '0.75rem', boxShadow: '0 12px 36px rgba(0,0,0,0.5)' }}>
+                      {/* Window Header */}
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '5px', borderBottom: '1px solid rgba(255,255,255,0.06)', paddingBottom: '0.4rem' }}>
+                        <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#EF4444' }} />
+                        <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#F59E0B' }} />
+                        <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10B981' }} />
+                        <span style={{ fontSize: '9px', color: '#64748b', marginLeft: '0.3rem', fontWeight: 700 }}>Infotech Dashboard</span>
+                      </div>
+
+                      {/* 3 Metric Pills */}
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.35rem' }}>
+                        <div style={{ background: '#0B0F19', padding: '0.4rem', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                          <div style={{ fontSize: '7px', color: '#64748b', textTransform: 'uppercase' }}>Revenue</div>
+                          <div style={{ fontSize: '0.75rem', fontWeight: 900, color: '#38BDF8' }}>$48.2K</div>
+                          <div style={{ fontSize: '7px', color: '#00D1B2' }}>+24%</div>
+                        </div>
+                        <div style={{ background: '#0B0F19', padding: '0.4rem', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                          <div style={{ fontSize: '7px', color: '#64748b', textTransform: 'uppercase' }}>Clients</div>
+                          <div style={{ fontSize: '0.75rem', fontWeight: 900, color: '#00D1B2' }}>128</div>
+                          <div style={{ fontSize: '7px', color: '#00D1B2' }}>+12%</div>
+                        </div>
+                        <div style={{ background: '#0B0F19', padding: '0.4rem', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                          <div style={{ fontSize: '7px', color: '#64748b', textTransform: 'uppercase' }}>Projects</div>
+                          <div style={{ fontSize: '0.75rem', fontWeight: 900, color: '#A855F7' }}>34</div>
+                          <div style={{ fontSize: '7px', color: '#A855F7' }}>+8%</div>
+                        </div>
+                      </div>
+
+                      {/* Monthly Growth Chart Bars */}
+                      <div>
+                        <div style={{ fontSize: '7px', color: '#64748b', marginBottom: '0.2rem' }}>Monthly Growth</div>
+                        <div style={{ display: 'flex', alignItems: 'flex-end', height: '40px', gap: '3px', justifyContent: 'space-between' }}>
+                          {[30, 45, 60, 40, 75, 90, 70, 85, 100].map((h, i) => (
+                            <div key={i} style={{ flex: 1, height: `${h}%`, background: 'linear-gradient(180deg, #00D1B2 0%, #38BDF8 100%)', borderRadius: '2px 2px 0 0' }} />
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Status Bullets */}
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', fontSize: '7px', color: '#94a3b8' }}>
+                        <div>● New lead from Dubai</div>
+                        <div>● Project milestone reached</div>
+                        <div>● Report ready for review</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 4 Bottom Stats Row */}
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.5rem', borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '0.85rem' }}>
+                    <div>
+                      <div style={{ fontSize: '1.1rem', fontWeight: 900, color: '#fff' }}>100+</div>
+                      <div style={{ fontSize: '8px', color: '#64748b', textTransform: 'uppercase' }}>Projects Delivered</div>
+                    </div>
+                    <div>
+                      <div style={{ fontSize: '1.1rem', fontWeight: 900, color: '#fff' }}>50+</div>
+                      <div style={{ fontSize: '8px', color: '#64748b', textTransform: 'uppercase' }}>Happy Clients</div>
+                    </div>
+                    <div>
+                      <div style={{ fontSize: '1.1rem', fontWeight: 900, color: '#fff' }}>5+</div>
+                      <div style={{ fontSize: '8px', color: '#64748b', textTransform: 'uppercase' }}>Years Experience</div>
+                    </div>
+                    <div>
+                      <div style={{ fontSize: '1.1rem', fontWeight: 900, color: '#fff' }}>98%</div>
+                      <div style={{ fontSize: '8px', color: '#64748b', textTransform: 'uppercase' }}>Client Satisfaction</div>
+                    </div>
                   </div>
                 </div>
               )}
 
-              {/* DEMO 3: EXACT WHY US COMPONENT */}
+              {/* DEMO 2: EXACT SOLUTIONS REPLICA (Matches Homepage with Tab Pills + Showcase Card) */}
+              {activeSection === 'solutions' && (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                  {/* Center Header */}
+                  <div style={{ textAlign: 'center' }}>
+                    <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', padding: '0.25rem 0.75rem', borderRadius: '99px', background: 'rgba(91,140,255,0.08)', border: '1px solid rgba(91,140,255,0.25)', color: '#5B8CFF', fontSize: '0.675rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.4rem' }}>
+                      <Sparkles size={11} /> Enterprise Capabilities
+                    </div>
+                    <h2 style={{ fontSize: '1.65rem', fontWeight: 900, color: '#ffffff', margin: '0 0 0.35rem 0' }}>
+                      Our <span style={{ background: 'linear-gradient(135deg, #5B8CFF, #00D1B2)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Solutions</span>
+                    </h2>
+                    <p style={{ fontSize: '0.75rem', color: '#94a3b8', maxWidth: '420px', margin: '0 auto', lineHeight: 1.5 }}>
+                      {solutionsSubtitle}
+                    </p>
+                  </div>
+
+                  {/* Horizontal Solution Tab Pills */}
+                  <div style={{ display: 'flex', gap: '0.35rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+                    {solutionsList.map((sol, i) => {
+                      const isSel = selectedSolutionIndex === i;
+                      return (
+                        <button
+                          key={sol.id}
+                          type="button"
+                          onClick={() => setSelectedSolutionIndex(i)}
+                          style={{
+                            padding: '0.4rem 0.8rem',
+                            borderRadius: '99px',
+                            background: isSel ? 'linear-gradient(135deg, #00D1B2, #0284C7)' : 'rgba(255,255,255,0.04)',
+                            border: isSel ? 'none' : '1px solid rgba(255,255,255,0.08)',
+                            color: '#ffffff',
+                            fontSize: '0.725rem',
+                            fontWeight: 700,
+                            cursor: 'pointer',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '0.35rem',
+                            boxShadow: isSel ? '0 4px 14px rgba(0,209,178,0.3)' : 'none'
+                          }}
+                        >
+                          <span>{sol.title}</span>
+                          <span style={{ fontSize: '8px', opacity: 0.8 }}>{sol.number}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  {/* Showcase 2-Column Card Frame */}
+                  <div style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '18px', padding: '1.25rem', display: 'grid', gridTemplateColumns: '1.1fr 1fr', gap: '1.25rem', alignItems: 'center', boxShadow: '0 12px 36px rgba(0,0,0,0.5)' }}>
+                    {/* Left Details */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                      <div style={{ display: 'inline-flex', padding: '0.2rem 0.6rem', borderRadius: '99px', background: 'rgba(56,189,248,0.15)', border: '1px solid rgba(56,189,248,0.3)', color: '#38BDF8', fontSize: '0.675rem', fontWeight: 800, textTransform: 'uppercase', width: 'fit-content' }}>
+                        {currentSolution.tag}
+                      </div>
+
+                      <h3 style={{ fontSize: '1.35rem', fontWeight: 900, color: '#ffffff', margin: 0 }}>
+                        {currentSolution.title}
+                      </h3>
+
+                      <p style={{ fontSize: '0.75rem', color: '#94a3b8', lineHeight: 1.5, margin: 0 }}>
+                        {currentSolution.desc}
+                      </p>
+
+                      {/* Feature Pills */}
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem' }}>
+                        {(currentSolution.features || ['Multi-Cloud Architecture', 'Automated CI/CD', 'Zero-Downtime Migration', 'SOC2 Compliant']).map(f => (
+                          <span key={f} style={{ display: 'inline-flex', alignItems: 'center', gap: '3px', fontSize: '0.675rem', color: '#cbd5e1', background: 'rgba(255,255,255,0.05)', padding: '0.2rem 0.5rem', borderRadius: '99px' }}>
+                            <Check size={10} color="#00D1B2" /> {f}
+                          </span>
+                        ))}
+                      </div>
+
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '0.25rem' }}>
+                        <div style={{ background: 'linear-gradient(135deg, #00D1B2, #0284C7)', color: '#fff', padding: '0.45rem 1rem', borderRadius: '99px', fontSize: '0.75rem', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
+                          Explore Solution <ArrowRight size={13} />
+                        </div>
+                        <div style={{ display: 'flex', gap: '4px' }}>
+                          <button onClick={() => setSelectedSolutionIndex((selectedSolutionIndex - 1 + solutionsList.length) % solutionsList.length)} style={{ width: '26px', height: '26px', borderRadius: '50%', background: 'rgba(255,255,255,0.06)', border: 'none', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
+                            <ChevronLeft size={14} />
+                          </button>
+                          <button onClick={() => setSelectedSolutionIndex((selectedSolutionIndex + 1) % solutionsList.length)} style={{ width: '26px', height: '26px', borderRadius: '50%', background: 'rgba(255,255,255,0.06)', border: 'none', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
+                            <ChevronRight size={14} />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Right Tech Image Frame with Badges */}
+                    <div style={{ position: 'relative', borderRadius: '14px', overflow: 'hidden', height: '180px', border: '1px solid rgba(255,255,255,0.1)' }}>
+                      <img src={currentSolution.img} alt={currentSolution.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      
+                      {/* Top Right Enterprise Grade Badge */}
+                      <div style={{ position: 'absolute', top: '8px', right: '8px', background: 'rgba(11,15,25,0.85)', backdropFilter: 'blur(8px)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: '99px', padding: '0.2rem 0.5rem', fontSize: '8px', fontWeight: 700, color: '#fff', display: 'inline-flex', alignItems: 'center', gap: '3px' }}>
+                        <ShieldCheck size={10} color="#00D1B2" /> {currentSolution.badge || 'Enterprise Grade'}
+                      </div>
+
+                      {/* Bottom Left Glass Stat Badge */}
+                      <div style={{ position: 'absolute', bottom: '8px', left: '8px', background: 'rgba(11,15,25,0.85)', backdropFilter: 'blur(8px)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: '8px', padding: '0.35rem 0.6rem' }}>
+                        <div style={{ fontSize: '0.85rem', fontWeight: 900, color: '#38BDF8' }}>{currentSolution.stat}</div>
+                        <div style={{ fontSize: '7px', color: '#94a3b8', textTransform: 'uppercase' }}>{currentSolution.statLabel}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* DEMO 3: EXACT WHY US REPLICA */}
               {activeSection === 'whyUs' && (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                   <div style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '0.75rem' }}>
-                    <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#5B8CFF', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Why Choose Us</div>
-                    <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#fff', margin: '0.2rem 0' }}>{whyTitle}</h3>
+                    <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#5B8CFF', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Why Choose Us</div>
+                    <h3 style={{ fontSize: '1.4rem', fontWeight: 900, color: '#fff', margin: '0.2rem 0' }}>{whyTitle}</h3>
                     <p style={{ fontSize: '0.75rem', color: '#94a3b8', margin: 0 }}>{whySubtitle}</p>
                   </div>
 
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
-                    {whyPillars.map((p, i) => (
-                      <div key={p.id} style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.45rem' }}>
-                        <div style={{ display: 'inline-flex', padding: '0.2rem 0.5rem', borderRadius: '6px', background: 'rgba(0,209,178,0.12)', color: '#00D1B2', fontSize: '0.7rem', fontWeight: 800, width: 'fit-content' }}>
-                          {p.stat}
-                        </div>
-                        <div style={{ fontSize: '0.825rem', fontWeight: 800, color: '#fff' }}>{p.title}</div>
+                    {whyPillars.map((p) => (
+                      <div key={p.id} style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '0.85rem', display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
+                        <div style={{ fontSize: '1.2rem', marginBottom: '0.1rem' }}>{p.icon || '⚡'}</div>
+                        <div style={{ fontSize: '0.85rem', fontWeight: 800, color: '#fff' }}>{p.title}</div>
                         <div style={{ fontSize: '0.7rem', color: '#94a3b8', lineHeight: 1.5 }}>{p.desc}</div>
                       </div>
                     ))}
@@ -842,26 +974,26 @@ export default function WebsiteStudioPage() {
                 </div>
               )}
 
-              {/* DEMO 4: EXACT CASE STUDIES COMPONENT */}
+              {/* DEMO 4: EXACT CASE STUDIES REPLICA */}
               {activeSection === 'caseStudies' && (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                  <div style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '0.75rem' }}>
-                    <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#00D1B2', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Case Studies</div>
-                    <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#fff', margin: '0.2rem 0' }}>{caseTitle}</h3>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                  <div style={{ textAlign: 'center' }}>
+                    <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#00D1B2', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Our Work</div>
+                    <h3 style={{ fontSize: '1.4rem', fontWeight: 900, color: '#fff', margin: '0.2rem 0' }}>{caseTitle}</h3>
                     <p style={{ fontSize: '0.75rem', color: '#94a3b8', margin: 0 }}>{caseSubtitle}</p>
                   </div>
 
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', maxHeight: '420px', overflowY: 'auto' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.65rem' }}>
                     {casesList.map(c => (
-                      <div key={c.id} style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '14px', overflow: 'hidden' }}>
-                        <img src={c.img} alt={c.client} style={{ width: '100%', height: '110px', objectFit: 'cover' }} />
-                        <div style={{ padding: '0.85rem', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <span style={{ fontSize: '0.7rem', color: '#5B8CFF', fontWeight: 700 }}>{c.tag}</span>
-                            <span style={{ fontSize: '0.7rem', fontWeight: 800, color: '#00D1B2', background: 'rgba(0,209,178,0.12)', padding: '0.15rem 0.5rem', borderRadius: '99px' }}>{c.metric}</span>
+                      <div key={c.id} style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+                        <img src={c.img} alt={c.client} style={{ width: '100%', height: '90px', objectFit: 'cover' }} />
+                        <div style={{ padding: '0.65rem', display: 'flex', flexDirection: 'column', gap: '0.3rem', flex: 1 }}>
+                          <span style={{ fontSize: '0.65rem', color: '#00D1B2', fontWeight: 800 }}>{c.metric}</span>
+                          <div style={{ fontSize: '0.8rem', fontWeight: 800, color: '#fff' }}>{c.client}</div>
+                          <div style={{ fontSize: '0.675rem', color: '#94a3b8', lineHeight: 1.4 }}>{c.desc}</div>
+                          <div style={{ marginTop: 'auto', paddingTop: '0.4rem', fontSize: '0.675rem', color: '#5B8CFF', fontWeight: 700 }}>
+                            View Case Study &rarr;
                           </div>
-                          <div style={{ fontSize: '0.9rem', fontWeight: 800, color: '#fff' }}>{c.client}</div>
-                          <div style={{ fontSize: '0.725rem', color: '#94a3b8', lineHeight: 1.5 }}>{c.desc}</div>
                         </div>
                       </div>
                     ))}
@@ -869,49 +1001,39 @@ export default function WebsiteStudioPage() {
                 </div>
               )}
 
-              {/* DEMO 5: EXACT TOOLS COMPONENT */}
+              {/* DEMO 5: TOOLS */}
               {activeSection === 'tools' && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                  <div style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '0.75rem' }}>
-                    <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#5B8CFF', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Interactive Suite</div>
-                    <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#fff', margin: '0.2rem 0' }}>{toolsTitle}</h3>
-                    <p style={{ fontSize: '0.75rem', color: '#94a3b8', margin: 0 }}>{toolsSubtitle}</p>
+                  <div style={{ textAlign: 'center' }}>
+                    <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#5B8CFF', textTransform: 'uppercase' }}>Interactive Suite</div>
+                    <h3 style={{ fontSize: '1.35rem', fontWeight: 900, color: '#fff', margin: '0.2rem 0' }}>{toolsTitle}</h3>
                   </div>
-
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.65rem' }}>
                     {toolsList.map(t => (
-                      <div key={t.id} style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-                        <span style={{ fontSize: '0.7rem', color: '#00D1B2', fontWeight: 700 }}>{t.tag || 'Tool Engine'}</span>
-                        <div style={{ fontSize: '0.85rem', fontWeight: 800, color: '#fff' }}>{t.name}</div>
-                        <div style={{ fontSize: '0.725rem', color: '#94a3b8', lineHeight: 1.5 }}>{t.desc}</div>
-                        <div style={{ marginTop: '0.4rem' }}>
-                          <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#5B8CFF', display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}>
-                            Launch Tool <ArrowRight size={13} />
-                          </span>
-                        </div>
+                      <div key={t.id} style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '0.75rem', display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
+                        <span style={{ fontSize: '0.65rem', color: '#00D1B2', fontWeight: 700 }}>{t.tag}</span>
+                        <div style={{ fontSize: '0.775rem', fontWeight: 800, color: '#fff' }}>{t.name}</div>
+                        <div style={{ fontSize: '0.675rem', color: '#94a3b8', lineHeight: 1.4 }}>{t.desc}</div>
                       </div>
                     ))}
                   </div>
                 </div>
               )}
 
-              {/* DEMO 6: EXACT BLOG COMPONENT */}
+              {/* DEMO 6: BLOG */}
               {activeSection === 'blog' && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                  <div style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '0.75rem' }}>
-                    <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#00D1B2', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Blog & Insights</div>
-                    <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#fff', margin: '0.2rem 0' }}>{blogTitle}</h3>
-                    <p style={{ fontSize: '0.75rem', color: '#94a3b8', margin: 0 }}>{blogSubtitle}</p>
+                  <div style={{ textAlign: 'center' }}>
+                    <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#00D1B2', textTransform: 'uppercase' }}>Blog & Insights</div>
+                    <h3 style={{ fontSize: '1.35rem', fontWeight: 900, color: '#fff', margin: '0.2rem 0' }}>{blogTitle}</h3>
                   </div>
-
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', maxHeight: '420px', overflowY: 'auto' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.65rem' }}>
                     {blogList.map(b => (
-                      <div key={b.id} style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '0.75rem', display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
-                        <img src={b.img} alt={b.title} style={{ width: '60px', height: '60px', borderRadius: '8px', objectFit: 'cover' }} />
-                        <div style={{ flex: 1, minWidth: 0 }}>
-                          <div style={{ fontSize: '0.675rem', color: '#00D1B2', fontWeight: 700 }}>{b.tag} · {b.readTime}</div>
-                          <div style={{ fontSize: '0.8rem', fontWeight: 800, color: '#fff', margin: '0.15rem 0', lineHeight: 1.3 }}>{b.title}</div>
-                          <span style={{ fontSize: '0.7rem', color: '#5B8CFF', fontWeight: 600 }}>Read Full Story &rarr;</span>
+                      <div key={b.id} style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', overflow: 'hidden' }}>
+                        <img src={b.img} alt={b.title} style={{ width: '100%', height: '80px', objectFit: 'cover' }} />
+                        <div style={{ padding: '0.65rem' }}>
+                          <div style={{ fontSize: '0.65rem', color: '#00D1B2' }}>{b.tag} · {b.readTime}</div>
+                          <div style={{ fontSize: '0.775rem', fontWeight: 800, color: '#fff', margin: '0.2rem 0', lineHeight: 1.3 }}>{b.title}</div>
                         </div>
                       </div>
                     ))}
@@ -919,24 +1041,22 @@ export default function WebsiteStudioPage() {
                 </div>
               )}
 
-              {/* DEMO 7: EXACT CAREERS COMPONENT */}
+              {/* DEMO 7: CAREERS */}
               {activeSection === 'careers' && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                  <div style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '0.75rem' }}>
-                    <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#5B8CFF', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Careers at Infotech</div>
-                    <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#fff', margin: '0.2rem 0' }}>Join Our Engineering & AI Team</h3>
-                    <p style={{ fontSize: '0.75rem', color: '#94a3b8', margin: 0 }}>Build the future of software with world-class talent.</p>
+                  <div style={{ textAlign: 'center' }}>
+                    <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#5B8CFF', textTransform: 'uppercase' }}>Careers</div>
+                    <h3 style={{ fontSize: '1.35rem', fontWeight: 900, color: '#fff', margin: '0.2rem 0' }}>Join Our Team</h3>
                   </div>
-
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                     {careersList.map(j => (
-                      <div key={j.id} style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '0.85rem 1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <div key={j.id} style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '10px', padding: '0.75rem 1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <div>
-                          <div style={{ fontSize: '0.825rem', fontWeight: 800, color: '#fff' }}>{j.role}</div>
-                          <div style={{ fontSize: '0.7rem', color: '#94a3b8', marginTop: '0.2rem' }}>{j.dept} · {j.exp}</div>
+                          <div style={{ fontSize: '0.8rem', fontWeight: 800, color: '#fff' }}>{j.role}</div>
+                          <div style={{ fontSize: '0.675rem', color: '#94a3b8' }}>{j.dept} · {j.exp}</div>
                         </div>
-                        <div style={{ background: 'linear-gradient(135deg, #5B8CFF, #00D1B2)', color: '#fff', padding: '0.35rem 0.8rem', borderRadius: '99px', fontSize: '0.7rem', fontWeight: 700 }}>
-                          Apply Now
+                        <div style={{ background: '#3B82F6', color: '#fff', padding: '0.3rem 0.75rem', borderRadius: '99px', fontSize: '0.675rem', fontWeight: 700 }}>
+                          Apply
                         </div>
                       </div>
                     ))}
@@ -944,39 +1064,22 @@ export default function WebsiteStudioPage() {
                 </div>
               )}
 
-              {/* DEMO 8: EXACT THEME COMPONENT */}
+              {/* DEMO 8: THEME */}
               {activeSection === 'theme' && (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', alignItems: 'center', justifyContent: 'center', padding: '1.5rem', textAlign: 'center' }}>
-                  <div style={{ width: '56px', height: '56px', borderRadius: '14px', background: `linear-gradient(135deg, ${primaryAccent}, ${secondaryTeal})`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 900, fontSize: '1.3rem', boxShadow: `0 8px 24px ${primaryAccent}40` }}>
+                <div style={{ textAlign: 'center', padding: '2rem' }}>
+                  <div style={{ width: '56px', height: '56px', borderRadius: '14px', background: `linear-gradient(135deg, ${primaryAccent}, ${secondaryTeal})`, margin: '0 auto 1rem auto', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 900, fontSize: '1.3rem' }}>
                     IF
                   </div>
-                  <div>
-                    <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#fff', margin: 0 }}>Active Theme: {activePreset}</h3>
-                    <p style={{ fontSize: '0.775rem', color: '#94a3b8', margin: '0.35rem 0 0 0' }}>Dynamic CSS token engine rendering across public buttons, glows, and badges.</p>
-                  </div>
-                  <div style={{ display: 'flex', gap: '0.75rem' }}>
-                    <div style={{ background: `linear-gradient(135deg, ${primaryAccent}, ${secondaryTeal})`, color: '#fff', padding: '0.55rem 1.1rem', borderRadius: '99px', fontSize: '0.775rem', fontWeight: 700, boxShadow: `0 4px 14px ${primaryAccent}40` }}>
-                      Primary Brand Gradient
-                    </div>
-                    <div style={{ background: 'rgba(255,255,255,0.06)', border: `1px solid ${primaryAccent}40`, color: '#fff', padding: '0.55rem 1.1rem', borderRadius: '99px', fontSize: '0.775rem', fontWeight: 600 }}>
-                      Secondary Outline
-                    </div>
-                  </div>
+                  <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#fff' }}>Theme: {activePreset}</h3>
                 </div>
               )}
 
-              {/* DEMO 9: EXACT MAINTENANCE COMPONENT */}
+              {/* DEMO 9: MAINTENANCE */}
               {activeSection === 'maintenance' && (
-                <div style={{ textAlign: 'center', padding: '2rem 1rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', background: '#05070D', borderRadius: '16px', border: '1px solid rgba(244,63,94,0.3)' }}>
-                  <div style={{ width: '52px', height: '52px', borderRadius: '50%', background: 'rgba(244,63,94,0.15)', border: '1px solid rgba(244,63,94,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#f43f5e' }}>
-                    <Wrench size={26} />
-                  </div>
-                  <span style={{ fontSize: '0.7rem', fontWeight: 800, color: '#f43f5e', textTransform: 'uppercase', letterSpacing: '0.08em' }}>System Status</span>
-                  <h4 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#fff', margin: 0, lineHeight: 1.3 }}>{maintenanceHeadline}</h4>
-                  <p style={{ fontSize: '0.8rem', color: '#94a3b8', lineHeight: 1.6, maxWidth: '280px', margin: 0 }}>{maintenanceMessage}</p>
-                  <div style={{ padding: '0.45rem 1rem', background: 'rgba(255,255,255,0.04)', borderRadius: '99px', border: '1px solid rgba(255,255,255,0.1)', fontSize: '0.75rem', color: '#00D1B2', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
-                    <Clock size={14} /> Back by: {new Date(estimatedReturn).toLocaleString()}
-                  </div>
+                <div style={{ textAlign: 'center', padding: '2rem', background: '#05070D', borderRadius: '16px', border: '1px solid rgba(244,63,94,0.3)' }}>
+                  <Wrench size={28} color={isMaintenanceActive ? '#f43f5e' : '#00D1B2'} style={{ margin: '0 auto 0.5rem auto' }} />
+                  <h4 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#fff', margin: 0 }}>{maintenanceHeadline}</h4>
+                  <p style={{ fontSize: '0.775rem', color: '#94a3b8', marginTop: '0.35rem' }}>{maintenanceMessage}</p>
                 </div>
               )}
 
