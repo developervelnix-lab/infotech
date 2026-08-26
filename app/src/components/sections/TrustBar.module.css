@@ -55,16 +55,24 @@
   padding-top: var(--space-10);
   border-top: 1px solid var(--color-border);
 }
-@media (max-width: 768px) { .statsRow { grid-template-columns: repeat(2,1fr); gap: var(--space-4); } }
-
-.stat { text-align: center; display: flex; flex-direction: column; gap: var(--space-2); }
-.statValue { font-size: var(--text-4xl); font-weight: 900; color: var(--color-white); letter-spacing: -0.04em; line-height: 1; }
-.statLabel { font-size: var(--text-sm); color: var(--color-muted); font-weight: 500; }
-
-@media (max-width: 640px) {
-  .section { padding-block: var(--space-12); }
-  .statValue { font-size: var(--text-2xl); }
-  .statLabel { font-size: var(--text-xs); }
-  .tagline { font-size: var(--text-xs); margin-bottom: var(--space-5); }
-  .marqueeWrap { margin-bottom: var(--space-8); }
+@media (max-width: 768px) {
+  .section {
+    padding-block: 1.25rem;
+  }
+  .tagline {
+    font-size: 10.5px;
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.08em;
+  }
+  .marqueeWrap {
+    margin-bottom: 0;
+  }
+  .logoCard {
+    padding: 0.35rem 0.85rem;
+    font-size: 11px;
+    border-radius: var(--radius-sm);
+  }
+  .marqueeTrack {
+    gap: 0.6rem;
+  }
 }
