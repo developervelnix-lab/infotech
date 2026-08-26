@@ -1,5 +1,6 @@
 'use client';
 
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Play } from 'lucide-react';
 import dynamic from 'next/dynamic';
@@ -11,8 +12,50 @@ import { fadeUp, staggerContainer } from '@/lib/animations';
 import styles from './Hero.module.css';
 
 export default function Hero() {
+  const [badge, setBadge] = useState('AI-Powered Digital Agency — 2026');
+  const [title, setTitle] = useState('Build Smarter. Scale Faster.');
+  const [subtext, setSubtext] = useState('We help businesses transform digitally with AI-powered solutions, modern development, and growth-focused strategies.');
+  const [cta1, setCta1] = useState('Start Your Project');
+  const [cta2, setCta2] = useState('Get Free Consultation');
+  const [heroBg, setHeroBg] = useState('/hero-bg.jpg');
+
+  useEffect(() => {
+    try {
+      const savedCMS = localStorage.getItem('infotech_full_cms');
+      if (savedCMS) {
+        const parsed = JSON.parse(savedCMS);
+        if (parsed.hero) {
+          if (parsed.hero.badge) setBadge(parsed.hero.badge);
+          if (parsed.hero.title) setTitle(parsed.hero.title);
+          if (parsed.hero.subtext) setSubtext(parsed.hero.subtext);
+          if (parsed.hero.cta1) setCta1(parsed.hero.cta1);
+          if (parsed.hero.cta2) setCta2(parsed.hero.cta2);
+          if (parsed.hero.bgImg) setHeroBg(parsed.hero.bgImg);
+        }
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }, []);
+
   return (
-    <section className={styles.hero} id="home">
+    <section className={styles.hero} id="home" style={{ position: 'relative' }}>
+      {/* Dynamic Background Image Overlay */}
+      {heroBg && (
+        <div 
+          style={{
+            position: 'absolute',
+            inset: 0,
+            backgroundImage: `url(${heroBg})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            opacity: 0.4,
+            zIndex: 0,
+            pointerEvents: 'none'
+          }} 
+        />
+      )}
 
       {/* Decorative blobs */}
       <div className={styles.blob1} />
@@ -34,7 +77,7 @@ export default function Hero() {
           {/* Badge */}
           <motion.div variants={fadeUp} className={styles.badge}>
             <span className={styles.badgeDot} />
-            AI-Powered Digital Agency — 2026
+            {badge}
           </motion.div>
 
           {/* Headline */}
@@ -50,17 +93,16 @@ export default function Hero() {
 
           {/* Subtext */}
           <motion.p variants={fadeUp} className={styles.subtext}>
-            We help businesses transform digitally with AI-powered solutions,
-            modern development, and growth-focused strategies.
+            {subtext}
           </motion.p>
 
           {/* CTAs */}
           <motion.div variants={fadeUp} className={styles.ctas}>
             <Button href="/contact" size="lg">
-              Start Your Project <ArrowRight size={18} />
+              {cta1} <ArrowRight size={18} />
             </Button>
             <Button variant="secondary" size="lg" href="/contact">
-              <Play size={16} /> Get Free Consultation
+              <Play size={16} /> {cta2}
             </Button>
           </motion.div>
 

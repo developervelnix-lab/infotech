@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 import { caseStudies } from '@/lib/data';
 import SectionTitle from '@/components/ui/SectionTitle';
@@ -21,14 +21,48 @@ export default function CaseStudies() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-60px' });
 
+  const [title, setTitle] = useState('Results That Speak for Themselves');
+  const [subtitle, setSubtitle] = useState('Real projects. Real numbers. Real growth for real businesses.');
+  const [items, setItems] = useState(caseStudies);
+
+  useEffect(() => {
+    try {
+      const savedCMS = localStorage.getItem('infotech_full_cms');
+      if (savedCMS) {
+        const parsed = JSON.parse(savedCMS);
+        if (parsed.cases) {
+          if (parsed.cases.title) setTitle(parsed.cases.title);
+          if (parsed.cases.subtitle) setSubtitle(parsed.cases.subtitle);
+          if (parsed.cases.list && parsed.cases.list.length > 0) {
+            const merged = parsed.cases.list.map((c: any, i: number) => {
+              const fallback = caseStudies[i % caseStudies.length];
+              return {
+                id: c.id || fallback.id,
+                title: c.client || fallback.title,
+                category: c.tag || fallback.category,
+                description: c.desc || fallback.description,
+                image: c.img || fallback.image,
+                metrics: [c.metric || fallback.metrics[0]],
+                tags: fallback.tags || ['Next.js', 'Cloud', 'AI']
+              };
+            });
+            setItems(merged);
+          }
+        }
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }, []);
+
   return (
     <section className={styles.section} id="case-studies">
       <div className="container">
         <SectionTitle
           label="Our Work"
-          title="Results That Speak for Themselves"
+          title={title}
           highlight="Results"
-          subtitle="Real projects. Real numbers. Real growth for real businesses."
+          subtitle={subtitle}
         />
         <motion.div
           ref={ref}
@@ -37,7 +71,7 @@ export default function CaseStudies() {
           initial="hidden"
           animate={isInView ? "show" : "hidden"}
         >
-          {caseStudies.map((cs, i) => (
+          {items.map((cs) => (
             <CaseStudyCard key={cs.id} cs={cs} />
           ))}
         </motion.div>
@@ -61,7 +95,7 @@ const cardVariants = {
   hidden: { 
     opacity: 0, 
     y: 60,
-    clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%)' 
+    clipPath: 'polygon(0 100%, 100% 100%, 100% 0, 0 100%)' 
   },
   show: { 
     opacity: 1, 
@@ -69,7 +103,7 @@ const cardVariants = {
     clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
     transition: {
       duration: 1,
-      ease: [0.16, 1, 0.3, 1] as const // Apple-like smooth ease out
+      ease: [0.16, 1, 0.3, 1] as const
     }
   }
 };
@@ -94,7 +128,7 @@ function CaseStudyCard({ cs }: { cs: typeof caseStudies[0] }) {
           sizes="(max-width: 768px) 100vw, 33vw"
         />
         <div className={`${styles.overlay} ${hovered ? styles.overlayVisible : ''}`}>
-          <a href={`/case-studies/${cs.id}`} className={styles.viewBtn}>
+          <a href={`/case-studies`} className={styles.viewBtn}>
             View Case Study →
           </a>
         </div>

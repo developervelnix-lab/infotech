@@ -53,6 +53,7 @@ export default function WebsiteStudioPage() {
   const [heroSubtext, setHeroSubtext] = useState('We help businesses transform digitally with AI-powered solutions, modern development, and growth-focused strategies.');
   const [primaryCtaText, setPrimaryCtaText] = useState('Start Your Project');
   const [secondaryCtaText, setSecondaryCtaText] = useState('Get Free Consultation');
+  const [heroBgImg, setHeroBgImg] = useState('/hero-bg.jpg');
 
   // --- 2. SOLUTIONS STATE ---
   const [solutionsTitle, setSolutionsTitle] = useState('Our Solutions');
@@ -184,6 +185,7 @@ export default function WebsiteStudioPage() {
           setHeroSubtext(p.hero.subtext || heroSubtext);
           if (p.hero.cta1) setPrimaryCtaText(p.hero.cta1);
           if (p.hero.cta2) setSecondaryCtaText(p.hero.cta2);
+          if (p.hero.bgImg) setHeroBgImg(p.hero.bgImg);
         }
         if (p.solutions) {
           setSolutionsTitle(p.solutions.title || solutionsTitle);
@@ -256,7 +258,7 @@ export default function WebsiteStudioPage() {
 
       const updated = {
         ...current,
-        hero: { badge: heroBadge, title: heroTitle, subtext: heroSubtext, cta1: primaryCtaText, cta2: secondaryCtaText },
+        hero: { badge: heroBadge, title: heroTitle, subtext: heroSubtext, cta1: primaryCtaText, cta2: secondaryCtaText, bgImg: heroBgImg },
         solutions: { title: solutionsTitle, subtitle: solutionsSubtitle, list: solutionsList },
         whyUs: { title: whyTitle, subtitle: whySubtitle, pillars: whyPillars },
         cases: { title: caseTitle, subtitle: caseSubtitle, list: casesList },
@@ -403,6 +405,17 @@ export default function WebsiteStudioPage() {
                   <div>
                     <label style={{ fontSize: '0.775rem', fontWeight: 700, color: '#cbd5e1', display: 'block', marginBottom: '0.35rem' }}>Secondary CTA Button</label>
                     <input type="text" value={secondaryCtaText} onChange={(e) => setSecondaryCtaText(e.target.value)} style={{ width: '100%', background: '#070A11', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.65rem', color: '#fff', fontSize: '0.825rem' }} />
+                  </div>
+                </div>
+
+                <div>
+                  <label style={{ fontSize: '0.775rem', fontWeight: 700, color: '#cbd5e1', display: 'block', marginBottom: '0.35rem' }}>Hero Background Image</label>
+                  <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                    <input type="text" value={heroBgImg} onChange={(e) => setHeroBgImg(e.target.value)} placeholder="Or paste background image URL" style={{ flex: 1, background: '#070A11', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.65rem', color: '#fff', fontSize: '0.8rem' }} />
+                    <label style={{ padding: '0.65rem 1rem', borderRadius: '8px', background: 'rgba(91,140,255,0.15)', border: '1px solid rgba(91,140,255,0.3)', color: '#5B8CFF', fontSize: '0.8rem', fontWeight: 700, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
+                      <Upload size={14} /> Upload Device File
+                      <input type="file" accept="image/*" onChange={(e) => handleLocalImageUpload(e, setHeroBgImg)} style={{ display: 'none' }} />
+                    </label>
                   </div>
                 </div>
               </div>
@@ -746,8 +759,11 @@ export default function WebsiteStudioPage() {
 
               {/* DEMO 1: EXACT HERO REPLICA (Matches Homepage with macOS Dashboard Mockup) */}
               {activeSection === 'hero' && (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '1rem', alignItems: 'center' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', position: 'relative', borderRadius: '12px', overflow: 'hidden', padding: '0.5rem' }}>
+                  {heroBgImg && (
+                    <div style={{ position: 'absolute', inset: 0, backgroundImage: `url(${heroBgImg})`, backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.35, pointerEvents: 'none', zIndex: 0 }} />
+                  )}
+                  <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '1rem', alignItems: 'center', position: 'relative', zIndex: 1 }}>
                     {/* Left Column */}
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
                       <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.35rem 0.85rem', borderRadius: '99px', background: 'rgba(91,140,255,0.08)', border: '1px solid rgba(91,140,255,0.25)', color: '#5B8CFF', fontSize: '0.725rem', fontWeight: 700, width: 'fit-content' }}>

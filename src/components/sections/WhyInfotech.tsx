@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 import { whyInfotech } from '@/lib/data';
 import SectionTitle from '@/components/ui/SectionTitle';
@@ -11,6 +11,36 @@ export default function WhyInfotech() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
 
+  const [title, setTitle] = useState('Why Businesses Trust Infotech');
+  const [subtitle, setSubtitle] = useState('We combine speed, intelligence, and proven results to deliver outcomes your business can feel.');
+  const [items, setItems] = useState(whyInfotech);
+
+  useEffect(() => {
+    try {
+      const savedCMS = localStorage.getItem('infotech_full_cms');
+      if (savedCMS) {
+        const parsed = JSON.parse(savedCMS);
+        if (parsed.whyUs) {
+          if (parsed.whyUs.title) setTitle(parsed.whyUs.title);
+          if (parsed.whyUs.subtitle) setSubtitle(parsed.whyUs.subtitle);
+          if (parsed.whyUs.pillars && parsed.whyUs.pillars.length > 0) {
+            const merged = parsed.whyUs.pillars.map((p: any, i: number) => {
+              const fallback = whyInfotech[i % whyInfotech.length];
+              return {
+                icon: p.icon || fallback.icon,
+                title: p.title || fallback.title,
+                desc: p.desc || fallback.desc
+              };
+            });
+            setItems(merged);
+          }
+        }
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }, []);
+
   return (
     <section className={styles.section} id="about">
       <div className="container">
@@ -19,14 +49,14 @@ export default function WhyInfotech() {
           <div ref={ref} className={styles.left}>
             <SectionTitle
               label="Why Choose Us"
-              title="Why Businesses Trust Infotech"
+              title={title}
               highlight="Trust Infotech"
-              subtitle="We combine speed, intelligence, and proven results to deliver outcomes your business can feel."
+              subtitle={subtitle}
               align="left"
             />
 
             <div className={styles.list}>
-              {whyInfotech.map((item, i) => (
+              {items.map((item, i) => (
                 <motion.div
                   key={i}
                   className={styles.item}

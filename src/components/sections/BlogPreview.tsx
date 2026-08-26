@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { blogPosts } from '@/lib/data';
 import SectionTitle from '@/components/ui/SectionTitle';
 import Image from 'next/image';
@@ -11,20 +11,54 @@ export default function BlogPreview() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-60px' });
 
+  const [title, setTitle] = useState('Knowledge That Drives Growth');
+  const [subtitle, setSubtitle] = useState('Tech, marketing, and business insights from the Infotech team.');
+  const [items, setItems] = useState(blogPosts);
+
+  useEffect(() => {
+    try {
+      const savedCMS = localStorage.getItem('infotech_full_cms');
+      if (savedCMS) {
+        const parsed = JSON.parse(savedCMS);
+        if (parsed.blog) {
+          if (parsed.blog.title) setTitle(parsed.blog.title);
+          if (parsed.blog.subtitle) setSubtitle(parsed.blog.subtitle);
+          if (parsed.blog.list && parsed.blog.list.length > 0) {
+            const merged = parsed.blog.list.map((b: any, i: number) => {
+              const fallback = blogPosts[i % blogPosts.length];
+              return {
+                slug: fallback.slug,
+                title: b.title || fallback.title,
+                category: b.tag || fallback.category,
+                readTime: b.readTime || fallback.readTime,
+                image: b.img || fallback.image,
+                date: fallback.date || 'Aug 2026',
+                excerpt: fallback.excerpt || 'Deep dive into modern software engineering strategies.'
+              };
+            });
+            setItems(merged);
+          }
+        }
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }, []);
+
   return (
     <section className={styles.section} id="blog">
       <div className="container">
         <SectionTitle
           label="Blog & Insights"
-          title="Knowledge That Drives Growth"
+          title={title}
           highlight="Growth"
-          subtitle="Tech, marketing, and business insights from the Infotech team."
+          subtitle={subtitle}
         />
         <div ref={ref} className={styles.grid}>
-          {blogPosts.map((post, i) => (
+          {items.map((post, i) => (
             <motion.a
-              key={post.slug}
-              href={`/blog/${post.slug}`}
+              key={post.slug + i}
+              href={`/blog`}
               className={styles.card}
               initial={{ opacity: 0, y: 32 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}

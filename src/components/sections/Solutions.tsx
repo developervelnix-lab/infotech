@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import { Cloud, Code2, BarChart3, Cpu, ArrowRight, ChevronLeft, ChevronRight, Sparkles, CheckCircle2 } from 'lucide-react';
 import Image from 'next/image';
@@ -77,14 +77,49 @@ export default function Solutions() {
   const [direction, setDirection] = useState(1);
   const containerRef = useRef<HTMLElement>(null);
 
+  const [headerTitle, setHeaderTitle] = useState('Our Solutions');
+  const [headerSubtitle, setHeaderSubtitle] = useState('Empowering your digital transformation journey with cutting-edge technology and unparalleled expertise.');
+  const [items, setItems] = useState(solutions);
+
+  useEffect(() => {
+    try {
+      const savedCMS = localStorage.getItem('infotech_full_cms');
+      if (savedCMS) {
+        const parsed = JSON.parse(savedCMS);
+        if (parsed.solutions) {
+          if (parsed.solutions.title) setHeaderTitle(parsed.solutions.title);
+          if (parsed.solutions.subtitle) setHeaderSubtitle(parsed.solutions.subtitle);
+          if (parsed.solutions.list && parsed.solutions.list.length > 0) {
+            const merged = parsed.solutions.list.map((item: any, i: number) => {
+              const fallback = solutions[i % solutions.length];
+              return {
+                ...fallback,
+                id: item.id || fallback.id,
+                title: item.title || fallback.title,
+                category: item.tag || fallback.category,
+                desc: item.desc || fallback.desc,
+                image: item.img || fallback.image,
+                stat: { value: item.stat || fallback.stat.value, label: item.statLabel || fallback.stat.label },
+                features: item.features || fallback.features,
+              };
+            });
+            setItems(merged);
+          }
+        }
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
   });
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    let index = Math.floor(latest * solutions.length);
-    if (index >= solutions.length) index = solutions.length - 1;
+    let index = Math.floor(latest * items.length);
+    if (index >= items.length) index = items.length - 1;
     if (index < 0) index = 0;
 
     if (index !== activeIndex) {
@@ -103,7 +138,7 @@ export default function Solutions() {
       const scrollTop = window.scrollY || window.pageYOffset;
       const containerTop = scrollTop + rect.top;
       const scrollableDistance = containerRef.current.offsetHeight - window.innerHeight;
-      const targetScroll = containerTop + (newIndex / (solutions.length - 1)) * scrollableDistance;
+      const targetScroll = containerTop + (newIndex / (items.length - 1)) * scrollableDistance;
       window.scrollTo({ top: targetScroll, behavior: 'smooth' });
     }
   };
@@ -115,12 +150,12 @@ export default function Solutions() {
   };
 
   const handleNext = () => {
-    if (activeIndex < solutions.length - 1) {
+    if (activeIndex < items.length - 1) {
       handleSelectTab(activeIndex + 1);
     }
   };
 
-  const activeSolution = solutions[activeIndex];
+  const activeSolution = items[activeIndex] || items[0] || solutions[0];
 
   const slideVariants = {
     enter: (dir: number) => ({
@@ -181,7 +216,7 @@ export default function Solutions() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
               >
-                Our <span className={styles.titleGradient}>Solutions</span>
+                {headerTitle}
               </motion.h2>
 
               <motion.p 
@@ -191,7 +226,7 @@ export default function Solutions() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.1 }}
               >
-                Empowering your digital transformation journey with cutting-edge technology and unparalleled expertise.
+                {headerSubtitle}
               </motion.p>
             </div>
 
@@ -201,7 +236,7 @@ export default function Solutions() {
                 {/* Segmented Floating Tabs */}
                 <div className={styles.tabsContainer}>
                   <div className={styles.navTabs}>
-                    {solutions.map((sol, index) => {
+                    {items.map((sol, index) => {
                       const isActive = index === activeIndex;
                       return (
                         <button
@@ -389,7 +424,7 @@ export default function Solutions() {
 
               {/* Mobile Solutions Stack (Visible on Mobile) */}
               <div className={styles.mobileCardList}>
-                {solutions.map((sol) => (
+                {items.map((sol) => (
                   <div key={sol.id} className={styles.mobileCard}>
                     <div className={styles.mobileCardImageWrap}>
                       <Image 
