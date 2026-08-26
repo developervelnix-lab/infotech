@@ -969,110 +969,204 @@ export default function WebsiteStudioPage() {
                 </div>
               )}
 
-              {/* DEMO 3: EXACT WHY US REPLICA */}
+              {/* DEMO 3: EXACT WHY US REPLICA (Matches Public Website with Vertical Cards & Process Flow) */}
               {activeSection === 'whyUs' && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                  <div style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '0.75rem' }}>
-                    <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#5B8CFF', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Why Choose Us</div>
-                    <h3 style={{ fontSize: '1.4rem', fontWeight: 900, color: '#fff', margin: '0.2rem 0' }}>{whyTitle}</h3>
-                    <p style={{ fontSize: '0.75rem', color: '#94a3b8', margin: 0 }}>{whySubtitle}</p>
-                  </div>
-
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
-                    {whyPillars.map((p) => (
-                      <div key={p.id} style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '0.85rem', display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
-                        <div style={{ fontSize: '1.2rem', marginBottom: '0.1rem' }}>{p.icon || '⚡'}</div>
-                        <div style={{ fontSize: '0.85rem', fontWeight: 800, color: '#fff' }}>{p.title}</div>
-                        <div style={{ fontSize: '0.7rem', color: '#94a3b8', lineHeight: 1.5 }}>{p.desc}</div>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1.25fr 1fr', gap: '1.25rem', alignItems: 'center' }}>
+                    {/* Left Column */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+                      <div style={{ display: 'inline-flex', padding: '0.25rem 0.75rem', borderRadius: '99px', background: 'rgba(91,140,255,0.08)', border: '1px solid rgba(91,140,255,0.25)', color: '#5B8CFF', fontSize: '0.675rem', fontWeight: 800, textTransform: 'uppercase', width: 'fit-content' }}>
+                        Why Choose Us
                       </div>
-                    ))}
+                      <h3 style={{ fontSize: '1.45rem', fontWeight: 900, color: '#fff', margin: 0, lineHeight: 1.2 }}>
+                        {whyTitle}
+                      </h3>
+                      <p style={{ fontSize: '0.75rem', color: '#94a3b8', margin: 0, lineHeight: 1.5 }}>
+                        {whySubtitle}
+                      </p>
+
+                      {/* Vertical 4 Cards with Square Icon Backdrops */}
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+                        {whyPillars.map((p, i) => {
+                          const iconList = ['⚡', '🤖', '📊', '🔒'];
+                          return (
+                            <div key={p.id} style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '0.75rem 0.85rem', display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                              <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'rgba(91,140,255,0.15)', border: '1px solid rgba(91,140,255,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.1rem', flexShrink: 0 }}>
+                                {p.icon || iconList[i % iconList.length]}
+                              </div>
+                              <div style={{ minWidth: 0 }}>
+                                <div style={{ fontSize: '0.825rem', fontWeight: 800, color: '#fff' }}>{p.title}</div>
+                                <div style={{ fontSize: '0.7rem', color: '#94a3b8', lineHeight: 1.4, marginTop: '2px' }}>{p.desc}</div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    {/* Right Column: Process Flow Steps & Floating Badge */}
+                    <div style={{ position: 'relative', background: '#111827', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '16px', padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.85rem', boxShadow: '0 12px 36px rgba(0,0,0,0.5)' }}>
+                      {['Discovery', 'Design', 'Development', 'Launch', 'Growth'].map((step, i) => (
+                        <div key={step} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', position: 'relative' }}>
+                          <div style={{ width: '28px', height: '28px', borderRadius: '50%', background: '#0284C7', color: '#fff', fontSize: '0.75rem', fontWeight: 900, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2, flexShrink: 0, boxShadow: '0 0 10px rgba(2,132,199,0.5)' }}>
+                            {i + 1}
+                          </div>
+                          <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#fff' }}>{step}</span>
+                        </div>
+                      ))}
+
+                      {/* Floating Clutch Badge */}
+                      <div style={{ marginTop: '0.5rem', background: '#070A11', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '10px', padding: '0.5rem 0.85rem', display: 'flex', alignItems: 'center', gap: '0.5rem', width: 'fit-content', alignSelf: 'flex-end' }}>
+                        <span style={{ fontSize: '1.2rem' }}>🏆</span>
+                        <div>
+                          <div style={{ fontSize: '0.725rem', fontWeight: 800, color: '#fff' }}>Top Agency 2026</div>
+                          <div style={{ fontSize: '8px', color: '#00D1B2', fontWeight: 700 }}>Clutch Verified</div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               )}
 
-              {/* DEMO 4: EXACT CASE STUDIES REPLICA */}
+              {/* DEMO 4: EXACT CASE STUDIES REPLICA (Matches Public Website) */}
               {activeSection === 'caseStudies' && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                   <div style={{ textAlign: 'center' }}>
-                    <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#00D1B2', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Our Work</div>
-                    <h3 style={{ fontSize: '1.4rem', fontWeight: 900, color: '#fff', margin: '0.2rem 0' }}>{caseTitle}</h3>
-                    <p style={{ fontSize: '0.75rem', color: '#94a3b8', margin: 0 }}>{caseSubtitle}</p>
+                    <div style={{ display: 'inline-flex', padding: '0.2rem 0.6rem', borderRadius: '99px', background: 'rgba(0,209,178,0.1)', border: '1px solid rgba(0,209,178,0.3)', color: '#00D1B2', fontSize: '0.675rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.35rem' }}>
+                      Our Work
+                    </div>
+                    <h3 style={{ fontSize: '1.5rem', fontWeight: 900, color: '#fff', margin: 0 }}>{caseTitle}</h3>
+                    <p style={{ fontSize: '0.75rem', color: '#94a3b8', margin: '0.25rem 0 0 0' }}>{caseSubtitle}</p>
                   </div>
 
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.65rem' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.75rem' }}>
                     {casesList.map(c => (
-                      <div key={c.id} style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-                        <img src={c.img} alt={c.client} style={{ width: '100%', height: '90px', objectFit: 'cover' }} />
-                        <div style={{ padding: '0.65rem', display: 'flex', flexDirection: 'column', gap: '0.3rem', flex: 1 }}>
-                          <span style={{ fontSize: '0.65rem', color: '#00D1B2', fontWeight: 800 }}>{c.metric}</span>
-                          <div style={{ fontSize: '0.8rem', fontWeight: 800, color: '#fff' }}>{c.client}</div>
-                          <div style={{ fontSize: '0.675rem', color: '#94a3b8', lineHeight: 1.4 }}>{c.desc}</div>
-                          <div style={{ marginTop: 'auto', paddingTop: '0.4rem', fontSize: '0.675rem', color: '#5B8CFF', fontWeight: 700 }}>
+                      <div key={c.id} style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '14px', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+                        <div style={{ position: 'relative', height: '95px' }}>
+                          <img src={c.img} alt={c.client} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                          <div style={{ position: 'absolute', bottom: '6px', left: '6px', background: 'rgba(11,15,25,0.85)', padding: '0.15rem 0.45rem', borderRadius: '4px', fontSize: '7px', fontWeight: 800, color: '#00D1B2', textTransform: 'uppercase' }}>
+                            {c.tag}
+                          </div>
+                        </div>
+                        <div style={{ padding: '0.75rem', display: 'flex', flexDirection: 'column', gap: '0.35rem', flex: 1 }}>
+                          <div style={{ fontSize: '0.85rem', fontWeight: 800, color: '#fff' }}>{c.client}</div>
+                          <div style={{ fontSize: '0.7rem', color: '#94a3b8', lineHeight: 1.4 }}>{c.desc}</div>
+                          <div style={{ display: 'flex', gap: '4px', marginTop: 'auto', paddingTop: '0.4rem' }}>
+                            <span style={{ fontSize: '7px', fontWeight: 800, color: '#00D1B2', background: 'rgba(0,209,178,0.12)', padding: '0.15rem 0.45rem', borderRadius: '99px' }}>{c.metric}</span>
+                          </div>
+                          <div style={{ fontSize: '0.7rem', color: '#5B8CFF', fontWeight: 700, marginTop: '0.25rem' }}>
                             View Case Study &rarr;
                           </div>
                         </div>
                       </div>
                     ))}
                   </div>
+
+                  <div style={{ textAlign: 'center', marginTop: '0.25rem' }}>
+                    <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#5B8CFF', border: '1px solid rgba(91,140,255,0.3)', padding: '0.4rem 1rem', borderRadius: '99px', background: 'rgba(91,140,255,0.06)' }}>
+                      View All Case Studies →
+                    </span>
+                  </div>
                 </div>
               )}
 
-              {/* DEMO 5: TOOLS */}
+              {/* DEMO 5: EXACT TOOLS REPLICA (Matches Public Website) */}
               {activeSection === 'tools' && (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                   <div style={{ textAlign: 'center' }}>
-                    <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#5B8CFF', textTransform: 'uppercase' }}>Interactive Suite</div>
-                    <h3 style={{ fontSize: '1.35rem', fontWeight: 900, color: '#fff', margin: '0.2rem 0' }}>{toolsTitle}</h3>
+                    <div style={{ display: 'inline-flex', padding: '0.2rem 0.6rem', borderRadius: '99px', background: 'rgba(91,140,255,0.1)', border: '1px solid rgba(91,140,255,0.3)', color: '#5B8CFF', fontSize: '0.675rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.35rem' }}>
+                      Interactive Tools
+                    </div>
+                    <h3 style={{ fontSize: '1.5rem', fontWeight: 900, color: '#fff', margin: 0 }}>{toolsTitle}</h3>
+                    <p style={{ fontSize: '0.75rem', color: '#94a3b8', margin: '0.25rem 0 0 0' }}>{toolsSubtitle}</p>
                   </div>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.65rem' }}>
-                    {toolsList.map(t => (
-                      <div key={t.id} style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '0.75rem', display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
-                        <span style={{ fontSize: '0.65rem', color: '#00D1B2', fontWeight: 700 }}>{t.tag}</span>
-                        <div style={{ fontSize: '0.775rem', fontWeight: 800, color: '#fff' }}>{t.name}</div>
-                        <div style={{ fontSize: '0.675rem', color: '#94a3b8', lineHeight: 1.4 }}>{t.desc}</div>
-                      </div>
-                    ))}
+
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.75rem' }}>
+                    {toolsList.map((t, idx) => {
+                      const colors = ['#5B8CFF', '#00D1B2', '#a78bfa'];
+                      const icons = ['🧮', '⚡', '💬'];
+                      const clr = colors[idx % colors.length];
+                      return (
+                        <div key={t.id} style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '14px', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                          <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: `${clr}15`, border: `1px solid ${clr}30`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.1rem' }}>
+                            {icons[idx % icons.length]}
+                          </div>
+                          <div style={{ fontSize: '0.85rem', fontWeight: 800, color: '#fff' }}>{t.name}</div>
+                          <div style={{ fontSize: '0.7rem', color: '#94a3b8', lineHeight: 1.4 }}>{t.desc}</div>
+                          <div style={{ marginTop: 'auto', paddingTop: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                            <span style={{ fontSize: '0.725rem', fontWeight: 700, color: clr }}>Launch Tool</span>
+                            <span style={{ width: '18px', height: '18px', borderRadius: '50%', background: clr, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: '10px' }}>&rarr;</span>
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               )}
 
-              {/* DEMO 6: BLOG */}
+              {/* DEMO 6: EXACT BLOG REPLICA (Matches Public Website) */}
               {activeSection === 'blog' && (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                   <div style={{ textAlign: 'center' }}>
-                    <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#00D1B2', textTransform: 'uppercase' }}>Blog & Insights</div>
-                    <h3 style={{ fontSize: '1.35rem', fontWeight: 900, color: '#fff', margin: '0.2rem 0' }}>{blogTitle}</h3>
+                    <div style={{ display: 'inline-flex', padding: '0.2rem 0.6rem', borderRadius: '99px', background: 'rgba(0,209,178,0.1)', border: '1px solid rgba(0,209,178,0.3)', color: '#00D1B2', fontSize: '0.675rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.35rem' }}>
+                      Blog & Insights
+                    </div>
+                    <h3 style={{ fontSize: '1.5rem', fontWeight: 900, color: '#fff', margin: 0 }}>{blogTitle}</h3>
+                    <p style={{ fontSize: '0.75rem', color: '#94a3b8', margin: '0.25rem 0 0 0' }}>{blogSubtitle}</p>
                   </div>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.65rem' }}>
+
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.75rem' }}>
                     {blogList.map(b => (
-                      <div key={b.id} style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', overflow: 'hidden' }}>
-                        <img src={b.img} alt={b.title} style={{ width: '100%', height: '80px', objectFit: 'cover' }} />
-                        <div style={{ padding: '0.65rem' }}>
-                          <div style={{ fontSize: '0.65rem', color: '#00D1B2' }}>{b.tag} · {b.readTime}</div>
-                          <div style={{ fontSize: '0.775rem', fontWeight: 800, color: '#fff', margin: '0.2rem 0', lineHeight: 1.3 }}>{b.title}</div>
+                      <div key={b.id} style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '14px', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+                        <div style={{ position: 'relative', height: '90px' }}>
+                          <img src={b.img} alt={b.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                          <div style={{ position: 'absolute', top: '6px', left: '6px', background: 'rgba(11,15,25,0.85)', padding: '0.15rem 0.45rem', borderRadius: '4px', fontSize: '7px', fontWeight: 800, color: '#00D1B2' }}>
+                            {b.tag}
+                          </div>
+                        </div>
+                        <div style={{ padding: '0.75rem', display: 'flex', flexDirection: 'column', gap: '0.35rem', flex: 1 }}>
+                          <div style={{ fontSize: '7px', color: '#64748b' }}>Aug 2026 · {b.readTime}</div>
+                          <div style={{ fontSize: '0.8rem', fontWeight: 800, color: '#fff', lineHeight: 1.3 }}>{b.title}</div>
+                          <div style={{ marginTop: 'auto', paddingTop: '0.4rem', fontSize: '0.7rem', color: '#5B8CFF', fontWeight: 700 }}>
+                            Read More &rarr;
+                          </div>
                         </div>
                       </div>
                     ))}
                   </div>
+
+                  <div style={{ textAlign: 'center', marginTop: '0.25rem' }}>
+                    <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#5B8CFF', border: '1px solid rgba(91,140,255,0.3)', padding: '0.4rem 1rem', borderRadius: '99px', background: 'rgba(91,140,255,0.06)' }}>
+                      View All Articles →
+                    </span>
+                  </div>
                 </div>
               )}
 
-              {/* DEMO 7: CAREERS */}
+              {/* DEMO 7: EXACT CAREERS REPLICA (Matches Public /careers) */}
               {activeSection === 'careers' && (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                   <div style={{ textAlign: 'center' }}>
-                    <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#5B8CFF', textTransform: 'uppercase' }}>Careers</div>
-                    <h3 style={{ fontSize: '1.35rem', fontWeight: 900, color: '#fff', margin: '0.2rem 0' }}>Join Our Team</h3>
+                    <div style={{ display: 'inline-flex', padding: '0.2rem 0.6rem', borderRadius: '99px', background: 'rgba(91,140,255,0.1)', border: '1px solid rgba(91,140,255,0.3)', color: '#5B8CFF', fontSize: '0.675rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.35rem' }}>
+                      Careers
+                    </div>
+                    <h3 style={{ fontSize: '1.5rem', fontWeight: 900, color: '#fff', margin: 0 }}>Learn. Build. Grow with Infotech.</h3>
+                    <p style={{ fontSize: '0.75rem', color: '#94a3b8', margin: '0.25rem 0 0 0' }}>Open Internship Positions</p>
                   </div>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
                     {careersList.map(j => (
-                      <div key={j.id} style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '10px', padding: '0.75rem 1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <div key={j.id} style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '0.85rem 1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <div>
-                          <div style={{ fontSize: '0.8rem', fontWeight: 800, color: '#fff' }}>{j.role}</div>
-                          <div style={{ fontSize: '0.675rem', color: '#94a3b8' }}>{j.dept} · {j.exp}</div>
+                          <div style={{ fontSize: '0.85rem', fontWeight: 800, color: '#fff' }}>{j.role}</div>
+                          <div style={{ display: 'flex', gap: '6px', marginTop: '0.3rem' }}>
+                            <span style={{ fontSize: '7px', color: '#00D1B2', background: 'rgba(0,209,178,0.1)', padding: '0.15rem 0.45rem', borderRadius: '4px', fontWeight: 700 }}>3 Months</span>
+                            <span style={{ fontSize: '7px', color: '#94a3b8', background: 'rgba(255,255,255,0.05)', padding: '0.15rem 0.45rem', borderRadius: '4px' }}>{j.type}</span>
+                            <span style={{ fontSize: '7px', color: '#5B8CFF', background: 'rgba(91,140,255,0.1)', padding: '0.15rem 0.45rem', borderRadius: '4px' }}>{j.exp}</span>
+                          </div>
                         </div>
-                        <div style={{ background: '#3B82F6', color: '#fff', padding: '0.3rem 0.75rem', borderRadius: '99px', fontSize: '0.675rem', fontWeight: 700 }}>
-                          Apply
+                        <div style={{ background: 'linear-gradient(135deg, #5B8CFF, #00D1B2)', color: '#fff', padding: '0.4rem 0.9rem', borderRadius: '99px', fontSize: '0.725rem', fontWeight: 700, cursor: 'pointer' }}>
+                          Apply Now
                         </div>
                       </div>
                     ))}
