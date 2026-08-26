@@ -9,6 +9,7 @@ import { getLenis } from '@/lib/lenis';
 export default function Template({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isHome = pathname === '/';
+  const isDashboard = pathname?.startsWith('/dashboard');
 
   useEffect(() => {
     // Reset window scroll position immediately
@@ -29,10 +30,10 @@ export default function Template({ children }: { children: React.ReactNode }) {
         initial="hidden"
         animate="visible"
         exit="exit"
-        className={isHome ? '' : 'subpageBg'}
+        className={isHome || isDashboard ? '' : 'subpageBg'}
         style={{ minHeight: isHome ? 'auto' : 'calc(100vh - var(--navbar-h) - var(--ticker-h))' }}
       >
-        {!isHome && (
+        {!isHome && !isDashboard && (
           <div className="subpageGlows">
             <div className="subpageGlow1" />
             <div className="subpageGlow2" />
